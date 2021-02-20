@@ -1,2 +1,3 @@
-# intRinsic
-Public repository for the R package intRinsic
+# intRinsic - public repository
+![intLogo](images/intLogo.png)
+Public repo for the R package `intRinsic`
