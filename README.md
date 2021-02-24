@@ -1,7 +1,9 @@
 # intRinsic - public repository
 ![intLogo](images/intLogo.png)
 Public repo for the R package `intRinsic`  
-  
+
+A `.pdf` vignette for this package can be found on Arxiv at [this link](https://arxiv.org/pdf/2102.11425.pdf).
+
   
 To install the package from this Github repo, run
 ```r
