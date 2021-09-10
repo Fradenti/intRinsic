@@ -372,7 +372,9 @@ mle_gride <- function(X,n1=1,
                   n1 = n1,n2 = n2,
                   nsim=nsim)
   qq  <- stats::quantile(bs-mle.est,probs = c(alpha/2,1-alpha/2))
-  Res <- c(mle-qq[2],mle.est,mle-qq[1])
+  Res <- c(mle.est-qq[2],
+           mle.est,
+           mle.est-qq[1])
   names(Res) <- c("Lower Bound", "Estimate","Upper Bound")
   return(Res)
 }
