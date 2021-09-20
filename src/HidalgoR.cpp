@@ -314,3 +314,45 @@ double loglikelihood_gride(double par, int n1, int n2, arma::colvec mu_dots){
 
     return(log_dens);
 }
+
+
+
+
+
+//' Score function generated from the generic ratio of two NN's distances
+//'
+//' @param par the ID, variable of the objective function,
+//' @param n1 order of the NN according to the first distance is computed.
+//' @param n2 order of the NN according to the second distance is computed.
+//' @param mu_dots the ratios of distance of generic order.
+//'
+//' @export
+// [[Rcpp::export]]
+double Score_gride(double par, int n1, int n2, arma::colvec mu_dots){
+
+
+  if(n2<n1){
+    stop("n2 is lower than n1");
+  }
+  int d_n12 = (n2-n1);
+  int nn    = mu_dots.n_elem;
+  double score, lognum, logden;
+
+  if (d_n12 == 1) {
+    lognum   = nn / (par);
+    logden   = ((n2 - 1) ) * arma::accu( log( mu_dots ) );
+    score    = lognum - logden + sum( log( mu_dots > 1. ) );
+  } else{
+    lognum   = nn / (par) +
+      (d_n12 - 1) * arma::accu(
+           pow( mu_dots, par)/
+             (pow( mu_dots, par)  - 1 ) %
+               log(mu_dots) );
+    // Rcout << lognum << "--\n" ;
+    logden   = ((n2 - 1)) * sum(log(mu_dots));
+    // Rcout << logden << "--\n"  ;
+    score =   lognum - logden + sum(log(mu_dots > 1.));
+  }
+
+  return(score);
+}
