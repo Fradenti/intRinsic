@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // log_Likelihood_double
 double log_Likelihood_double(double mu_obs, double d);
 RcppExport SEXP _intRinsic_log_Likelihood_double(SEXP mu_obsSEXP, SEXP dSEXP) {
@@ -32,16 +37,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // Norm_Constant_Z_l2
-double Norm_Constant_Z_l2(int Nzi_l, int N, double csi, int q);
-RcppExport SEXP _intRinsic_Norm_Constant_Z_l2(SEXP Nzi_lSEXP, SEXP NSEXP, SEXP csiSEXP, SEXP qSEXP) {
+double Norm_Constant_Z_l2(int Nzi_l, int N, double xi, int q);
+RcppExport SEXP _intRinsic_Norm_Constant_Z_l2(SEXP Nzi_lSEXP, SEXP NSEXP, SEXP xiSEXP, SEXP qSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< int >::type Nzi_l(Nzi_lSEXP);
     Rcpp::traits::input_parameter< int >::type N(NSEXP);
-    Rcpp::traits::input_parameter< double >::type csi(csiSEXP);
+    Rcpp::traits::input_parameter< double >::type xi(xiSEXP);
     Rcpp::traits::input_parameter< int >::type q(qSEXP);
-    rcpp_result_gen = Rcpp::wrap(Norm_Constant_Z_l2(Nzi_l, N, csi, q));
+    rcpp_result_gen = Rcpp::wrap(Norm_Constant_Z_l2(Nzi_l, N, xi, q));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -55,27 +60,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type q(qSEXP);
     Rcpp::traits::input_parameter< int >::type N(NSEXP);
     rcpp_result_gen = Rcpp::wrap(index_row_col(Nq, q, N));
-    return rcpp_result_gen;
-END_RCPP
-}
-// Update_memberships
-arma::colvec Update_memberships(arma::colvec mu_obser, arma::colvec dl, arma::colvec pl, int K, int N, int q, arma::colvec possible_label, arma::colvec Ci, double CSI, arma::umat index_row, List index_col);
-RcppExport SEXP _intRinsic_Update_memberships(SEXP mu_obserSEXP, SEXP dlSEXP, SEXP plSEXP, SEXP KSEXP, SEXP NSEXP, SEXP qSEXP, SEXP possible_labelSEXP, SEXP CiSEXP, SEXP CSISEXP, SEXP index_rowSEXP, SEXP index_colSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::colvec >::type mu_obser(mu_obserSEXP);
-    Rcpp::traits::input_parameter< arma::colvec >::type dl(dlSEXP);
-    Rcpp::traits::input_parameter< arma::colvec >::type pl(plSEXP);
-    Rcpp::traits::input_parameter< int >::type K(KSEXP);
-    Rcpp::traits::input_parameter< int >::type N(NSEXP);
-    Rcpp::traits::input_parameter< int >::type q(qSEXP);
-    Rcpp::traits::input_parameter< arma::colvec >::type possible_label(possible_labelSEXP);
-    Rcpp::traits::input_parameter< arma::colvec >::type Ci(CiSEXP);
-    Rcpp::traits::input_parameter< double >::type CSI(CSISEXP);
-    Rcpp::traits::input_parameter< arma::umat >::type index_row(index_rowSEXP);
-    Rcpp::traits::input_parameter< List >::type index_col(index_colSEXP);
-    rcpp_result_gen = Rcpp::wrap(Update_memberships(mu_obser, dl, pl, K, N, q, possible_label, Ci, CSI, index_row, index_col));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -159,28 +143,52 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// PSM
-arma::mat PSM(arma::mat inds);
-RcppExport SEXP _intRinsic_PSM(SEXP indsSEXP) {
+// gride_log_likelihood
+double gride_log_likelihood(double d, int n1, int n2, arma::colvec mus_n1_n2);
+RcppExport SEXP _intRinsic_gride_log_likelihood(SEXP dSEXP, SEXP n1SEXP, SEXP n2SEXP, SEXP mus_n1_n2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type inds(indsSEXP);
-    rcpp_result_gen = Rcpp::wrap(PSM(inds));
+    Rcpp::traits::input_parameter< double >::type d(dSEXP);
+    Rcpp::traits::input_parameter< int >::type n1(n1SEXP);
+    Rcpp::traits::input_parameter< int >::type n2(n2SEXP);
+    Rcpp::traits::input_parameter< arma::colvec >::type mus_n1_n2(mus_n1_n2SEXP);
+    rcpp_result_gen = Rcpp::wrap(gride_log_likelihood(d, n1, n2, mus_n1_n2));
     return rcpp_result_gen;
 END_RCPP
 }
-// loglikelihood_gride
-double loglikelihood_gride(double par, int n1, int n2, arma::colvec mu_dots);
-RcppExport SEXP _intRinsic_loglikelihood_gride(SEXP parSEXP, SEXP n1SEXP, SEXP n2SEXP, SEXP mu_dotsSEXP) {
+// gride_log_posterior
+double gride_log_posterior(double z, int n1, int n2, double a_d, double b_d, arma::colvec mus_n1_n2);
+RcppExport SEXP _intRinsic_gride_log_posterior(SEXP zSEXP, SEXP n1SEXP, SEXP n2SEXP, SEXP a_dSEXP, SEXP b_dSEXP, SEXP mus_n1_n2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type par(parSEXP);
+    Rcpp::traits::input_parameter< double >::type z(zSEXP);
     Rcpp::traits::input_parameter< int >::type n1(n1SEXP);
     Rcpp::traits::input_parameter< int >::type n2(n2SEXP);
-    Rcpp::traits::input_parameter< arma::colvec >::type mu_dots(mu_dotsSEXP);
-    rcpp_result_gen = Rcpp::wrap(loglikelihood_gride(par, n1, n2, mu_dots));
+    Rcpp::traits::input_parameter< double >::type a_d(a_dSEXP);
+    Rcpp::traits::input_parameter< double >::type b_d(b_dSEXP);
+    Rcpp::traits::input_parameter< arma::colvec >::type mus_n1_n2(mus_n1_n2SEXP);
+    rcpp_result_gen = Rcpp::wrap(gride_log_posterior(z, n1, n2, a_d, b_d, mus_n1_n2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gride_mh_sampler
+arma::colvec gride_mh_sampler(double start_d, int n1, int n2, double a_d, double b_d, arma::colvec mus_n1_n2, int nsim, int burn_in, double sigma);
+RcppExport SEXP _intRinsic_gride_mh_sampler(SEXP start_dSEXP, SEXP n1SEXP, SEXP n2SEXP, SEXP a_dSEXP, SEXP b_dSEXP, SEXP mus_n1_n2SEXP, SEXP nsimSEXP, SEXP burn_inSEXP, SEXP sigmaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type start_d(start_dSEXP);
+    Rcpp::traits::input_parameter< int >::type n1(n1SEXP);
+    Rcpp::traits::input_parameter< int >::type n2(n2SEXP);
+    Rcpp::traits::input_parameter< double >::type a_d(a_dSEXP);
+    Rcpp::traits::input_parameter< double >::type b_d(b_dSEXP);
+    Rcpp::traits::input_parameter< arma::colvec >::type mus_n1_n2(mus_n1_n2SEXP);
+    Rcpp::traits::input_parameter< int >::type nsim(nsimSEXP);
+    Rcpp::traits::input_parameter< int >::type burn_in(burn_inSEXP);
+    Rcpp::traits::input_parameter< double >::type sigma(sigmaSEXP);
+    rcpp_result_gen = Rcpp::wrap(gride_mh_sampler(start_d, n1, n2, a_d, b_d, mus_n1_n2, nsim, burn_in, sigma));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -190,14 +198,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"_intRinsic_Groups_quantities", (DL_FUNC) &_intRinsic_Groups_quantities, 3},
     {"_intRinsic_Norm_Constant_Z_l2", (DL_FUNC) &_intRinsic_Norm_Constant_Z_l2, 4},
     {"_intRinsic_index_row_col", (DL_FUNC) &_intRinsic_index_row_col, 3},
-    {"_intRinsic_Update_memberships", (DL_FUNC) &_intRinsic_Update_memberships, 11},
     {"_intRinsic_Update_memberships_faster", (DL_FUNC) &_intRinsic_Update_memberships_faster, 13},
     {"_intRinsic_Postprocessing_Chains", (DL_FUNC) &_intRinsic_Postprocessing_Chains, 2},
     {"_intRinsic_rtgamma_once", (DL_FUNC) &_intRinsic_rtgamma_once, 4},
     {"_intRinsic_UPD_d_TRUNC", (DL_FUNC) &_intRinsic_UPD_d_TRUNC, 5},
     {"_intRinsic_UPD_d_TRUNC_MASS", (DL_FUNC) &_intRinsic_UPD_d_TRUNC_MASS, 6},
-    {"_intRinsic_PSM", (DL_FUNC) &_intRinsic_PSM, 1},
-    {"_intRinsic_loglikelihood_gride", (DL_FUNC) &_intRinsic_loglikelihood_gride, 4},
+    {"_intRinsic_gride_log_likelihood", (DL_FUNC) &_intRinsic_gride_log_likelihood, 4},
+    {"_intRinsic_gride_log_posterior", (DL_FUNC) &_intRinsic_gride_log_posterior, 6},
+    {"_intRinsic_gride_mh_sampler", (DL_FUNC) &_intRinsic_gride_mh_sampler, 9},
     {NULL, NULL, 0}
 };
 
