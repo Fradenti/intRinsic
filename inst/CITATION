@@ -1,0 +1,18 @@
+citHeader("To cite intRinsic in publications use:")
+
+citEntry(entry = "Manual",
+  title        = "intRinsic: an R package for model-based estimation of the intrinsic dimension of a dataset",
+  author       = personList(as.person("Francesco Denti")),
+  journal      = "Arxiv preprint",
+  year         = "2021",
+  volume       = "",
+  number       = "",
+  pages        = "",
+  url          = "https://arxiv.org/abs/2102.11425",
+
+  textVersion  =
+  paste("Francesco Denti (2021+).",
+        "intRinsic: an R package for model-based estimation of the intrinsic dimension of a dataset.",
+        "Arxiv preprint",
+        "URL https://arxiv.org/abs/2102.11425")
+)

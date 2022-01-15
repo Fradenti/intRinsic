@@ -4,12 +4,24 @@
 \name{intRinsic-package}
 \alias{intRinsic}
 \alias{intRinsic-package}
-\title{intRinsic: Instrinsic dimension estimators based on the TwoNN and Hidalgo models}
+\title{intRinsic: Likelihood-Based Intrinsic Dimension Estimators}
 \description{
-The package contains the functions to fit the TwoNN-type models and the Hidalgo Bayesian mixture model.
+Provides functions to estimate the intrinsic dimension of a dataset via likelihood-based approaches. Specifically, the package implements the 'TWO-NN' and 'Gride' estimators and the 'Hidalgo' Bayesian mixture model. References: Allegra et al. (2020, <doi:10.1038/s41598-020-72222-0>); Denti et al. (2022+, <arXiv:2104.13832>); Facco et al. (2017, <doi:10.1038/s41598-017-11873-y>); Santos-Fernandez et al. (2021, <arXiv:1902.10459>).
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/Fradenti/intRinsic}
+}
+
 }
 \author{
-\strong{Maintainer}: Francesco Denti \email{fdenti@uci.edu}
+\strong{Maintainer}: Francesco Denti \email{francescodenti.personal@gmail.com} (\href{https://orcid.org/0000-0003-2978-4702}{ORCID}) [copyright holder]
+
+Authors:
+\itemize{
+  \item Andrea Gilardi \email{andrea.gilardi@unimib.it} (\href{https://orcid.org/0000-0002-9424-7439}{ORCID})
+}
 
 }
 \keyword{internal}
