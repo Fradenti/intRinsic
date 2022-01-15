@@ -24,7 +24,7 @@ To install the package from this GitHub repository, run
 Sys.setenv("R_REMOTES_NO_ERRORS_FROM_WARNINGS" = "true")
 
 #install from github
-remotes::install_github("Fradenti/intRinsic_dev")
+remotes::install_github("Fradenti/intRinsic")
 ```
 
 Simple example on Swissroll dataset
@@ -35,5 +35,6 @@ X <- Swissroll(2000)
 twonn(X)
 ```
 
+An updated vignette will soon be posted on ArXiv.
 
 Please note that the original version of the package (v0.1.0) is still available under the GitHub release with tag `v0.1.0` at [this page](https://github.com/Fradenti/intRinsic/releases).
