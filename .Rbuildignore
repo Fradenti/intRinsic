@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^images$
-^Readme\.md$
-^License\.md$
 ^LICENSE\.md$
+^\.github$
+^cran-comments\.md$
+^\.travis\.yml$
+^CRAN-SUBMISSION$
