@@ -1,4 +1,6 @@
-# intRinsic (development version)
+# intRinsic 0.2.0.9000 (development version)
+
+* ...
 
 # intRinsic 0.2.0
 
