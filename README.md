@@ -35,6 +35,6 @@ X <- Swissroll(2000)
 twonn(X)
 ```
 
-An updated vignette will soon be posted on ArXiv.
+The updated vignette for this package is available on ArXiv, at [this link](https://arxiv.org/pdf/2102.11425.pdf).
 
 Please note that the original version of the package (v0.1.0) is still available under the GitHub release with tag `v0.1.0` at [this page](https://github.com/Fradenti/intRinsic/releases).
