@@ -25,16 +25,17 @@ Depends:
 Imports: 
     dplyr,
     FNN,
-    ggplot2,
     knitr,
     MCMCpack,
-    pheatmap,
     Rcpp,
     reshape2,
     rlang,
-    salso,
     stats,
     utils
+Suggests:
+    ggplot2,
+    salso,
+    pheatmap
 LinkingTo: 
     Rcpp,
     RcppArmadillo
