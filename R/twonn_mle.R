@@ -71,33 +71,91 @@ twonn_mle <-
   }
 
 
-#' Print \code{TWO-NN} MLE output
+#' @name twonn
 #'
 #' @param x object of class \code{twonn_mle}, obtained from the function
 #' \code{twonn_mle()}.
 #' @param ... ignored.
 #'
-#' @return the function prints a summary of the TWO-NN estimated via
-#' maximum likelihood to console.
 #'
 #' @export
 print.twonn_mle <- function(x, ...) {
+  y <- c("TWONN - MLE" = x[["est"]][2])
+  print((y))
+  invisible(x)
+}
+
+#' @name twonn
+#'
+#' @param object object of class \code{twonn_mle}, obtained from the function
+#' \code{twonn_mle()}.
+#' @param ... ignored.
+#'
+#' @export
+summary.twonn_mle <- function(object, ...) {
+  y <- cbind(
+    `Original sample size` = object[["n_original"]],
+    `Used sample size` = object[["n"]],
+    `Trimming proportion` = object[["c_trimmed"]],
+    `Confidence level` = object[["cl"]],
+    `Lower Bound` = object[["est"]][1],
+    `Estimate` = object[["est"]][2],
+    `Upper Bound` = object[["est"]][3]
+  )
+  structure(y, class = c("summary.twonn_mle","matrix"))
+}
+
+
+#' @name twonn
+#'
+#' @param x object of class \code{twonn_mle}, obtained from the function
+#' \code{twonn_mle()}.
+#' @param ... ignored.
+#'
+#' @export
+print.summary.twonn_mle <- function(x, ...) {
   cat("Model: TWO-NN\n")
   cat("Method: MLE\n")
   cat(paste0(
     "Sample size: ",
-    x[["n_original"]],
+    x[1],
     ", Obs. used: ",
-    x[["n"]],
+    x[2],
     ". Trimming proportion: ",
-    100 * x[["c_trimmed"]],
+    100 * x[3],
     "%\n"
   ))
-  cat(paste0("ID estimates (confidence level: ", x[["cl"]], ")"))
+  cat(paste0("ID estimates (confidence level: ", x[4], ")"))
   y <- cbind(
-    `Lower Bound` = x[["est"]][1],
-    `Estimate` = x[["est"]][2],
-    `Upper Bound` = x[["est"]][3]
+    `Lower Bound` = x[5],
+    `Estimate` = x[6],
+    `Upper Bound` = x[7]
   )
   print(knitr::kable(y))
+  invisible(x)
 }
+
+
+#' @name twonn
+#' @param x object of class \code{twonn_mle}, the output of the
+#' \code{twonn} function when \code{method = "mle"}.
+#'
+#'
+#' @importFrom graphics abline legend lines matplot par points polygon
+#' @importFrom stats density ts
+#'
+#' @export
+#'
+plot.twonn_mle <-
+  function(x,
+           ...) {
+
+    plot(rep(0,3) ~ x$est,type="n",xlab = ("Maximum Likelihood Estimation"),ylab="")
+    graphics::abline(v = x$est,col = "gray",lwd=1,lty=2)
+    graphics::points(0~x$est[2],cex = 2,pch=21,bg=1)
+    graphics::arrows(y0 = 0,code = 3,y1 = 0,x0 = x$est[1],x1 = x$est[3],angle=90,lwd=2)
+    graphics::title("MLE TWO-NN")
+    invisible()
+  }
+
+

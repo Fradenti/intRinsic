@@ -74,13 +74,12 @@ twonn_dec_by <- function(X,
 
 
 
-#' Print \code{TWO-NN} evolution object decimated via halving steps
+#' @name twonn_decimated
 #'
 #' @param x object of class \code{twonn_dec_prop}, obtained from the function
 #' \code{twonn_dec_prop()}.
 #' @param ... ignored.
 #'
-#' @return the function prints a summary of the decimated TWO-NN to console.
 #'
 #' @export
 print.twonn_dec_by <- function(x, ...) {
@@ -96,3 +95,41 @@ print.twonn_dec_by <- function(x, ...) {
   invisible(x)
 }
 
+
+
+#' @name twonn_decimated
+#'
+#' @param x object of class \code{twonn_dec_prop}, obtained from the function
+#' \code{twonn_dec_prop()}.
+#' @param CI logical, if \code{TRUE}, the confidence intervals are plotted
+#' @param steps logical, if \code{TRUE}, the x-axis reports the number of halving steps.
+#' If \code{FALSE}, the x-axis reports the log10 average distance.
+#' @param ... ignored.
+#'
+#'
+#' @export
+plot.twonn_dec_by <- function(x, CI = FALSE, steps = FALSE, ...) {
+
+  if(steps){
+    xx       <- 1:(x$steps+1)
+    logscale <- ""
+    xlab     <- "Halving steps"
+  }else{
+    xx <- x$avg_distance_n2
+    logscale <- "x"
+    xlab     <- Log[10] ~ average ~ n[2] ~ distance
+    }
+  if(CI){
+  plot(x$decimated_twonn[,2]~xx,col="darkblue",type = "b",lwd=1.5,
+          xlab = Log[10] ~ average ~ n[2] ~ distance, ylab = "ID estimate", log = logscale,
+          ylim = c(min(x$decimated_twonn),max(x$decimated_twonn)))
+  graphics::polygon(c(xx, rev(xx)), c(x$decimated_twonn[,1], rev(x$decimated_twonn[,3])),
+          col = "lightblue", border = NA)
+  lines(x$decimated_twonn[,2]~xx,col="darkblue",type = "b",lwd=1.5)
+  }else{
+  plot(x$decimated_twonn[,2]~xx,col="darkblue",type = "b",lwd=1.5,
+         xlab = Log[10] ~ average ~ n[2] ~ distance, ylab = "ID estimate", log = logscale)
+  }
+  graphics::title("Decimated TWO-NN: Halving steps")
+  invisible()
+}

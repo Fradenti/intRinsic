@@ -21,6 +21,8 @@
 #' @return list containing the Gride evolution, the corresponding NN distance
 #' ratios, the average n2-th NN order distances, and the NN orders considered.
 #'
+#' @name gride_evolution
+#'
 #' @export
 #'
 #' @references
@@ -45,13 +47,13 @@ gride_evolution <- function(X, vec_n1, vec_n2, upp_bound = 50) {
   D        <- ncol(X)
   n        <- nrow(X)
   W        <- length(vec_n1)
-  MUdost   <- matrix(NA, n, W)
+  MUdots   <- matrix(NA, n, W)
   K        <- FNN::get.knn(X, k = max(vec_n2))
   path     <- numeric(W)
   avg_distance_n2 <- numeric(W)
 
   for (w in 1:W) {
-    MUdost[, w] <- (K$nn.dist[, vec_n2[w]]) /
+    MUdots[, w] <- (K$nn.dist[, vec_n2[w]]) /
       (K$nn.dist[, vec_n1[w]])
 
     avg_distance_n2[w] <- mean(K$nn.dist[, vec_n2[w]])
@@ -60,14 +62,14 @@ gride_evolution <- function(X, vec_n1, vec_n2, upp_bound = 50) {
       interval = c(0.01, min(D, upp_bound) + 1),
       n1 = vec_n1[w],
       n2 = vec_n2[w],
-      mus_n1_n2 = MUdost[, w],
+      mus_n1_n2 = MUdots[, w],
       maximum = TRUE
     )$max
   }
 
   res <- list(
     path     = path,
-    MUdots   = MUdost,
+    MUdots   = MUdots,
     NNorders = rbind(vec_n1, vec_n2),
     avg_distance_n2 = avg_distance_n2
   )
@@ -77,7 +79,7 @@ gride_evolution <- function(X, vec_n1, vec_n2, upp_bound = 50) {
 }
 
 
-#' Print \code{Gride} evolution object
+#' @name gride_evolution
 #'
 #' @param x object of class \code{gride_evolution}, obtained from the function
 #' \code{gride_evolution()}.
@@ -109,10 +111,31 @@ print.gride_evolution <- function(x, ...) {
 }
 
 
+
+#' @name gride_evolution
+#'
+#' @param x an object of class \code{gride_evolution}.
+#'
+#' @param ... other arguments passed to specific methods.
+#'
+#' @export
+#'
+plot.gride_evolution <- function(x,
+                                     ...) {
+  id     <- x$path
+  avg_n2 <- x$avg_distance_n2
+
+  plot(id~avg_n2,type = "b", col = "darkblue",log = "x",
+       ylab = ("Intrinsic dimension"),
+       xlab = Log[10] ~ average ~ n[2] ~ distance)
+  graphics::title("Gride Evolution")
+  invisible()
+}
+
 #' Plot the evolution of \code{Gride} estimates
 #'
-#' Use this method without the \code{.gride_evolution} suffix and after loading
-#' the \code{ggplot2} package. It plots the evolution of the \code{id}
+#' Use this method without the \code{.gride_evolution} suffix.
+#' It plots the evolution of the \code{id}
 #' estimates as a function of the average distance from the furthest NN of
 #' each point.
 #'
@@ -125,6 +148,8 @@ print.gride_evolution <- function(x, ...) {
 #' @return object of class \code{\link[ggplot2]{ggplot}}. It displays the
 #' the evolution of the Gride maximum likelihood estimates as a function
 #' of the average distance from \code{n2}.
+#'
+#' @export
 #'
 autoplot.gride_evolution <- function(object,
                                      title = "Gride Evolution",

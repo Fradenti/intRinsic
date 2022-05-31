@@ -1,7 +1,12 @@
+#' @importFrom ggplot2 autoplot
+#' @export
+ggplot2::autoplot
+
+
 #' Plot the output of the \code{Hidalgo} function
 #'
-#' Use this method without the \code{.Hidalgo} suffix and after loading the
-#' \code{ggplot2} package. It produces several plots to explore the output of
+#' Use this method without the \code{.Hidalgo} suffix.
+#' It produces several plots to explore the output of
 #' the \code{Hidalgo} model.
 #'
 #' @param object object of class \code{Hidalgo}, the output of the
@@ -60,8 +65,12 @@
 #'
 #' @seealso \code{\link{Hidalgo}}
 #'
-#' @importFrom rlang .data
 #'
+#' @importFrom rlang .data
+#' @importFrom ggplot2 autoplot
+#'
+#' @export
+#' @family autoplot methods
 #'
 autoplot.Hidalgo <- function(object,
                              type = c("raw_chains",
@@ -97,3 +106,6 @@ autoplot.Hidalgo <- function(object,
 
   G1
 }
+
+
+

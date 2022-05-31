@@ -1,151 +1,75 @@
-#' Stratification of the \code{id} by an external categorical variable
+#' Auxiliary functions for the \code{Hidalgo} model
 #'
-#' The function computes summary statistics (mean, median, and standard
-#' deviation) of the post-processed chains of the intrinsic dimension stratified
-#' by an external categorical variable.
+#' Collection of functions used to extract meaningful information from the object returned
+#' by the function \code{Hidalgo}
 #'
-#' @param object object of class \code{Hidalgo}, the output of the
+#' @name auxHidalgo
+#'
+#' @param x object of class \code{Hidalgo}, the output of the
 #' \code{Hidalgo()} function.
-#' @param class factor according to the observations should be stratified by.
 #'
-#' @return a \code{data.frame} containing the posterior \code{id} means,
-#' medians, and standard deviations stratified by the levels of the variable
-#' \code{class}.
+#' @return \code{posterior_mean} returns the observation-specific \code{id} posterior means estimated with \code{Hidalgo}.
+#'
 #' @export
-#'
-#' @seealso \code{\link{Hidalgo}}
-#'
-#' @examples
-#' \donttest{
-#' X            <- replicate(5,rnorm(500))
-#' X[1:250,1:2] <- 0
-#' oracle       <- rep(1:2,rep(250,2))
-#' h_out        <- Hidalgo(X)
-#' id_by_class(h_out,oracle)
-#' }
-#'
-id_by_class <- function(object, class) {
-  if (class(object)[1] != "Hidalgo") {
+posterior_means <- function(x){
+  if (class(x)[1] != "Hidalgo") {
     stop("object is not of class 'Hidalgo'", call. = FALSE)
   }
+  return(x$id_summary$MEAN)
 
-  class <- factor(class)
-  REV   <- object$id_summary
+}
 
-  means    <- tapply(REV$MEAN, class, mean)
-  medians  <- tapply(REV$MEAN, class, stats::median)
-  sds      <- tapply(REV$MEAN, class, stats::sd)
+#' @name auxHidalgo
+#'
+#' @param x object of class \code{Hidalgo}, the output of the
+#' \code{Hidalgo()} function.
+#'
+#' @return \code{initial_values} returns a list with the parameter specification
+#' passed to the model.
+#'
+#' @export
+initial_values <- function(x){
+  if (class(x)[1] != "Hidalgo") {
+    stop("object is not of class 'Hidalgo'", call. = FALSE)
+  }
+  return(x$recap)
 
-  Res <- data.frame(
-    class = levels(class),
-    mean = means,
-    median = medians,
-    sd = sds
-  )
-
-  structure(Res, class = c("hidalgo_class", class(Res)))
 }
 
 
-#' Posterior similarity matrix and partition estimation
+#' @name auxHidalgo
 #'
-#' The function computes the posterior similarity (coclustering) matrix (psm)
-#' and estimates a representative partition of the observations from the MCMC
-#' output. The user can provide the desired number of clusters, or estimate a
-#' partition minimizing a loss function on the space of the partitions.
-#' In the latter case, function uses the package \code{salso}
-#' (\href{https://arxiv.org/abs/2105.04451}{Dahl et al., 2021+}),
-#' that the user needs to load.
+#' @param x object of class \code{Hidalgo}, the output of the
+#' \code{Hidalgo()} function.
 #'
-#' @param object object of class \code{Hidalgo}, the output of the
-#' \code{Hidalgo} function.
-#' @param clustering_method character indicating the method to use to perform
-#' clustering. It can be
-#' \describe{
-#'        \item{"dendrogram"}{thresholding the adjacency dendrogram with a given
-#'         number (\code{K});}
-#'        \item{"salso"}{estimation via minimization of several partition
-#'        estimation criteria.
-#'        The default loss function is the variation of information.}
-#'        }
-#' @param K number of clusters to recover by thresholding the
-#' dendrogram obtained from the psm.
-#' @param nCores parameter for the \code{salso} function: the number of CPU
-#' cores to use. A value of zero indicates to use all cores on the system.
-#' @param ... optional additional parameter to pass to \code{salso()}.
+#' @return \code{posterior_median} returns the observation-specific \code{id} posterior medians estimated with  \code{Hidalgo}.
 #'
-#' @return list containing the posterior similarity matrix (\code{psm}) and
-#' the estimated partition \code{clust}.
 #' @export
-#'
-#' @seealso \code{\link{Hidalgo}}, \code{\link[salso]{salso}}
-#'
-#' @references
-#' David B. Dahl, Devin J. Johnson and Peter Müller (2021). salso: Search
-#' Algorithms and Loss Functions for Bayesian Clustering. R package version
-#' 0.3.0. \url{https://CRAN.R-project.org/package=salso}
-#'
-#' @examples
-#' \donttest{
-#' library(salso)
-#' X            <- replicate(5,rnorm(500))
-#' X[1:250,1:2] <- 0
-#' h_out        <- Hidalgo(X)
-#' psm_and_cluster(h_out)
-#' }
-psm_and_cluster <- function(object,
-                            clustering_method = c("dendrogram", "salso"),
-                            K = 2,
-                            nCores = 1,
-                            ...) {
-  if (class(object)[1] != "Hidalgo") {
+posterior_medians <- function(x){
+  if (class(x)[1] != "Hidalgo") {
     stop("object is not of class 'Hidalgo'", call. = FALSE)
   }
+  out <- x$id_summary$MEDIAN
+  return(out)
 
-  clustering_method <- match.arg(clustering_method)
-
-  psm <- salso::psm(object$membership_labels,
-                    nCores = nCores)
-
-  clust <- switch(clustering_method,
-                  "dendrogram" =   {
-                    dendr <-  stats::hclust(stats::as.dist(1 - psm))
-                    stats::cutree(dendr, k = K)
-                  },
-                  "salso" = {
-                    factor(salso::salso(object$membership_labels, ...))
-                  })
-
-  Res <-
-    list(
-      clust = clust,
-      psm = psm,
-      chosen_method = clustering_method,
-      K = K
-    )
-  structure(Res, class = c("hidalgo_psm", class(Res)))
 }
 
-#' Print the summary of the clustering solution
+
+#' @name auxHidalgo
 #'
-#' @param x object of class \code{hidalgo_psm}, obtained from the function
-#' \code{psm_and_cluster()}.
-#' @param ... ignored.
+#' @param x object of class \code{Hidalgo}, the output of the
+#' \code{Hidalgo()} function.
+#' @param alpha posterior probability contained in the computed credible
+#' interval.
 #'
-#' @return the function prints a summary of the clustering solution to console.
+#' @return \code{credible_interval} returns the observation-specific credible intervals for a specific
+#' probability \code{alpha}.
+#'
 #' @export
-print.hidalgo_psm <- function(x, ...) {
-  cat("Estimated clustering solution summary:\n\n")
-  cat(paste0("Method: ", x$chosen_method, ".\n"))
-
-  if (x$chosen_method == "dendrogram") {
-    cat(paste0("Retrieved clusters: ", x$K, ".\n"))
-  } else{
-    cat(paste0("Retrieved clusters: ", length(unique(x$clust)), ".\n"))
+credible_intervals <- function(x, alpha = .95){
+  if (class(x)[1] != "Hidalgo") {
+    stop("object is not of class 'Hidalgo'", call. = FALSE)
   }
-
-  cat("Clustering frequencies:")
-  tab           <- t(table(Cluster = x$clust))
-  colnames(tab) <- paste("Cluster", colnames(tab))
-  print(knitr::kable(tab))
+  out <- t(apply(x$id_postpr,2,function(x) stats::quantile(x, probs = c((1 - alpha) / 2, (1 + alpha) / 2))))
+  return(out)
 }

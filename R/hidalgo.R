@@ -1,4 +1,4 @@
-#' Gibbs sampler for the \code{Hidalgo} model
+#' Fit the \code{Hidalgo} model
 #'
 #' The function fits the Heterogeneous intrinsic dimension algorithm, developed
 #' in Allegra et al., 2020. The model is a Bayesian mixture of Pareto
@@ -38,7 +38,10 @@
 #' @param pi_mass probability placed a priori on \code{D} when
 #' \code{Truncated_PointMass} is chosen.
 #'
-#' @seealso \code{\link{id_by_class}} and \code{\link{psm_and_cluster}}
+#'
+#' @name Hidalgo
+#'
+#' @seealso \code{\link{id_by_class}} and \code{\link{clustering}}
 #' to understand how to further postprocess the results.
 #'
 #' @return object of class \code{Hidalgo}, which is a list containing
@@ -78,6 +81,7 @@
 #' # this is just a short example
 #' # increase the number of iterations to improve mixing and convergence
 #' h_out        <- Hidalgo(X, nsim = 500, burn_in = 500)
+#' plot(h_out, type =  "B")
 #' id_by_class(h_out, oracle)
 #' }
 #'
@@ -181,7 +185,6 @@ Hidalgo <- function(X  = NULL,
     pbar <- utils::txtProgressBar(min = 1,
                                   max = nsim * thinning + burn_in,
                                   style = 3)
-    on.exit(close(pbar))
     ipbar <- 0
   }
 
@@ -335,20 +338,19 @@ Hidalgo <- function(X  = NULL,
     id_summary           = summa,
     recap                = Recap
   )
-
+  close(pbar)
   structure(output, class = c("Hidalgo", class(output)))
 
 }
 
 
 
-#' Print the Hidalgo object
+#' @name Hidalgo
 #'
 #' @param x an object of class \code{Hidalgo}, obtained from the function
 #' \code{Hidalgo()}.
 #' @param ... other arguments passed to specific methods.
 #'
-#' @return the function prints a summary of the Hidalgo MCMC run to console.
 #'
 #' @export
 print.Hidalgo <- function(x, ...) {
@@ -378,7 +380,11 @@ print.Hidalgo <- function(x, ...) {
       x$recap[["nsim"]] + x$recap[["burn_in"]],
       ", Burn in: ",
       x$recap[["burn_in"]],
-      ", Elapsed time: ",
+      ", Thinning: ",
+      x$recap[["thinning"]],
+      "\nUsed iterations: ",
+      x$recap[["nsim"]],
+      "\nElapsed time: ",
       round(x$recap[["elapsed"]], 4),
       " ",
       attr(x$recap[["elapsed"]], "units")
@@ -386,3 +392,154 @@ print.Hidalgo <- function(x, ...) {
   )
   invisible(x)
 }
+
+
+#' @name Hidalgo
+#'
+#' @param x object of class \code{Hidalgo}, the output of the
+#' \code{Hidalgo()} function.
+#' @param type character that indicates the type of plot that is requested.
+#' It can be:
+#' \describe{
+#'  \item{\code{"A"}}{plot the MCMC and the ergodic means NOT corrected
+#'  for label switching;}
+#'  \item{\code{"B"}}{plot the posterior mean and median of the id
+#'  for each observation, after the chains are processed for label switching;}
+#'  \item{\code{"C"}}{plot the estimated id distributions stratified by
+#'  the groups specified in the class vector;}
+#'  }
+#' @param class factor variable used to stratify observations according to
+#' their the \code{id} estimates.
+#' @param ... other arguments passed to specific methods.
+#'
+#' @importFrom graphics boxplot plot segments matplot
+#'
+#'
+#' @export
+plot.Hidalgo <- function(x,
+                         type = c("A","B","C"),
+                         class = NULL,
+                         ...) {
+  type <- match.arg(type)
+
+  if (type == "C" & is.null(class)){
+      stop("Please provide the factor variable to stratify the id estimates")
+  }
+
+
+  if (type == "A") {
+    ID  <- x$id_raw
+    cmm <- (apply(ID, 2, function(x)
+      cumsum(x) / seq_along(x)))
+    matplot(
+      ts(x$id_raw),
+      type = "l",
+      col = "lightgray",
+      lty = 1,
+      xlab = "MCMC Iteration",
+      ylab = "Raw MCMC - Intrinsic Dimension"
+    )
+    matplot(
+      cmm,
+      type = "l",
+      lty = 1,
+      lwd = 2,
+      add = T
+    )
+  } else if (type == "B") {
+
+    on.exit({par(my_par)}, add = TRUE, after = TRUE)
+    my_par <- par(mfrow = c(2, 1))
+
+    ID  <- x$id_summary
+    plot(
+      ID$MEAN,
+      ylim = c(min(ID$Q.05), max(ID$Q.95)),
+      type = "n",
+      main = "Posterior Means",
+      ylab = "Intrinsic Dimension",
+      xlab = "Observation"
+    )
+    segments(
+      x0 = ID$OBS,
+      x1 = ID$OBS,
+      y0 = ID$Q.05,
+      ID$Q.95,
+      col = "lightgray"
+    )
+    points(ID$MEAN, ylim = c(min(ID$Q.05), max(ID$Q.95)), col = "darkblue")
+
+
+
+    plot(
+      ID$MEDIAN,
+      ylim = c(min(ID$Q.05), max(ID$Q.95)),
+      type = "n",
+      main = "Posterior Medians",
+      ylab = "Intrinsic Dimension",
+      xlab = "Observation"
+    )
+    segments(
+      x0 = ID$OBS,
+      x1 = ID$OBS,
+      y0 = ID$Q.05,
+      ID$Q.95,
+      col = "lightgray"
+    )
+    points(ID$MEDIAN, ylim = c(min(ID$Q.05), max(ID$Q.95)), col = "darkblue")
+
+  }else if(type == "C"){
+
+    on.exit({par(my_par)}, add = TRUE, after = TRUE)
+    my_par <- par(mfrow = c(2, 1))
+
+    ID  <- x$id_summary
+    boxplot(
+      ID$MEAN ~ class,
+      col  = as.numeric(class)+1,
+      ylab = ("ID posterior estimate") ,
+      xlab = "Class",
+      main = "Posterior Means"
+    )
+    boxplot(
+      ID$MEDIAN ~ class,
+      col = as.numeric(class)+1,
+      ylab = ("ID posterior estimate"),
+      xlab = "Class",
+      main = "Posterior Medians"
+    )
+  }
+  invisible()
+
+}
+
+#' @name Hidalgo
+#'
+#' @param object object of class \code{Hidalgo}, the output of the
+#' \code{Hidalgo()} function.
+#' @param ... other arguments passed to specific methods.
+#'
+#' @export
+summary.Hidalgo <- function(object, ... ){
+
+  out <- object$id_summary[,1:6]
+  structure(out, class = c("summary.Hidalgo",class(out)))
+
+}
+
+#' @name Hidalgo
+#'
+#' @param x object of class \code{Hidalgo}, the output of the
+#' \code{Hidalgo()} function.
+#' @param ... other arguments passed to specific methods.
+#'
+#' @export
+print.summary.Hidalgo <- function(x, ...){
+
+  cat("Hidalgo - Posterior id estimates\n")
+
+  print(summary(as.data.frame(x)))
+  invisible(x)
+}
+
+

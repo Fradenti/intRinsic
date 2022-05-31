@@ -1,7 +1,7 @@
 #' Plot the simulated MCMC chains
 #'
-#' Use this method without the \code{.gride_bayes} suffix and after loading the
-#' \code{ggplot2} package. It display the traceplots of the chains generated
+#' Use this method without the \code{.gride_bayes} suffix.
+#' It display the traceplots of the chains generated
 #' with Metropolis-Hasting updates to visually assess mixing and convergence.
 #' Alternatively, it is possible to plot the posterior density.
 #'
@@ -23,6 +23,9 @@
 #'
 #' @seealso \code{\link{gride}}
 #'
+#' @family autoplot methods
+#'
+#' @export
 autoplot.gride_bayes <- function(object,
                                  traceplot = FALSE,
                               title = "Bayesian Gride - Posterior distribution",
@@ -31,7 +34,7 @@ autoplot.gride_bayes <- function(object,
     sam <- c(object$post_sample)
     cmm <- cumsum(sam) / seq_along(sam)
     G1 <-
-      ggplot2::ggplot(dplyr::tibble(sam, ind = seq_len(sam), cmm = cmm)) +
+      ggplot2::ggplot(dplyr::tibble(sam, ind = seq_along(sam), cmm = cmm)) +
       ggplot2::geom_line(ggplot2::aes(x = .data$ind, y = .data$sam), col =
                            "lightgray") +
       ggplot2::geom_line(ggplot2::aes(x = .data$ind, y = .data$cmm), col =
@@ -74,17 +77,16 @@ n[1] == .(object$n1) ~ "," ~ n[2] == .(object$n2) ~ "," ~ sigma == .(object$sigm
 
 
   }
-
-
   return(G1)
 }
 
 
 
+
 #' Plot the simulated bootstrap sample for the MLE \code{Gride}
 #'
-#' Use this method without the \code{.gride_mle} suffix and after loading the
-#' \code{ggplot2} package. It display the density plot of sample obtained via
+#' Use this method without the \code{.gride_mle} suffix.
+#' It display the density plot of sample obtained via
 #' parametric bootstrap for the \code{Gride} model.
 #'
 #' @param object object of class \code{gride_mle}.
@@ -102,6 +104,7 @@ n[1] == .(object$n1) ~ "," ~ n[2] == .(object$n2) ~ "," ~ sigma == .(object$sigm
 #'
 #' @seealso \code{\link{gride}}
 #'
+#' @export
 autoplot.gride_mle <- function(object,
                                title = "MLE Gride - Bootstrap sample",
                                ...) {
@@ -127,3 +130,5 @@ autoplot.gride_mle <- function(object,
 
   return(G1)
 }
+
+

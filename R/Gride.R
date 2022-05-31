@@ -60,7 +60,9 @@
 #' \donttest{
 #'  X  <- replicate(2,rnorm(500))
 #'  dm <- as.matrix(dist(X,method = "manhattan"))
-#'  gride(X, nsim = 500)
+#'  res <- gride(X, nsim = 500)
+#'  res
+#'  plot(res)
 #'  gride(dist_mat = dm, method = "bayes", upper_D =10,
 #'  nsim = 500, burn_in = 100)
 #' }
@@ -79,30 +81,41 @@ gride <- function(X = NULL,
                   a_d = 1,
                   b_d = 1,
                   ...) {
+
+
   if (is.null(mus_n1_n2)) {
     if (is.null(X) & is.null(dist_mat)) {
       stop("Please provide either a dataset X or a distance matrix",
-           call. = FALSE)
+           call. = FALSE)}
+
+      mus_n1_n2  <- compute_mus(
+        X = X,
+        dist_mat = dist_mat,
+        n1 = n1,
+        n2 = n2
+        )
+
+  }else{
+    if (class(mus_n1_n2)[1] == "mus") {
+      n1 <- attr(mus_n1_n2, which = "n1")
+      n2 <- attr(mus_n1_n2, which = "n2")
+      if(attr(mus_n1_n2, which = "upper_D") != "unknown"){
+        upper_D <- attr(mus_n1_n2, which = "upper_D") + 5
+      }
+
     }
 
-    if (is.null(X) & is.null(upper_D)) {
-      stop("Please provide the nominal dimension of the dataset D in upper_D",
-           call. = FALSE)
+
     }
 
-    if (!is.null(X)) {
+
+  if (!is.null(X)) {
       upper_D <- ncol(X) + 1
-    }
-
-
-    mus_n1_n2  <- compute_mus(
-      X = X,
-      dist_mat = dist_mat,
-      n1 = n1,
-      n2 = n2
-    )
   }
-
+  if (is.null(X) & is.null(upper_D)) {
+    stop("Please provide the nominal dimension of the dataset D in upper_D",
+         call. = FALSE)
+  }
 
   method <- match.arg(method)
   switch(
@@ -113,6 +126,7 @@ gride <- function(X = NULL,
       n2 = n2,
       alpha = alpha,
       upper_D = upper_D,
+      nsim = nsim,
       ...
     ),
     bayes  = gride_bayes(
@@ -121,6 +135,11 @@ gride <- function(X = NULL,
       n1 = n1,
       n2 = n2,
       upper_D = upper_D,
+      nsim = nsim,
+      burn_in = burn_in,
+      sigma = sigma,
+      start_d = start_d,
+      a_d = a_d, b_d = b_d,
       ...
     )
   )

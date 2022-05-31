@@ -2,9 +2,15 @@
 % Please edit documentation in R/compute_mus.R
 \name{compute_mus}
 \alias{compute_mus}
+\alias{print.mus}
+\alias{plot.mus}
 \title{Compute the ratio statistics needed for the intrinsic dimension estimation}
 \usage{
 compute_mus(X = NULL, dist_mat = NULL, n1 = 1, n2 = 2, Nq = FALSE, q = 3)
+
+\method{print}{mus}(x, ...)
+
+\method{plot}{mus}(x, range_d = NULL, ...)
 }
 \arguments{
 \item{X}{a dataset with \code{n} observations and \code{D} variables.}
@@ -19,6 +25,14 @@ compute_mus(X = NULL, dist_mat = NULL, n1 = 1, n2 = 2, Nq = FALSE, q = 3)
 needed for fitting the Hidalgo model.}
 
 \item{q}{integer, number of NN considered to build \code{N^q}.}
+
+\item{x}{object of class \code{mus}, obtained from the
+function \code{compute_mus()}.}
+
+\item{...}{ignored.}
+
+\item{range_d}{a sequence of values for which the generalized ratios density
+is superimposed to the histogram of \code{mus}.}
 }
 \value{
 a vector containing the ratio statistics, an object of class

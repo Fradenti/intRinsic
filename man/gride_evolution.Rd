@@ -2,9 +2,15 @@
 % Please edit documentation in R/gride_evolution.R
 \name{gride_evolution}
 \alias{gride_evolution}
+\alias{print.gride_evolution}
+\alias{plot.gride_evolution}
 \title{\code{Gride} evolution based on Maximum Likelihood Estimation}
 \usage{
 gride_evolution(X, vec_n1, vec_n2, upp_bound = 50)
+
+\method{print}{gride_evolution}(x, ...)
+
+\method{plot}{gride_evolution}(x, ...)
 }
 \arguments{
 \item{X}{data matrix with \code{n} observations and \code{D} variables.}
@@ -17,10 +23,17 @@ in the evolution.}
 
 \item{upp_bound}{upper bound for the interval used in the numerical
 optimization (via \code{optimize}). Default set to 50.}
+
+\item{x}{an object of class \code{gride_evolution}.}
+
+\item{...}{other arguments passed to specific methods.}
 }
 \value{
 list containing the Gride evolution, the corresponding NN distance
 ratios, the average n2-th NN order distances, and the NN orders considered.
+
+the function prints a summary of the Gride evolution to
+console.
 }
 \description{
 The function allows the study of the evolution of the \code{id} estimates

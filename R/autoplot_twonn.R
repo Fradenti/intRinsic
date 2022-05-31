@@ -1,7 +1,7 @@
 #' Plot the output of the \code{TWO-NN} model estimated via least squares
 #'
-#' Use this method without the \code{.twonn_linfit} suffix and after loading the
-#' \code{ggplot2} package. The function returns the representation of the linear
+#' Use this method without the \code{.twonn_linfit} suffix.
+#' The function returns the representation of the linear
 #' regression that is fitted with the \code{linfit} method.
 #'
 #' @param object object of class \code{twonn_linfit}, the output of the
@@ -9,13 +9,16 @@
 #' @param title string used as title of the plot.
 #' @param ... other arguments passed to specific methods.
 #'
-#' @rdname autoplot.linfit_twonn
+#' @rdname autoplot.twonn_linfit
 #'
 #' @seealso \code{\link{twonn}}
 #'
 #' @return a \code{\link[ggplot2]{ggplot2}} object displaying the goodness of
 #' the linear fit of the TWO-NN model.
 #'
+#' @family autoplot methods
+#'
+#' @export
 autoplot.twonn_linfit <- function(object,
                                   title = "TWO-NN Linear Fit",
                                   ...) {
@@ -60,12 +63,11 @@ autoplot.twonn_linfit <- function(object,
 }
 
 
-
 #' Plot the output of the \code{TWO-NN} model estimated via the Bayesian
 #' approach
 #'
-#' Use this method without the \code{.twonn_bayes} suffix and after loading the
-#' \code{ggplot2} package. The function returns the density plot of the
+#' Use this method without the \code{.twonn_bayes} suffix.
+#' The function returns the density plot of the
 #' posterior distribution computed with the \code{bayes} method.
 #'
 #' @param object object of class \code{twonn_bayes}, the output of the
@@ -86,6 +88,9 @@ autoplot.twonn_linfit <- function(object,
 #' @return \code{\link[ggplot2]{ggplot2}} object displaying the posterior
 #' distribution of the intrinsic dimension parameter.
 #'
+#' @family autoplot methods
+#'
+#' @export
 autoplot.twonn_bayes <-
   function(object,
            plot_low = 0,
@@ -122,13 +127,10 @@ autoplot.twonn_bayes <-
   }
 
 
-
-
 #' Plot the output of the \code{TWO-NN} model estimated via the Maximum
 #' Likelihood approach
 #'
-#' Use this method without the \code{.twonn_mle} suffix and after loading the
-#' \code{ggplot2} package.
+#' Use this method without the \code{.twonn_mle} suffix.
 #' The function returns the point estimate along with the confidence bands
 #' computed via the \code{mle} method.
 #'
@@ -145,6 +147,9 @@ autoplot.twonn_bayes <-
 #' and confidence interval obtained via maximum likelihood approach of the
 #' \code{id} parameter.
 #'
+#' @family autoplot methods
+#'
+#' @export
 autoplot.twonn_mle <-
   function(object,
            title = "MLE TWO-NN",
@@ -180,3 +185,7 @@ autoplot.twonn_mle <-
       )
     G1 + ggplot2::ggtitle(title)
   }
+
+
+
+

@@ -4,7 +4,7 @@
 \alias{autoplot.gride_evolution}
 \title{Plot the evolution of \code{Gride} estimates}
 \usage{
-autoplot.gride_evolution(object, title = "Gride Evolution", ...)
+\method{autoplot}{gride_evolution}(object, title = "Gride Evolution", ...)
 }
 \arguments{
 \item{object}{an object of class \code{gride_evolution}.}
@@ -19,8 +19,8 @@ the evolution of the Gride maximum likelihood estimates as a function
 of the average distance from \code{n2}.
 }
 \description{
-Use this method without the \code{.gride_evolution} suffix and after loading
-the \code{ggplot2} package. It plots the evolution of the \code{id}
+Use this method without the \code{.gride_evolution} suffix.
+It plots the evolution of the \code{id}
 estimates as a function of the average distance from the furthest NN of
 each point.
 }

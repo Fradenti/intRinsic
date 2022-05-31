@@ -75,25 +75,89 @@ gride_mle <- function(mus_n1_n2 = NULL,
 }
 
 
-#' Print \code{Gride} MLE object
+
+
+#' @name gride
 #'
-#' @param x object of class \code{gride_mle}, obtained from the function
+#' @param object object of class \code{gride_mle}, obtained from the function
 #' \code{gride_mle()}.
 #' @param ... ignored.
 #'
-#' @return the function prints a summary of the Gride estimated via maximum
-#' likelihood to console.
+#'
 #' @export
 print.gride_mle <- function(x, ...) {
-  cat(paste0("Model: Gride(", x[["n1"]], ",", x[["n2"]], ")\n"))
+  y <- c("Gride - MLE" = unname(x[["est"]][2]))
+  print((y))
+  invisible(x)
+}
+
+#' @name gride
+#'
+#' @param object object of class \code{gride_mle}, obtained from the function
+#' \code{gride_mle()}.
+#' @param ... ignored.
+#'
+#' @export
+summary.gride_mle <- function(object, ...) {
+  y <- cbind(
+    `NN order 1` = object[["n1"]],
+    `NN order 2` = object[["n2"]],
+    `Bootstrap simulations` = object[["nsim"]],
+    `Confidence level` = object[["cl"]],
+
+    `Lower Bound` = object[["est"]][1],
+    `Estimate` = object[["est"]][2],
+    `Upper Bound` = object[["est"]][3]
+  )
+  structure(y, class = c("summary.gride_mle","matrix"))
+}
+
+
+#' @name gride
+#'
+#' @param x object of class \code{twonn_mle}, obtained from the function
+#' \code{twonn_mle()}.
+#' @param ... ignored.
+#'
+#' @export
+print.summary.gride_mle <- function(x, ...) {
+  cat(paste0("Model: Gride(", x[1], ",", x[2], ")\n"))
   cat("Method: MLE\n")
   cat(paste0("CI obtained with a parametric bootstrap sample of size ",
-             x[["nsim"]], "\n"))
-  cat(paste0("ID estimates (confidence level: ", x[["cl"]], ")"))
+             x[3], "\n"))
+  cat(paste0("ID estimates (confidence level: ", x[4], ")"))
   y <- cbind(
-    `Lower Bound` = x[["est"]][1],
-    `Estimate` = x[["est"]][2],
-    `Upper Bound` = x[['est']][3]
+    `Lower Bound` = x[5],
+    `Estimate` = x[6],
+    `Upper Bound` = x[7]
   )
   print(knitr::kable(y))
+  invisible(x)
+  }
+
+
+#' @name gride
+#'
+#' @param x object of class \code{gride_mle}.
+#' It is obtained using the output of the \code{gride} function when
+#' \code{method = "mle"}.
+#'
+#' @param ... other arguments passed to specific methods.
+#'
+#' @export
+#'
+plot.gride_mle <- function(x,
+                           ...) {
+  ID <- x$boot_sample
+  dx <- density(ID)
+  plot(dx, xlab = "Intrinsic Dimension" , ylab = "Bootstrap Density",
+       col="darkblue",lwd=1.3, main = "")
+  polygon(c(dx$x), c(dx$y),
+          col = "lightgray", border = "darkblue", main = "")
+  abline(v =  c(x$est, x$lb, x$ub),
+         lty = 2,
+         col = 2)
+  graphics::title("MLE Gride: Bootstrap sample")
+  invisible()
 }
+

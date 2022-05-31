@@ -47,6 +47,7 @@ rgera <- function(nsim,
   sample <- (z + 1) ^ (1 / d)
   attr(sample, "n1") <- n1
   attr(sample, "n2") <- n2
+  attr(sample, "upper_D") <- "unknown"
   structure(sample, class = c("mus", class(sample)))
 }
 
@@ -57,6 +58,8 @@ dgera <- function(x,
                   n2 = 2,
                   d,
                   log = FALSE) {
+
+  x <- c(x)
   if (n2 < n1) {
     stop("n2 should be greater than n1", call. = FALSE)
   }
@@ -67,14 +70,16 @@ dgera <- function(x,
     logden   <- ((n2 - 1) * d + 1) * (log(x))
     log_dens <- lognum - logden + (log(x > 1))
   } else{
-    logch    <- sum(log(1:n2)) - sum(log(1:n1)) - sum(log(1:(n2 - n1)))
+    logB     <- sum(log(1:(n2 - n1 - 1))) + sum(log(1:(n1-1))) - sum(log(1:(n2-1)))
     lognum   <- log(d) + (d_n12 - 1) * (log(x ^ d - 1))
     logden   <- ((n2 - 1) * d + 1) * (log(x))
-    log_dens <- logch + log(d_n12)  +
-      lognum - logden + sum(log(x > 1))
+    log_dens <- lognum - logden + sum(log(x > 1)) - logB
   }
   if (!log) {
     log_dens <- exp(log_dens)
   }
+
+  structure(log_dens, class = c("dgera", class(log_dens)))
+
   return(log_dens)
 }

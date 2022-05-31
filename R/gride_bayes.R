@@ -5,7 +5,7 @@
 #' runs a Metropolis-Hasting (MH) algorithm over \code{log(d)}, adopting a
 #' Normal distribution with pre-specified standard deviation \code{sigma} as
 #' proposal distribution.
-#' See \href{https://arxiv.org/abs/2104.13832}{Denti et al., 2021+}
+#' See \href{https://arxiv.org/abs/2104.13832}{Denti et al., 2022+}
 #' for more details.
 #'
 #' @param mus_n1_n2 vector of generalized order NN distance ratios.
@@ -46,14 +46,7 @@ gride_bayes <- function(mus_n1_n2 = NULL,
                         b_d = 1,
                         alpha = 0.95,
                         upper_D = NULL) {
-  if (class(mus_n1_n2)[1] == "mus") {
-    n1 <- attr(mus_n1_n2, which = "n1")
-    n2 <- attr(mus_n1_n2, which = "n2")
-    if (!is.null(attr(mus_n1_n2, which = "upper_D"))) {
-      upper_D <- attr(mus_n1_n2, which = "upper_D")
-    }
 
-  }
 
   if (n2 < n1) {
     stop("n2 should be greater than n1", call. = FALSE)
@@ -108,39 +101,120 @@ gride_bayes <- function(mus_n1_n2 = NULL,
   structure(Res, class = c("gride_bayes", class(Res)))
 }
 
-#' Print \code{Gride} Bayes object
+
+
+#' @name gride
+#'
+#' @param x object of class \code{gride_bayes}, obtained from the function
+#' \code{gride_bayes()}.
+#' @param ... ignored.
+#'
+#'
+#' @export
+print.gride_bayes <- function(x, ...) {
+  cat(paste0("Gride(",x[["n1"]],",",x[["n2"]],") - Bayes - Posterior Mean\n"))
+  cat(x[["est"]][2])
+  invisible(x)
+}
+
+#' @name gride
+#'
+#' @param object object of class \code{gride_bayes}, obtained from the function
+#' \code{gride_bayes()}.
+#' @param ... ignored.
+#'
+#' @export
+summary.gride_bayes <- function(object, ...) {
+  y <- c(
+    `MCMC Iterations` = object[["nsim"]],
+
+
+    `Prior shape` = object[["hp_prior"]][1],
+    `Prior scale` = object[["hp_prior"]][2],
+
+    `Credible interval level` = object[["alpha"]],
+
+    `n1` = object[["n1"]],
+    `n2` = object[["n2"]],
+
+    `Lower bound` = object[["est"]][1],
+    `Posterior mean` = object[["est"]][2],
+    `Posterior median` = object[["est"]][3],
+    `Posterior mode` = object[["est"]][4],
+    `Upper bound` = object[["est"]][5]
+  )
+  structure(y, class = c("summary.gride_bayes","matrix"))
+}
+
+
+#' @name gride
 #'
 #' @param x object of class \code{gride_bayes()}, obtained from the function
 #' \code{gride_bayes()}.
 #' @param ... ignored.
 #'
-#' @return the function prints a summary of the Bayesian Gride to console.
 #'
 #' @export
-print.gride_bayes <- function(x, ...) {
-  cat(paste0("Model: Gride(", x[["n1"]], ",", x[["n2"]], ")\n"))
+print.summary.gride_bayes <- function(x, ...) {
+  cat(paste0("Model: Gride(", x[5], ",", x[6], ")\n"))
   cat("Method: Bayesian Estimation\n")
   cat(paste0("Prior d ~ Gamma(",
-             x[["hp_prior"]][1],
+             x[2],
              ", ",
-             x[["hp_prior"]][2],
+             x[3],
              ")\n"))
   cat(paste0("MCMC posterior sample size: ", x[["nsim"]], "\n"))
   cat(paste0(
     "Credibile Interval quantiles: ",
-    (1 - x[["alpha"]]) / 2 * 100,
+    (1 - x[4]) / 2 * 100,
     "%, ",
-    (1 + x[["alpha"]]) / 2 * 100,
+    (1 + x[4]) / 2 * 100,
     "%\n"
   ))
 
   cat(paste0("Posterior ID estimates:"))
   y <- cbind(
-    `Lower Bound` = x[["est"]][1],
-    `Mean` = x[["est"]][2],
-    `Median` = x[["est"]][3],
-    `Mode` = x[["est"]][4],
-    `Upper Bound` = x[['est']][5]
+    `Lower Bound` = x[7],
+    `Mean` = x[8],
+    `Median` = x[9],
+    `Mode` = x[10],
+    `Upper Bound` = x[11]
   )
   print(knitr::kable(y))
+  invisible(x)
 }
+
+
+
+#' @name gride
+#'
+#' @param x object of class \code{gride_bayes}.
+#' It is obtained using the output of the \code{gride} function when
+#' \code{method = "bayes"}.
+#'
+#' @export
+#'
+plot.gride_bayes <- function(x,
+                             ...) {
+
+    on.exit({par(my_par)}, add = TRUE, after = TRUE)
+    my_par <- par(mfrow = c(2, 1))
+
+    ID <- c(x$post_sample)
+    cmm <- cumsum(ID) / seq_along(ID)
+
+    plot(ID ,col="gray",type="l", xlab = "MCMC Iteration")
+    lines(stats::ts(cmm), col = "darkblue",lwd=1.3)
+    graphics::title("Bayesian Gride: Traceplot")
+
+
+    dx <- density(ID)
+    plot(dx, xlab = "Intrinsic Dimension" , ylab = "Simulated Posterior Density",
+         col="darkblue",lwd=1.3, main = "")
+    polygon(c(dx$x), c(dx$y),
+            col = "lightgray", border = "darkblue", main = "")
+    graphics::title("Bayesian Gride: Posterior Density")
+
+    invisible()
+      }
+

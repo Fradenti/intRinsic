@@ -18,12 +18,6 @@ gride_bootstrap <- function(mus_n1_n2,
                             n2 = 2,
                             nsim = 2000,
                             upper_D = NULL) {
-  if (class(mus_n1_n2)[1] == "mus") {
-    n1 <- attr(mus_n1_n2, which = "n1")
-    n2 <- attr(mus_n1_n2, which = "n2")
-    upper_D <- attr(mus_n1_n2, which = "upper_D")
-  }
-
 
   if (n2 < n1) {
     stop("n2 should be greater than n1", call. = FALSE)
@@ -42,12 +36,14 @@ gride_bootstrap <- function(mus_n1_n2,
     n2 = n2,
     upper_D = upper_D
   )
+
   boot_mus_samples <- replicate(nsim, rgera(
     nsim = n,
     n1 = n1,
     n2 = n2,
     d = mle_est
   ))
+
   bootstrap_sample <- apply(boot_mus_samples,
                             2,
                             function(x)

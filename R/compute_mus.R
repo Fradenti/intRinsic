@@ -141,22 +141,79 @@ compute_mus <- function(X = NULL,
 
 
 
-#' Print the ratio statistics output
+#' @name compute_mus
 #'
 #' @param x object of class \code{mus}, obtained from the
 #' function \code{compute_mus()}.
 #' @param ... ignored.
 #'
-#' @return the function prints a summary of the computed ratio statistics to
-#' console.
-#'
 #' @export
 print.mus <- function(x, ...) {
+
+  if(is.matrix(x[[2]])){
+    nn <- length(x[[1]])
+  }else{
+    nn <- length(x)
+  }
+
   cat("Ratio statistics mu's:\n")
   cat(paste0("NN orders: n1 = ", attr(x, "n1"), ", n2 = ",
              attr(x, "n2"), ".\n"))
-  cat(paste0("Sample size: ", length(x), "."))
+  cat(paste0("Sample size: ", nn, "."))
   if (!is.null(attr(x, "upper_D"))) {
     cat(paste0("\nNominal Dimension: ", attr(x, "upper_D"), "."))
   }
+
+  invisible(x)
+  }
+
+
+
+
+#' @name compute_mus
+#'
+#' @importFrom graphics hist curve
+#'
+#' @param x object of class \code{mus}, obtained from the
+#' function \code{compute_mus()}.
+#' @param range_d a sequence of values for which the generalized ratios density
+#' is superimposed to the histogram of \code{mus}.
+#' @param ... ignored.
+#'
+#' @export
+plot.mus <- function(x, range_d = NULL, ...) {
+
+
+  n1 <- attr(x, "n1")
+  n2 <- attr(x, "n2")
+  hist(x,
+       breaks = 30,
+       freq = F,
+       col = "white",
+       main = "", xlab = latex2exp::TeX("$\\mu$"))
+
+  if(!is.null(range_d)){
+
+  for (i in 1:length(range_d)) {
+    y <- dgera(sort(x),
+               n1 = n1,
+               n2 = n2,
+               d = range_d[i])
+    lines(y ~ sort(x),
+          col = range_d[i] - min(range_d) + 1,
+          lwd = 2,
+          lty = 3)
+  }
+
+  legend(
+    "topright",
+    legend = range_d,
+    col = (range_d) - min(range_d) + 1,
+    lty = 3,
+    lwd = 2
+  )
+  }
+  invisible()
 }
+
+

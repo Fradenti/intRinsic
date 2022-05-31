@@ -83,13 +83,11 @@ twonn_dec_prop <- function(X,
 
 
 
-#' Print \code{TWO-NN} evolution object decimated via vector of proportions
+#' @name twonn_decimated
 #'
 #' @param x object of class \code{twonn_dec_prop}, obtained from the function
 #' \code{twonn_dec_prop()}.
 #' @param ... ignored.
-#'
-#' @return the function prints a summary of the decimated TWO-NN to console.
 #'
 #' @export
 print.twonn_dec_prop <- function(x, ...) {
@@ -113,4 +111,47 @@ print.twonn_dec_prop <- function(x, ...) {
     ".\n"
   ))
   invisible(x)
+}
+
+
+
+#' @name twonn_decimated
+#'
+#' @param x object of class \code{twonn_dec_prop}, obtained from the function
+#' \code{twonn_dec_prop()}.
+#' @param CI logical, if \code{TRUE}, the confidence intervals are plotted
+#' @param proportions logical, if \code{TRUE}, the x-axis reports the number of decimating proportions.
+#' If \code{FALSE}, the x-axis reports the log10 average distance.
+#' @param ... ignored.
+#'
+#'
+#' @export
+plot.twonn_dec_prop <- function(x,
+                                CI = FALSE,
+                                proportions = FALSE,
+                                ...) {
+
+    if(proportions){
+      xx       <- (x$proportions)
+      logscale <- ""
+      xlab     <- "Decimating proportions"
+    }else{
+      xx <- x$avg_distance_n2
+      logscale <- "x"
+      xlab     <- Log[10] ~ average ~ n[2] ~ distance
+    }
+
+    if(CI){
+      plot(x$decimated_twonn[,2]~xx,col="darkblue",type = "b",lwd=1.5,
+           xlab = xlab, ylab = "ID estimate", log = logscale,
+           ylim = c(min(x$decimated_twonn),max(x$decimated_twonn)))
+      graphics::polygon(c(xx, rev(xx)), c(x$decimated_twonn[,1], rev(x$decimated_twonn[,3])),
+                        col = "lightblue", border = NA)
+      lines(x$decimated_twonn[,2]~xx,col="darkblue",type = "b",lwd=1.5)
+    }else{
+      plot(x$decimated_twonn[,2]~xx,col="darkblue",type = "b",lwd=1.5,
+           xlab = xlab, ylab = "ID estimate", log = logscale)
+    }
+    graphics::title("Decimated TWO-NN: Proportions")
+    invisible()
 }

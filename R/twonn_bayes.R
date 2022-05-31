@@ -64,46 +64,137 @@ twonn_bayes <- function(mus,
   structure(Res, class = c("twonn_bayes", class(Res)))
 }
 
-#' Print \code{TWO-NN} Bayes object
+
+#' @name twonn
 #'
 #' @param x object of class \code{twonn_bayes}, obtained from the function
 #' \code{twonn_bayes()}.
 #' @param ... ignored.
 #'
-#' @return the function prints a summary of the Bayesian TWO-NN to console.
 #'
 #' @export
 print.twonn_bayes <- function(x, ...) {
+  y <- c("TWONN - Bayes - Posterior Mean" = x[["est"]][2])
+  print((y))
+  invisible(x)
+}
+
+#' @name twonn
+#'
+#' @param object object of class \code{twonn_bayes}, obtained from the function
+#' \code{twonn_bayes()}.
+#' @param ... ignored.
+#'
+#' @export
+summary.twonn_bayes <- function(object, ...) {
+  y <- c(
+    `Original sample size` = object[["n_original"]],
+    `Used sample size` = object[["n"]],
+    `Trimming proportion` = object[["c_trimmed"]],
+
+    `Prior shape` = object[["hp_prior"]][1],
+    `Prior scale` = object[["hp_prior"]][2],
+
+    `Credible interval level` = object[["alpha"]],
+
+    `Lower bound` = object[["est"]][1],
+    `Posterior mean` = object[["est"]][2],
+    `Posterior median` = object[["est"]][3],
+    `Posterior mode` = object[["est"]][4],
+    `Upper bound` = object[["est"]][5]
+  )
+  structure(y, class = c("summary.twonn_bayes","matrix"))
+}
+
+
+#' @name twonn
+#'
+#' @param x object of class \code{twonn_bayes}, obtained from the function
+#' \code{twonn_bayes()}.
+#' @param ... ignored.
+#'
+#' @export
+print.summary.twonn_bayes <- function(x, ...) {
   cat("Model: TWO-NN\n")
   cat("Method: Bayesian Estimation\n")
   cat(paste0(
     "Sample size: ",
-    x[["n_original"]],
+    x[1],
     ", Obs. used: ",
-    x[["n"]],
+    x[2],
     ". Trimming proportion: ",
-    100 * x[["c_trimmed"]],
+    100 * x[3],
     "%\n"
   ))
   cat(paste0("Prior d ~ Gamma(",
-             x[["hp_prior"]][1],
+             x[4],
              ", ",
-             x[["hp_prior"]][2],
+             x[5],
              ")\n"))
   cat(paste0(
     "Credibile Interval quantiles: ",
-    (1 - x[["alpha"]]) / 2 * 100,
+    (1 - x[6]) / 2 * 100,
     "%, ",
-    (1 + x[["alpha"]]) / 2 * 100,
+    (1 + x[6]) / 2 * 100,
     "%\n"
   ))
   cat(paste0("Posterior ID estimates:"))
   y <- cbind(
-    `Lower Bound` = x[["est"]][1],
-    `Mean` = x[["est"]][2],
-    `Median` = x[["est"]][3],
-    `Mode` = x[["est"]][4],
-    `Upper Bound` = x[["est"]][5]
+    `Lower Bound` = x[7],
+    `Mean` = x[8],
+    `Median` = x[9],
+    `Mode` = x[10],
+    `Upper Bound` = x[11]
   )
+  rownames(y) <- NULL
   print(knitr::kable(y))
+  invisible(x)
 }
+
+
+
+#' @name twonn
+#'
+#' @param x object of class \code{twonn_bayes}, the output of the
+#' \code{twonn} function when \code{method = "bayes"}.
+#' @param plot_low lower bound of the interval on which the posterior density
+#' is plotted.
+#' @param plot_upp upper bound of the interval on which the posterior density
+#' is plotted.
+#' @param by step-size at which the sequence spanning the interval is
+#' incremented.
+#' @param ... other arguments passed to specific methods.
+#'
+#' @export
+#'
+plot.twonn_bayes <-
+  function(x,
+           plot_low = 0.001,
+           plot_upp = NULL,
+           by = .05,
+           ...) {
+
+    if (is.null(plot_upp)) {
+      plot_upp <- x$est[5] + 3
+    }
+
+    xx <- seq(plot_low, plot_upp, by = by)
+    y0 <- stats::dgamma(xx,
+                        shape = x$hp_prior[1],
+                        rate =  x$hp_prior[2])
+    y <- stats::dgamma(xx,
+                       shape = x$hp_posterior[1],
+                       rate =  x$hp_posterior[2])
+
+    plot(y0~xx, type="l", col = 4,
+         xlab=("Intrinsic Dimension"),
+         ylab=("Posterior density"), ylim = c(0, max(c(y,y0)) ))
+    lines(y~xx, type="l", col = 1)
+    abline(v = x$est,
+           lty = 2,
+           col = 2)
+    graphics::title("Bayesian TWO-NN")
+    invisible()
+  }
+
+

@@ -47,7 +47,7 @@ twonn_linfit <- function(mus,
   Res <- list(
     est = Res,
     lm_output = modlin1,
-    conflev = alpha,
+    cl = alpha,
     c_trimmed = c_trimmed,
     n_original = n_original,
     n = n
@@ -56,33 +56,94 @@ twonn_linfit <- function(mus,
   structure(Res, class = c("twonn_linfit", class(Res)))
 }
 
-#' Print TWO-NN Least Squares output
+#' @name twonn
 #'
-#' @param x object of class \code{twonn_linfit}, obtained from the function
-#' \code{twonn_linfit()}.
+#' @param x object of class \code{twonn_mle}, obtained from the function
+#' \code{twonn_mle()}.
 #' @param ... ignored.
 #'
-#' @return the function prints a summary of the TWO-NN estimated via least
-#' squares to console.
 #'
 #' @export
 print.twonn_linfit <- function(x, ...) {
+  y <- c("TWONN - Linfit" = x[["est"]][2])
+  print((y))
+  invisible(x)
+}
+
+#' @name twonn
+#'
+#' @param object object of class \code{twonn_mle}, obtained from the function
+#' \code{twonn_mle()}.
+#' @param ... ignored.
+#'
+#' @export
+summary.twonn_linfit <- function(object, ...) {
+  y <- cbind(
+    `Original sample size` = object[["n_original"]],
+    `Used sample size` = object[["n"]],
+    `Trimming proportion` = object[["c_trimmed"]],
+    `Confidence level` = object[["cl"]],
+    `Lower Bound` = object[["est"]][1],
+    `Estimate` = object[["est"]][2],
+    `Upper Bound` = object[["est"]][3]
+  )
+  structure(y, class = c("summary.twonn_linfit","matrix"))
+}
+
+
+#' @name twonn
+#'
+#' @param x object of class \code{twonn_mle}, obtained from the function
+#' \code{twonn_mle()}.
+#' @param ... ignored.
+#'
+#' @export
+print.summary.twonn_linfit <- function(x, ...) {
   cat("Model: TWO-NN\n")
   cat("Method: Least Square Estimation\n")
   cat(paste0(
     "Sample size: ",
-    x[["n_original"]],
+    x[1],
     ", Obs. used: ",
-    x[["n"]],
+    x[2],
     ". Trimming proportion: ",
-    100 * x[["c_trimmed"]],
+    100 * x[3],
     "%\n"
   ))
-  cat(paste0("ID estimates (confidence level: ", x[["conflev"]], ")"))
+  cat(paste0("ID estimates (confidence level: ", x[4], ")"))
   y <- cbind(
-    `Lower Bound` = x[["est"]][1],
-    `Estimate` = x[["est"]][2],
-    `Upper Bound` = x[["est"]][3]
+    `Lower Bound` = x[5],
+    `Estimate` = x[6],
+    `Upper Bound` = x[7]
   )
   print(knitr::kable(y))
+  invisible(x)
+}
+
+
+
+#' @name twonn
+#'
+#' @param x object of class \code{twonn_linfit}, the output of the
+#' \code{twonn} function when \code{method = "linfit"}.
+#'
+#' @export
+#'
+plot.twonn_linfit <- function(x,
+                              ...) {
+  lmod <- x$lm_output
+  xx   <- lmod$model$x
+  y    <- lmod$model$y
+  Res  <- x$est
+
+  plot( y ~ xx, pch = 21, bg = 1,cex=.4,
+        ylab = ("-log(1-(i/N))"),
+        xlab = expression(log(mu)))
+  abline(lmod,col=2,lwd=1.3)
+  graphics::title("TWO-NN Linear Fit")
+  expr <- expression(R^2)
+  legend("topleft",legend =  paste0("ID : ", round(Res[2], 3),"\n" ,
+                                    expr," : ", round(summary(lmod)$r.squared, 3) ) )
+  invisible()
+
 }

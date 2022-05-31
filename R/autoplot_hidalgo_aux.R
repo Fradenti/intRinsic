@@ -121,7 +121,7 @@ ggHid_mean_median <- function(object, ...) {
       alpha = 1,
       pch = 21
     ) +
-    ggplot2::facet_wrap(~ type) +
+    ggplot2::facet_wrap( ~ type) +
     ggplot2::xlab("Observation") +
     ggplot2::ylab("Intrinsic Dimension")
 }
@@ -226,7 +226,7 @@ ggHid_class <- function(object,
     ggplot2::theme_bw() +
     ggplot2::theme(text = ggplot2::element_text(size = 20),
                    legend.position = "none") +
-    ggplot2::facet_wrap(~ type) +
+    ggplot2::facet_wrap( ~ type) +
     ggplot2::xlab("ID posterior estimate") +
     ggplot2::ylab("")
 
@@ -237,113 +237,71 @@ ggHid_class <- function(object,
 #' The function produces a heatmap of the posterior similarity (coclustering)
 #' matrix (psm) computed from the MCMC output of the function \code{Hidalgo()}.
 #' Rows and columns can be organized according to a clustering solution or to an
-#' external categorical variable. To plot the coclustering matrix, the user
-#' needs to load the \code{pheatmatp} package.
-#'
+#' external categorical variable.
 #'
 #' @param object object of class \code{Hidalgo}, the output of the
 #' \code{Hidalgo()} function.
 #' @param psm posterior similarity matrix that can be provided directly to the
 #' function.
-#' @param clust clustering solution used to stratify the psm plot.
-#' @param class factor variable used to stratify observations according to their
+#' @param class factor variable used to order the observations according to their
 #' the \code{id} estimates.
-#' @param id_names vector of label identifying each observation.
-#' It is optional, and if the number of observations is above 75, it is ignored
-#' for better graphical representation.
 #' @param ... other arguments passed to specific methods.
 #'
 #' @keywords internal
 #' @noRd
 #'
-#' @return plot produced by the function \code{\link[pheatmap]{pheatmap}}.
-#' The plotted psm allows to study the clustering structure present in the data
-#' estimated via the mixture model.
+#' @return object of class \code{\link[ggplot2]{ggplot}}. It is a heatmap
+#' representing the psm, which allows to study the clustering structure present
+#' in the data estimated via the mixture model.
 #'
 #' @seealso \code{\link{autoplot.Hidalgo}}
 #'
 ggHid_psm <- function(object,
                       psm = NULL,
-                      clust = NULL,
                       class = NULL,
-                      id_names = NULL,
                       ...) {
   if (is.null(psm)) {
-    psm <- psm_and_cluster(object)$psm
+    psm <- clustering(object)$psm
   }
 
-  n   <- nrow(psm)
-
-  if (is.null(id_names)) {
-    id_names <- paste("Observation", 1:n)
-  }
-
-
-  if (!is.null(clust)) {
-    cl     <- clust
-    cl_col <- data.frame(Cluster = cl)
-    rownames(cl_col) <- id_names
-    cl_col_ord <- cl_col[order(cl_col), , drop = FALSE]
-  }
+  n     <- nrow(psm)
 
   if (!is.null(class)) {
-    cl_row <- data.frame(Class = class)
-    rownames(cl_row) <- id_names
-    cl_row_ord <- cl_row[order(cl_row), , drop = FALSE]
-  }
+    ind = sort(as.numeric(class),index=T)$ix
+    D     <- data.frame(reshape2::melt(psm[ind,ind]))
 
-  estimate_clustering <- !is.null(clust)
-  lab <- n <= 75
+    Q1 <- ggplot2::ggplot(D) +
+      ggplot2::geom_tile(ggplot2::aes(
+        x = .data$Var2,
+        y = .data$Var1,
+        fill = .data$value
+      ))
 
-  if (!is.null(class) & estimate_clustering) {
-    psm_ord <- psm[order(cl_row), order(cl_col)]
-    rownames(psm_ord) <- id_names[order(cl_row)]
-    colnames(psm_ord) <- id_names[order(cl_col)]
-
-    Q <- pheatmap::pheatmap(
-      psm_ord,
-      cluster_rows = FALSE,
-      cluster_cols = FALSE,
-      annotation_row = cl_row_ord,
-      annotation_col = cl_col_ord,
-      angle_col = "90",
-      show_rownames = lab,
-      show_colnames = lab
-    )
-  } else if (!is.null(class) & !estimate_clustering) {
-    psm_ord <- psm[order(cl_row), ]
-    rownames(psm_ord) <- id_names[order(cl_row)]
-
-    Q <- pheatmap::pheatmap(
-      psm_ord,
-      cluster_rows = FALSE,
-      cluster_cols = TRUE,
-      annotation_row = cl_row_ord,
-      angle_col = "90",
-      show_rownames = lab,
-      show_colnames = lab
-    )
-  } else if (is.null(class) & estimate_clustering) {
-    psm_ord <- psm[, order(cl_col)]
-    colnames(psm_ord) <- id_names[order(cl_col)]
-
-    Q <- pheatmap::pheatmap(
-      psm_ord,
-      cluster_rows = TRUE,
-      cluster_cols = FALSE,
-      annotation_col = cl_col_ord,
-      angle_col = "90",
-      show_rownames = lab,
-      show_colnames = lab
-    )
   } else {
-    Q <- pheatmap::pheatmap(
-      psm,
-      cluster_rows = TRUE,
-      cluster_cols = TRUE,
-      show_rownames = lab,
-      show_colnames = lab
-    )
+    cl    <- stats::hclust(stats::as.dist(1-psm))
+
+    D     <- data.frame(reshape2::melt(psm[cl$order,cl$order]))
+
+    Q1 <- ggplot2::ggplot(D) +
+      ggplot2::geom_tile(ggplot2::aes(
+        x = (.data$Var1),
+        y = (.data$Var2),
+        fill = .data$value
+      ))
   }
+  Q <- Q1 +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
+      text = ggplot2::element_text(size = 20),
+      legend.position = "bottom",
+      legend.margin = ggplot2::margin(),
+      legend.key.width = ggplot2::unit(2, "cm")
+    ) +
+    ggplot2::xlab("") +
+    ggplot2::ylab("") +
+    ggplot2::scale_fill_gradient("PCP   ",
+                                 low = "white", high = 4)
+
+
   return(Q)
 }

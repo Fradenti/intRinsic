@@ -183,7 +183,6 @@ arma::colvec UPD_d_TRUNC_MASS( List AIFD,  double a0, double b0, int K, double D
   return(D_new);
 }
 
-
 // [[Rcpp::export]]
 double gride_log_likelihood(double d,
                             int n1,
@@ -197,11 +196,11 @@ double gride_log_likelihood(double d,
 
   int d_n12 = (n2-n1);
   int nn    = mus_n1_n2.n_elem;
-  double log_dens, lognum, logden, logch;
+  double log_dens, lognum, logden, logB;
 
-  arma::colvec vn1  = arma::linspace(1, n1, n1);
-  arma::colvec vn2  = arma::linspace(1, n2, n2);
-  arma::colvec vn12 = arma::linspace(1, d_n12, d_n12);
+  arma::colvec vn1  = arma::linspace(1, n1-1, n1-1);
+  arma::colvec vn2  = arma::linspace(1, n2-1, n2-1);
+  arma::colvec vn12 = arma::linspace(1, d_n12-1, d_n12-1);
 
 
   if (d_n12 == 1) {
@@ -209,16 +208,17 @@ double gride_log_likelihood(double d,
     logden   = ((n2 - 1) * d + 1) * arma::accu( log( mus_n1_n2 ) );
     log_dens = lognum - logden + sum( log( mus_n1_n2 > 1 ) );
   } else{
-    logch    = arma::accu(log(vn2))-arma::accu(log(vn1))-arma::accu(log(vn12));
+    logB     = arma::accu(log(vn1)) + arma::accu(log(vn12))-arma::accu(log(vn2));
     lognum   = nn * log(d) +
       (d_n12 - 1) * arma::accu( log( pow( mus_n1_n2, d)  - 1 ) );
     logden   = ((n2 - 1) * d + 1) * sum(log(mus_n1_n2));
-    log_dens = logch * nn + nn * log(d_n12)  +
-      lognum - logden + sum(log(mus_n1_n2 > 1.));
+    log_dens =  lognum - logden + sum(log(mus_n1_n2 > 1.)) - logB * nn;
   }
 
   return(log_dens);
 }
+
+
 // [[Rcpp::export]]
 double gride_log_posterior(double z,
                            int n1,
@@ -239,6 +239,7 @@ double gride_log_posterior(double z,
 
   return(log_post);
 }
+
 // [[Rcpp::export]]
 arma::colvec gride_mh_sampler(double start_d,
                               int n1,
