@@ -1,3 +1,8 @@
+# intRinsic 0.2.1.9000
+
+* development version
+* ...
+
 # intRinsic 0.2.1
 
 * Fixed minor bugs involving the `gride()` family of functions
