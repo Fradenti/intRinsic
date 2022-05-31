@@ -1,6 +1,6 @@
 # intRinsic 0.2.1.9000
 
-* development version
+* fixed minor bug in `Hidalgo`, when `verbose = FALSE`
 * ...
 
 # intRinsic 0.2.1

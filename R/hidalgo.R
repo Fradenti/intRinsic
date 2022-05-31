@@ -327,9 +327,10 @@ Hidalgo <- function(X  = NULL,
     Q.95 = sd4,
     OBS = seq_len(n)
   )
-  if (verbose)
+  if (verbose){
     cat("Done! \n")
-
+    close(pbar)
+  }
   output <- list(
     cluster_prob         = cluster_prob,
     membership_labels    = membership_labels,
@@ -338,7 +339,6 @@ Hidalgo <- function(X  = NULL,
     id_summary           = summa,
     recap                = Recap
   )
-  close(pbar)
   structure(output, class = c("Hidalgo", class(output)))
 
 }
