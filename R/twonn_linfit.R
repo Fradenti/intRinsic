@@ -21,7 +21,7 @@
 #' @references
 #' Facco E, D'Errico M, Rodriguez A, Laio A (2017). "Estimating the intrinsic
 #' dimension of datasets by a minimal neighborhood information."
-#' Scientific Reports, 7(1), 1-8.
+#' Scientific Reports, 7(1).
 #' ISSN 20452322, doi: 10.1038/s41598-017-11873-y.
 #'
 twonn_linfit <- function(mus,

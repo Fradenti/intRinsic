@@ -2,7 +2,7 @@
 #'
 #' The function fits the \code{TWO-NN} model via Bayesian estimation, employing
 #' a conjugate prior. The formulas can be found in
-#' \href{https://arxiv.org/abs/2104.13832}{Denti et al., 2021+}.
+#' \href{https://doi.org/10.1038/s41598-022-20991-1}{Denti et al., 2022}.
 #'
 #' @param mus vector of second to first NN distance ratios.
 #' @param a_d shape parameter of the Gamma prior on the parameter \code{d}.
@@ -21,9 +21,10 @@
 #' @noRd
 #'
 #' @references
-#' Denti F, Doimo D, Laio A, Mira A (2022+). "Distributional Results for
-#' Model-Based Intrinsic Dimension Estimators."
-#' arXiv preprint. 2104.13832, \url{https://arxiv.org/abs/2104.13832}.
+#' Denti F, Doimo D, Laio A, Mira A (2022). "The generalized ratios intrinsic
+#' dimension estimator."
+#' Scientific Reports, 12(20005).
+#' ISSN  20452322, doi: 10.1038/s41598-022-20991-1.
 #'
 twonn_bayes <- function(mus,
                         a_d = 0.001,

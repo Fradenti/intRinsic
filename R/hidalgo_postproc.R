@@ -70,7 +70,7 @@ print.hidalgo_class <- function(x, ... ){
 #' output. The user can provide the desired number of clusters, or estimate a
 #' partition minimizing a loss function on the space of the partitions.
 #' In the latter case, function uses the package \code{salso}
-#' (\href{https://arxiv.org/abs/2105.04451}{Dahl et al., 2021+}),
+#' (\href{ doi:10.1080/10618600.2022.2069779}{Dahl et al., 2022}),
 #' that the user needs to load.
 #'
 #' @param object object of class \code{Hidalgo}, the output of the
@@ -97,8 +97,14 @@ print.hidalgo_class <- function(x, ... ){
 #' @seealso \code{\link{Hidalgo}}, \code{\link[salso]{salso}}
 #'
 #' @references
-#' David B. Dahl, Devin J. Johnson and Peter Müller (2021). salso: Search
-#' Algorithms and Loss Functions for Bayesian Clustering. R package version
+#' D. B. Dahl, D. J. Johnson, and P. Müller (2022),
+#' "Search Algorithms and Loss Functions for Bayesian Clustering",
+#' Journal of Computational and Graphical Statistics,
+#' doi: 10.1080/10618600.2022.2069779.
+#'
+#' David B. Dahl, Devin J. Johnson and Peter Müller (2022). "salso: Search
+#' Algorithms and Loss Functions for Bayesian Clustering".
+#' R package version
 #' 0.3.0. \url{https://CRAN.R-project.org/package=salso}
 #'
 #' @examples

@@ -2,7 +2,7 @@
 #'
 #' The function fits the \code{TWO-NN} model via maximum likelihood estimation,
 #' as discussed in
-#' \href{https://arxiv.org/abs/2104.13832}{Denti et al., 2021+}.
+#' \href{https://doi.org/10.1038/s41598-022-20991-1}{Denti et al., 2022}.
 #' This function is not exported, and can be accessed with \code{twonn()},
 #' specifying \code{method = "mle"}.
 #'
@@ -24,12 +24,13 @@
 #' @references
 #' #' Facco E, D'Errico M, Rodriguez A, Laio A (2017). "Estimating the intrinsic
 #' dimension of datasets by a minimal neighborhood information."
-#' Scientific Reports, 7(1), 1-8.
+#' Scientific Reports, 7(1).
 #' ISSN 20452322, doi: 10.1038/s41598-017-11873-y.
 #'
-#' Denti F, Doimo D, Laio A, Mira A (2022+). "Distributional Results for
-#' Model-Based Intrinsic Dimension Estimators."
-#' arXiv preprint. 2104.13832, \url{https://arxiv.org/abs/2104.13832}.
+#' Denti F, Doimo D, Laio A, Mira A (2022). "The generalized ratios intrinsic
+#' dimension estimator."
+#' Scientific Reports, 12(20005).
+#' ISSN  20452322, doi: 10.1038/s41598-022-20991-1.
 #'
 twonn_mle <-
   function(mus,

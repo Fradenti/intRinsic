@@ -2,7 +2,7 @@
 #'
 #' Density function and random number generator for the Generalized Ratio
 #' distribution with NN orders equal to \code{n1} and \code{n2}.
-#' See \href{https://arxiv.org/abs/2104.13832}{Denti et al., 2021+}
+#' See \href{https://doi.org/10.1038/s41598-022-20991-1}{Denti et al., 2022}
 #' for more details.
 #'
 #' @aliases dgera rgera
@@ -20,9 +20,9 @@
 #' random observations sampled from the generalized ratio distribution.
 #'
 #' @references
-#' Denti F, Doimo D, Laio A, Mira A (2022+). "Distributional Results for
-#' Model-Based Intrinsic Dimension Estimators."
-#' arXiv preprint. 2104.13832, \url{https://arxiv.org/abs/2104.13832}.
+#' Denti F, Doimo D, Laio A, Mira A (2022). "The generalized ratios intrinsic dimension estimator."
+#' Scientific Reports, 12(20005).
+#' ISSN  20452322, doi: 10.1038/s41598-022-20991-1.
 #'
 #' @examples
 #' draws   <- rgera(100,3,5,2)

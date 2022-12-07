@@ -5,7 +5,7 @@
 #' runs a Metropolis-Hasting (MH) algorithm over \code{log(d)}, adopting a
 #' Normal distribution with pre-specified standard deviation \code{sigma} as
 #' proposal distribution.
-#' See \href{https://arxiv.org/abs/2104.13832}{Denti et al., 2022+}
+#' See \href{https://doi.org/10.1038/s41598-022-20991-1}{Denti et al., 2022}
 #' for more details.
 #'
 #' @param mus_n1_n2 vector of generalized order NN distance ratios.
@@ -29,9 +29,10 @@
 #' @noRd
 #'
 #' @references
-#' Denti F, Doimo D, Laio A, Mira A (2022+). "Distributional Results for
-#' Model-Based Intrinsic Dimension Estimators."
-#' arXiv preprint. 2104.13832, \url{https://arxiv.org/abs/2104.13832}.
+#' Denti F, Doimo D, Laio A, Mira A (2022). "The generalized ratios intrinsic
+#' dimension estimator."
+#' Scientific Reports, 12(20005).
+#' ISSN  20452322, doi: 10.1038/s41598-022-20991-1.
 #'
 #' @seealso \code{\link{gride}}
 #'

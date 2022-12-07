@@ -1,7 +1,9 @@
 # intRinsic 0.2.1.9000
 
-* fixed minor bug in `Hidalgo`, when `verbose = FALSE`
-* ...
+* Fixed minor bug in `Hidalgo`, when `verbose = FALSE`
+* Updated some references with doi information
+* 
+
 
 # intRinsic 0.2.1
 

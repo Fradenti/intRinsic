@@ -11,7 +11,7 @@ citEntry(entry = "Manual",
   url          = "https://arxiv.org/abs/2102.11425",
 
   textVersion  =
-  paste("Francesco Denti (2021+).",
+  paste("Francesco Denti (2022+).",
         "intRinsic: an R package for model-based estimation of the intrinsic dimension of a dataset.",
         "Arxiv preprint",
         "URL https://arxiv.org/abs/2102.11425")
