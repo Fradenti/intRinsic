@@ -2,7 +2,8 @@
 
 * Fixed minor bug in `Hidalgo`, when `verbose = FALSE`
 * Updated some references with doi information
-* 
+* Added additional checks in `compute_mus`: NA, symmetry, non-negativity
+* ... 
 
 
 # intRinsic 0.2.1

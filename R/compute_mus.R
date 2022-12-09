@@ -54,8 +54,16 @@ compute_mus <- function(X = NULL,
     stop("Please provide either a dataset X or a distance matrix",
          call. = FALSE)
   }
+
   D <- NULL
+
   if (is.null(dist_mat)) {
+    if(any(is.na(X))){
+      stop("There are missing values in the provided dataset.
+Please remove the problematic observations and try again.")
+    }
+
+    X     <- as.matrix(X)
     D     <- ncol(X)
     n     <- n0 <- nrow(X)
     check <- 0
@@ -96,8 +104,28 @@ compute_mus <- function(X = NULL,
     attr(mus, "upper_D") <- D
 
   } else {
-    n0                                <- nrow(dist_mat)
-    dummy                             <- dist_mat
+    # checks on dist_mat
+
+    # if it is of class dist, then transform it into a matrix
+    if(inherits(dist_mat,"dist")){
+      dist_mat <- as.matrix(dist_mat)
+    }
+
+    ## does it contain non-negative distances?
+    if(!all(dist_mat>=0)){
+      stop("Negative distances detected in dist_mat. Please provide a valid distance matrix")
+    }
+    # is it symmetric?
+    if(!isSymmetric(dist_mat)){
+      stop("The provided distance matrix is not symmetric. Please provide a valid distance matrix")
+    }
+    # NA?
+    if(any(is.na(X))){
+      stop("There are missing values in the provided distance matrix.
+Please remove the problematic observations and try again.")
+    }
+    n0    <- nrow(dist_mat)
+    dummy <- dist_mat
     dummy[lower.tri(dummy, diag = TRUE)] <- -1
     inds     <- unique(which(dummy == 0, arr.ind = TRUE)[, 2])
 
