@@ -64,7 +64,7 @@
 #' Allegra M, Facco E, Denti F, Laio A, Mira A (2020).
 #' “Data segmentation based on the local intrinsic dimension.”
 #' Scientific Reports, 10(1), 1–27. ISSN 20452322,
-#' doi: 10.1038/s41598-020-72222-0, 1902.10459,
+#' \doi{10.1038/s41598-020-72222-0, 1902.10459},
 #' \url{https://arxiv.org/abs/1902.10459}
 #'
 #' Santos-Fernandez E, Denti F, Mengersen K, Mira A (2021).

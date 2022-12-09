@@ -32,7 +32,7 @@
 #' Denti F, Doimo D, Laio A, Mira A (2022). "The generalized ratios intrinsic
 #' dimension estimator."
 #' Scientific Reports, 12(20005).
-#' ISSN  20452322, doi: 10.1038/s41598-022-20991-1.
+#' ISSN  20452322, \doi{10.1038/s41598-022-20991-1}.
 #'
 #' @seealso \code{\link{gride}}
 #'

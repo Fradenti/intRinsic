@@ -18,12 +18,12 @@
 #' Facco E, D'Errico M, Rodriguez A, Laio A (2017). "Estimating the intrinsic
 #' dimension of datasets by a minimal neighborhood information."
 #' Scientific Reports, 7(1).
-#' ISSN 20452322, doi: 10.1038/s41598-017-11873-y.
+#' ISSN 20452322, \doi{10.1038/s41598-017-11873-y}.
 #'
 #' Denti F, Doimo D, Laio A, Mira A (2022). "The generalized ratios intrinsic
 #' dimension estimator."
 #' Scientific Reports, 12(20005).
-#' ISSN  20452322, doi: 10.1038/s41598-022-20991-1.
+#' ISSN  20452322, \doi{10.1038/s41598-022-20991-1}.
 #'
 #' @return a vector containing the ratio statistics, an object of class
 #' \code{mus}. The length of the vector is equal to the number of observations

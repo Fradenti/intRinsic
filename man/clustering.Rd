@@ -69,7 +69,7 @@ clustering(h_out)
 D. B. Dahl, D. J. Johnson, and P. Müller (2022),
 "Search Algorithms and Loss Functions for Bayesian Clustering",
 Journal of Computational and Graphical Statistics,
-doi: 10.1080/10618600.2022.2069779.
+\doi{10.1080/10618600.2022.2069779}.
 
 David B. Dahl, Devin J. Johnson and Peter Müller (2022). "salso: Search
 Algorithms and Loss Functions for Bayesian Clustering".
