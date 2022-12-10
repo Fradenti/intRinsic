@@ -1,7 +1,12 @@
 # intRinsic <img src="man/figures/intLogo.png" align="right" width="120" />
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/Fradenti/intRinsic/workflows/R-CMD-check/badge.svg)](https://github.com/Fradenti/intRinsic/actions)
+[![R-CMD-check](https://github.com/Fradenti/intRinsic_dev/workflows/R-CMD-check/badge.svg)](https://github.com/Fradenti/intRinsic_dev/actions)
+[![CRAN](https://www.r-pkg.org/badges/version/intRinsic)](https://cran.r-project.org/package=intRinsic)
+[![Last Commit](https://img.shields.io/github/last-commit/fradenti/intRinsic)](https://github.com/fradenti/intRinsic)
+[![Downloads (monthly)](https://cranlogs.r-pkg.org/badges/intRinsic?color=brightgreen)](https://www.r-pkg.org/pkg/intRinsic)
+[![Downloads (total)](https://cranlogs.r-pkg.org/badges/grand-total/intRinsic?color=brightgreen)](https://www.r-pkg.org/pkg/intRinsic)
+<!-- [![JSS](https://img.shields.io/badge/JSS-10.18637%2Fjss.v040.i08-brightgreen)]() -->
 <!-- badges: end -->
 
 A package with functions to estimate the intrinsic dimension of a dataset via likelihood-based approaches. 

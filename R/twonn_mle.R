@@ -2,7 +2,7 @@
 #'
 #' The function fits the \code{TWO-NN} model via maximum likelihood estimation,
 #' as discussed in
-#' \href{https://doi.org/10.1038/s41598-022-20991-1}{Denti et al., 2022}.
+#' \href{https://www.nature.com/articles/s41598-022-20991-1}{Denti et al., 2022}.
 #' This function is not exported, and can be accessed with \code{twonn()},
 #' specifying \code{method = "mle"}.
 #'

@@ -53,7 +53,7 @@ and estimates a representative partition of the observations from the MCMC
 output. The user can provide the desired number of clusters, or estimate a
 partition minimizing a loss function on the space of the partitions.
 In the latter case, function uses the package \code{salso}
-(\href{ doi:10.1080/10618600.2022.2069779}{Dahl et al., 2022}),
+(\href{https://cran.r-project.org/package=salso}{Dahl et al., 2021}),
 that the user needs to load.
 }
 \examples{
@@ -66,7 +66,7 @@ clustering(h_out)
 }
 }
 \references{
-D. B. Dahl, D. J. Johnson, and P. Müller (2022),
+D. B. Dahl, D. J. Johnson, and P. Müller (2022),
 "Search Algorithms and Loss Functions for Bayesian Clustering",
 Journal of Computational and Graphical Statistics,
 \doi{10.1080/10618600.2022.2069779}.

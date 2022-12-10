@@ -2,7 +2,7 @@
 #'
 #' The function fits the \code{TWO-NN} model via Bayesian estimation, employing
 #' a conjugate prior. The formulas can be found in
-#' \href{https://doi.org/10.1038/s41598-022-20991-1}{Denti et al., 2022}.
+#' \href{https://www.nature.com/articles/s41598-022-20991-1}{Denti et al., 2022}.
 #'
 #' @param mus vector of second to first NN distance ratios.
 #' @param a_d shape parameter of the Gamma prior on the parameter \code{d}.

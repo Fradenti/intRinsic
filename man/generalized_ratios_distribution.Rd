@@ -30,7 +30,7 @@ random observations sampled from the generalized ratio distribution.
 \description{
 Density function and random number generator for the Generalized Ratio
 distribution with NN orders equal to \code{n1} and \code{n2}.
-See \href{https://doi.org/10.1038/s41598-022-20991-1}{Denti et al., 2022}
+See \href{https://www.nature.com/articles/s41598-022-20991-1}{Denti et al., 2022}
 for more details.
 }
 \examples{

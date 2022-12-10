@@ -5,7 +5,7 @@
 #' using least squares estimation, depending on the specification of the
 #' argument \code{method}. This model has been originally presented in
 #' \href{https://www.nature.com/articles/s41598-017-11873-y}{Facco et al., 2017}
-#' . See also \href{https://doi.org/10.1038/s41598-022-20991-1}{Denti et al., 2022}
+#' . See also \href{https://www.nature.com/articles/s41598-022-20991-1}{Denti et al., 2022}
 #' for more details.
 #'
 #' @param X data matrix with \code{n} observations and \code{D} variables.
@@ -78,6 +78,15 @@ twonn <- function(X = NULL,
                   a_d = 0.001,
                   b_d = 0.001,
                   ...) {
+
+  if (!is.null(mus)) {
+    if( !all(mus >= 1) ){
+      stop("Detected some values in mus below 1.
+           Please provide a proper vector of ratios.",
+           call. = FALSE)
+    }
+    }
+
   if (is.null(mus)) {
     if (is.null(X) & is.null(dist_mat)) {
       stop("Please provide either a dataset X or a distance matrix",
@@ -94,6 +103,7 @@ twonn <- function(X = NULL,
   }
 
   method <- match.arg(method)
+
 
   switch(
     method,

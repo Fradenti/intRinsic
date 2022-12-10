@@ -5,7 +5,7 @@
 #' The function finds the maximum likelihood estimates for \code{d}, and
 #' subsequently simulate parametric bootstrap samples for uncertainty
 #' quantification.
-#' See \href{https://doi.org/10.1038/s41598-022-20991-1}{Denti et al., 2022}
+#' See \href{https://www.nature.com/articles/s41598-022-20991-1}{Denti et al., 2022}
 #' for more details.
 #'
 #'

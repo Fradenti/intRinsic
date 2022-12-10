@@ -43,7 +43,7 @@ data. To increase the average distance from the second NN (and thus the
 average neighborhood size) involved in the estimation, the function computes
 a sequence of \code{Gride} models with increasing NN orders, \code{n1} and
 \code{n2}.
-See also \href{https://doi.org/10.1038/s41598-022-20991-1}{Denti et al., 2022}
+See also \href{https://www.nature.com/articles/s41598-022-20991-1}{Denti et al., 2022}
 for more details.
 }
 \examples{

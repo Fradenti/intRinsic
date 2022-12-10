@@ -60,7 +60,8 @@ compute_mus <- function(X = NULL,
   if (is.null(dist_mat)) {
     if(any(is.na(X))){
       stop("There are missing values in the provided dataset.
-Please remove the problematic observations and try again.")
+Please remove the problematic observations and try again.",
+           call. = FALSE)
     }
 
     X     <- as.matrix(X)
@@ -113,16 +114,20 @@ Please remove the problematic observations and try again.")
 
     ## does it contain non-negative distances?
     if(!all(dist_mat>=0)){
-      stop("Negative distances detected in dist_mat. Please provide a valid distance matrix")
+      stop("Negative distances detected in dist_mat. Please provide a valid distance matrix",
+           call. = FALSE)
     }
     # is it symmetric?
     if(!isSymmetric(dist_mat)){
-      stop("The provided distance matrix is not symmetric. Please provide a valid distance matrix")
+      stop("The provided distance matrix is not symmetric.
+Please provide a valid distance matrix",
+           call. = FALSE)
     }
     # NA?
     if(any(is.na(X))){
       stop("There are missing values in the provided distance matrix.
-Please remove the problematic observations and try again.")
+Please remove the problematic observations and try again.",
+           call. = FALSE)
     }
     n0    <- nrow(dist_mat)
     dummy <- dist_mat

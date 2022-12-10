@@ -121,7 +121,7 @@ likelihood and the Bayesian frameworks. Also, one can obtain the estimates
 using least squares estimation, depending on the specification of the
 argument \code{method}. This model has been originally presented in
 \href{https://www.nature.com/articles/s41598-017-11873-y}{Facco et al., 2017}
-. See also \href{https://doi.org/10.1038/s41598-022-20991-1}{Denti et al., 2022}
+. See also \href{https://www.nature.com/articles/s41598-022-20991-1}{Denti et al., 2022}
 for more details.
 }
 \examples{
