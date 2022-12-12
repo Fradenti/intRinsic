@@ -23,7 +23,7 @@ Description: Provides functions to estimate the intrinsic dimension of a dataset
 License: MIT + file LICENSE
 URL: https://github.com/Fradenti/intRinsic
 Depends: 
-    R (>= 4.1.0)
+    R (>= 4.2.0)
 Imports: 
     dplyr,
     FNN,
@@ -44,3 +44,5 @@ NeedsCompilation: yes
 ByteCompile: true
 Encoding: UTF-8
 RoxygenNote: 7.2.2
+Suggests: 
+    covr

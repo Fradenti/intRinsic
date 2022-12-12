@@ -136,7 +136,7 @@ clustering <- function(object,
                     stats::cutree(dendr, k = K)
                   },
                   "salso" = {
-                    factor(salso::salso(object$membership_labels, ...))
+                    salso::salso(object$membership_labels, ...)
                   })
 
   Res <-
@@ -144,7 +144,7 @@ clustering <- function(object,
       clust = factor(clust),
       psm = psm,
       chosen_method = clustering_method,
-      K = K
+      K = length(unique(clust))
     )
   structure(Res, class = c("hidalgo_psm", class(Res)))
 }

@@ -51,11 +51,12 @@ Hidalgo(
 
 \item{q}{integer, first local homogeneity parameter. Default is 3.}
 
-\item{xi}{real between 0 and 1, second local homogeneity parameter.
+\item{xi}{real number between 0 and 1, second local homogeneity parameter.
 Default is 0.75.}
 
-\item{alpha_Dirichlet}{parameter of the Dirichlet prior on the mixture
-weights. Default is 0.05, inducing a sparse mixture.}
+\item{alpha_Dirichlet}{parameter \eqn{\alpha} of the symmetric Dirichlet prior
+on the mixture weights. Default is 0.05, inducing a sparse mixture.
+Values that are too small (\eqn{\alpha<0.005}) may cause underflow.}
 
 \item{a0_d}{shape parameter of the Gamma prior on \code{d}.}
 

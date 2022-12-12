@@ -184,7 +184,7 @@ Please remove the problematic observations and try again.",
 #' @export
 print.mus <- function(x, ...) {
 
-  if(is.matrix(x[[2]])){
+  if(is.list(x)){ #check if the mus object contains Nq
     nn <- length(x[[1]])
   }else{
     nn <- length(x)

@@ -19,10 +19,11 @@
 #' @param thinning integer indicating the thinning interval.
 #' @param verbose logical, should the progress of the sampler be printed?
 #' @param q integer, first local homogeneity parameter. Default is 3.
-#' @param xi real between 0 and 1, second local homogeneity parameter.
+#' @param xi real number between 0 and 1, second local homogeneity parameter.
 #' Default is 0.75.
-#' @param alpha_Dirichlet parameter of the Dirichlet prior on the mixture
-#' weights. Default is 0.05, inducing a sparse mixture.
+#' @param alpha_Dirichlet parameter \eqn{\alpha} of the symmetric Dirichlet prior
+#' on the mixture weights. Default is 0.05, inducing a sparse mixture.
+#' Values that are too small (\eqn{\alpha<0.005}) may cause underflow.
 #' @param a0_d shape parameter of the Gamma prior on \code{d}.
 #' @param b0_d rate parameter of the Gamma prior on \code{d}.
 #' @param prior_type character, type of Gamma prior on \code{d}, can be
@@ -155,7 +156,18 @@ Hidalgo <- function(X  = NULL,
 
   IRC.list <-  index_row_col(Nq, q, n)
   rm(Nq)
-  pl    <- MCMCpack::rdirichlet(K, alpha_Dirichlet)
+
+  pl  <- c(MCMCpack::rdirichlet(1, rep(alpha_Dirichlet,K)))
+  # in case alpha_Dirichlet is too low, initialize as equi-probable
+  if( any(is.na(pl)) ){
+
+    warning(paste("alpha_Dirichlet is too low and caused underflows when initializing.
+Consider increasing its value in the next run."),
+            call. = FALSE)
+
+    pl <-  rep(alpha_Dirichlet,K)
+  }
+
   Ci    <- sample(K, n, TRUE, pl)
   d     <- stats::rgamma(K, a0_d, 1 / b0_d)
 
