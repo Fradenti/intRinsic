@@ -70,7 +70,8 @@ dgera <- function(x,
     logden   <- ((n2 - 1) * d + 1) * (log(x))
     log_dens <- lognum - logden + (log(x > 1))
   } else{
-    logB     <- sum(log(1:(n2 - n1 - 1))) + sum(log(1:(n1-1))) - sum(log(1:(n2-1)))
+    logB     <- sum(log(1:(n2 - n1 - 1))) + sum(log(1:(n1-1))) -
+      sum(log(1:(n2-1)))
     lognum   <- log(d) + (d_n12 - 1) * (log(x ^ d - 1))
     logden   <- ((n2 - 1) * d + 1) * (log(x))
     log_dens <- lognum - logden + sum(log(x > 1)) - logB

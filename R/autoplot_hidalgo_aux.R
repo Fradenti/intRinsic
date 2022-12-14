@@ -243,8 +243,8 @@ ggHid_class <- function(object,
 #' \code{Hidalgo()} function.
 #' @param psm posterior similarity matrix that can be provided directly to the
 #' function.
-#' @param class factor variable used to order the observations according to their
-#' the \code{id} estimates.
+#' @param class factor variable used to order the observations according to
+#' their \code{id} estimates.
 #' @param ... other arguments passed to specific methods.
 #'
 #' @keywords internal
@@ -267,8 +267,8 @@ ggHid_psm <- function(object,
   n     <- nrow(psm)
 
   if (!is.null(class)) {
-    ind = sort(as.numeric(class),index=T)$ix
-    D     <- data.frame(reshape2::melt(psm[ind,ind]))
+    ind <-  sort(as.numeric(class),index=T)$ix
+    D <- data.frame(reshape2::melt(psm[ind,ind]))
 
     Q1 <- ggplot2::ggplot(D) +
       ggplot2::geom_tile(ggplot2::aes(

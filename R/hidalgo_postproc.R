@@ -56,12 +56,10 @@ id_by_class <- function(object, class) {
 #'
 print.hidalgo_class <- function(x, ... ){
   cat("Posterior ID by class:")
-  rownames(x) = NULL
+  rownames(x) <- NULL
   print(knitr::kable(x))
   invisible(x)
 }
-
-
 
 #' Posterior similarity matrix and partition estimation
 #'

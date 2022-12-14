@@ -1,4 +1,4 @@
-## Version 0.2.1
+## Version 0.2.2
 
 In this release, 
 
@@ -9,18 +9,19 @@ In this release,
 ## R CMD check results
 
 Running `devtools::check(args = c('--as-cran','--no-manual'))` locally and the functions
-`devtools::check_win_devel()` and `devtools::check_win_release()` produce 
+`devtools::check_win_devel()` and `devtools::check_win_release()` produces 
 no ERRORs, WARNINGs, nor NOTEs.  
 
 The functions `devtools::check_rhub()`,  produce no ERRORs, no WARNINGs, and one NOTE.  
-Specifically, only on `Platform: Windows Server 2022, R-devel, 64 bit`, we obtained
+Specifically, only on `Fedora Linux, R-devel, clang, gfortran`, we obtained
 
-* checking for detritus in the temp directory ... NOTE
-  Found the following files/directories:
-    'lastMiKTeXException'
+* checking HTML version of manual ... NOTE
+  Skipping checking HTML validation: no command 'tidy' found
+I cannot change that Tidy is not on the path, or update Tidy on the external Fedora Linux server.
+
 
 Finally, this package, in its current state, also passes all the standard 
-checks performed via GitHub action.
+checks performed via GitHub actions.
 
 ## Downstread dependencies
 

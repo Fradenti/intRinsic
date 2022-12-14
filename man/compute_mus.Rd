@@ -21,8 +21,8 @@ compute_mus(X = NULL, dist_mat = NULL, n1 = 1, n2 = 2, Nq = FALSE, q = 3)
 
 \item{n2}{order of the second NN considered. Default is 2.}
 
-\item{Nq}{logical indicator. If \code{TRUE}, it provides the \code{N^q} matrix
-needed for fitting the Hidalgo model.}
+\item{Nq}{logical indicator. If \code{TRUE}, it provides the \code{N^q}
+matrix needed for fitting the Hidalgo model.}
 
 \item{q}{integer, number of NN considered to build \code{N^q}.}
 

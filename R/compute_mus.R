@@ -10,8 +10,8 @@
 #' @param dist_mat a distance matrix computed between \code{n} observations.
 #' @param n1 order of the first NN considered. Default is 1.
 #' @param n2 order of the second NN considered. Default is 2.
-#' @param Nq logical indicator. If \code{TRUE}, it provides the \code{N^q} matrix
-#' needed for fitting the Hidalgo model.
+#' @param Nq logical indicator. If \code{TRUE}, it provides the \code{N^q}
+#' matrix needed for fitting the Hidalgo model.
 #' @param q integer, number of NN considered to build \code{N^q}.
 #'
 #' @references
@@ -228,7 +228,7 @@ plot.mus <- function(x, range_d = NULL, ...) {
 
   if(!is.null(range_d)){
 
-  for (i in 1:length(range_d)) {
+  for (i in seq_along(range_d)) {
     y <- dgera(sort(x),
                n1 = n1,
                n2 = n2,

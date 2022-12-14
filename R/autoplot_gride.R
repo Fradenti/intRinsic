@@ -18,8 +18,8 @@
 #'
 #' @return object of class \code{\link[ggplot2]{ggplot}}.
 #' It could represent the traceplot of the posterior simulations for the
-#' Bayesian \code{Gride} model (\code{traceplot = TRUE}) or a density plot of the simulated
-#' posterior distribution (\code{traceplot = FALSE}).
+#' Bayesian \code{Gride} model (\code{traceplot = TRUE}) or a density plot
+#' of the simulated posterior distribution (\code{traceplot = FALSE}).
 #'
 #' @seealso \code{\link{gride}}
 #'

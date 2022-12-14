@@ -41,4 +41,4 @@ twonn(X)
 
 The updated vignette for this package is available on ArXiv, at [this link](https://arxiv.org/pdf/2102.11425.pdf).
 
-Please note that the previous versions of the package (v0.1.0 and v0.2.0) are still available under the GitHub release at [this page](https://github.com/Fradenti/intRinsic/releases).
+Please note that the previous versions of the package (v0.1.0, v0.2.0, and v0.2.1) are still available under the GitHub release at [this page](https://github.com/Fradenti/intRinsic/releases).
