@@ -19,7 +19,7 @@ Description: Provides functions to estimate the intrinsic dimension of a dataset
     Allegra et al. (2020, <doi:10.1038/s41598-020-72222-0>); 
     Denti et al. (2022, <doi:10.1038/s41598-022-20991-1>);
     Facco et al. (2017, <doi:10.1038/s41598-017-11873-y>); 
-    Santos-Fernandez et al. (2021, <arXiv:1902.10459>).
+    Santos-Fernandez et al. (2021, <doi.org:10.1038/s41598-022-20991-1>).
 License: MIT + file LICENSE
 URL: https://github.com/Fradenti/intRinsic
 Depends: 

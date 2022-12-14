@@ -27,7 +27,8 @@ autoplot.twonn_linfit <- function(object,
   y    <- lmod$model$y
   Res  <- object$est
 
-  p1 <- ggplot2::qplot(x, y) +
+  p1 <- ggplot2::ggplot()+
+    ggplot2::geom_point(ggplot2::aes(x = x, y = y)) +
     ggplot2::theme_bw() +
     ggplot2::geom_abline(
       intercept = 0,

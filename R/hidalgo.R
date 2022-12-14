@@ -21,9 +21,9 @@
 #' @param q integer, first local homogeneity parameter. Default is 3.
 #' @param xi real number between 0 and 1, second local homogeneity parameter.
 #' Default is 0.75.
-#' @param alpha_Dirichlet parameter \eqn{\alpha} of the symmetric Dirichlet prior
+#' @param alpha_Dirichlet parameter of the symmetric Dirichlet prior
 #' on the mixture weights. Default is 0.05, inducing a sparse mixture.
-#' Values that are too small (\eqn{\alpha<0.005}) may cause underflow.
+#' Values that are too small (i.e., lower than 0.005) may cause underflow.
 #' @param a0_d shape parameter of the Gamma prior on \code{d}.
 #' @param b0_d rate parameter of the Gamma prior on \code{d}.
 #' @param prior_type character, type of Gamma prior on \code{d}, can be
@@ -66,12 +66,11 @@
 #' “Data segmentation based on the local intrinsic dimension.”
 #' Scientific Reports, 10(1), 1–27. ISSN 20452322,
 #' \doi{10.1038/s41598-020-72222-0, 1902.10459},
-#' \url{https://arxiv.org/abs/1902.10459}
 #'
 #' Santos-Fernandez E, Denti F, Mengersen K, Mira A (2021).
 #' “The role of intrinsic dimension in high-resolution player tracking data –
 #' Insights in basketball.” Annals of Applied Statistics - Forthcoming, –
-#' ISSN 2331-8422, 2002.04148, \url{https://arxiv.org/abs/2002.04148}
+#' ISSN 2331-8422, 2002.04148, \doi{10.1038/s41598-022-20991-1}
 #'
 #' @examples
 #' \donttest{

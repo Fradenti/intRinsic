@@ -2,10 +2,9 @@
 
 In this release, 
 
-* we have addressed some minor bugs
-* we have added basic methods functions (e.g., `print()`, `plot()`,...) to ease 
-  the user's access to the results provided by the main functions.
- 
+* we have addressed some minor bugs (see `NEWS.md` for more details)
+* we have added some additional input checks 
+* we have updated the documentations adding the most recent references
   
 ## R CMD check results
 
