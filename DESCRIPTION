@@ -22,9 +22,8 @@ Description: Provides functions to estimate the intrinsic dimension of a dataset
     Santos-Fernandez et al. (2021, <doi.org:10.1038/s41598-022-20991-1>).
 License: MIT + file LICENSE
 URL: https://github.com/Fradenti/intRinsic
-Depends: 
-    R (>= 4.2.0)
-Imports: 
+BugReports: https://github.com/fradenti/intRinsic/issues
+Depends: R (>= 4.2.0)Imports: 
     dplyr,
     FNN,
     ggplot2,
