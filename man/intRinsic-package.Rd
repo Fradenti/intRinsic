@@ -12,6 +12,7 @@ Provides functions to estimate the intrinsic dimension of a dataset via likeliho
 Useful links:
 \itemize{
   \item \url{https://github.com/Fradenti/intRinsic}
+  \item Report bugs at \url{https://github.com/fradenti/intRinsic/issues}
 }
 
 }
