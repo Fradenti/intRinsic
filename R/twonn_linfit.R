@@ -100,7 +100,7 @@ summary.twonn_linfit <- function(object, ...) {
 #' @export
 print.summary.twonn_linfit <- function(x, ...) {
   cat("Model: TWO-NN\n")
-  cat("Method: Least Square Estimation\n")
+  cat("Method: Least Squares Estimation\n")
   cat(paste0(
     "Sample size: ",
     x[1],

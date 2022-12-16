@@ -157,12 +157,12 @@ clustering <- function(object,
 #' @export
 print.hidalgo_psm <- function(x, ...) {
   cat("Estimated clustering solution summary:\n\n")
-  cat(paste0("Method: ", x$chosen_method, ".\n"))
+  cat(paste0("Method: ", x$chosen_method, "\n"))
 
   if (x$chosen_method == "dendrogram") {
-    cat(paste0("Retrieved clusters: ", x$K, ".\n"))
+    cat(paste0("Retrieved clusters: ", x$K, "\n"))
   } else{
-    cat(paste0("Retrieved clusters: ", length(unique(x$clust)), ".\n"))
+    cat(paste0("Retrieved clusters: ", length(unique(x$clust)), "\n"))
   }
 
   cat("Clustering frequencies:")
