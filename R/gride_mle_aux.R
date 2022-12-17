@@ -3,7 +3,7 @@
 #' @param mus_n1_n2 vector of generalized order NN distance ratios.
 #' @param n1 order of the first NN considered.
 #' @param n2 order of the second NN considered.
-#' @param nsim integer,the number of bootstrap replications to consider.
+#' @param nsim integer, the number of bootstrap replications to consider.
 #' @param upper_D nominal dimension of the dataset (upper bound for the
 #' maximization routine).
 #'

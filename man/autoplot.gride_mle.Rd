@@ -22,7 +22,7 @@ visual assessment of the uncertainty of the \code{id} estimates.
 }
 \description{
 Use this method without the \code{.gride_mle} suffix.
-It display the density plot of sample obtained via
+It displays the density plot of sample obtained via
 parametric bootstrap for the \code{Gride} model.
 }
 \seealso{

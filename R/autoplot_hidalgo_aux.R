@@ -1,6 +1,6 @@
 #' Plot the raw traceplots of the \code{id} parameters
 #'
-#' The functions produces the traceplots of the parameters
+#' The function produces the traceplots of the parameters
 #' \code{d_k}, for \code{k=1...K}. The ergodic means for all the chains
 #' are superimposed.
 #' The \code{K} chains that are plotted are not post-processed.
@@ -63,7 +63,7 @@ ggHid_chains <- function(object, ...) {
 
 #' Plot a summary of the distributions of re-arranged chains
 #'
-#' The functions produces two panels, reporting the means (left) and the medians
+#' The function produces two panels, reporting the means (left) and the medians
 #' (right) of the processed chains. Each observation is mapped to its own
 #' intrinsic dimension value assumed at each iteration \code{t} of the MCMC,
 #' denoted as \code{d(t,z_i)}. The 90% credible intervals are also depicted
@@ -77,7 +77,7 @@ ggHid_chains <- function(object, ...) {
 #'
 #' @return object of class \code{\link[ggplot2]{ggplot}}. It displays two
 #' scatterplots containing the posterior mean and median \code{id} for each
-#' observation, after that the MCMC has been postprocessed to handle label
+#' observation, once the MCMC has been postprocessed to handle label
 #' switching.
 #'
 #' @keywords internal
@@ -150,11 +150,11 @@ ggHid_mean_median <- function(object, ...) {
 #' @keywords internal
 #' @noRd
 #'
-#' @return object of class \code{\link[ggplot2]{ggplot}}. It can be use to
+#' @return object of class \code{\link[ggplot2]{ggplot}}. It can be used to
 #' visually study the relation between the posterior \code{id} estimates and an
-#' external, categorical variable.
+#' exogenous, categorical variable.
 #' The type of plot varies according to the specification of
-#' \code{class_plot_type}, and it can be either a set of boxplot or
+#' \code{class_plot_type}, and it can be either a set of boxplots or
 #' violin plots, or a collection of overlapping densities or histograms.
 #'
 ggHid_class <- function(object,
@@ -236,8 +236,8 @@ ggHid_class <- function(object,
 #'
 #' The function produces a heatmap of the posterior similarity (coclustering)
 #' matrix (psm) computed from the MCMC output of the function \code{Hidalgo()}.
-#' Rows and columns can be organized according to a clustering solution or to an
-#' external categorical variable.
+#' Rows and columns can be organized according to a clustering solution or an
+#' exogenous categorical variable.
 #'
 #' @param object object of class \code{Hidalgo}, the output of the
 #' \code{Hidalgo()} function.

@@ -121,7 +121,7 @@ in Allegra et al., 2020. The model is a Bayesian mixture of Pareto
 distribution with modified likelihood to induce homogeneity across
 neighboring observations. The model can segment the observations into
 multiple clusters characterized by different
-intrinsic dimensions, which allows to capture hidden patterns in the data.
+intrinsic dimensions. This permits to capture hidden patterns in the data.
 For more details on the algorithm, refer to
 \href{https://www.nature.com/articles/s41598-020-72222-0}{Allegra et al., 2020}.
 For an example of application to basketball data, see

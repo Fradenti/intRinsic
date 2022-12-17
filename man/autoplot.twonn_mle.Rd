@@ -17,7 +17,7 @@ Likelihood approach}
 }
 \value{
 \code{\link[ggplot2]{ggplot2}} object displaying the point estimate
-and confidence interval obtained via maximum likelihood approach of the
+and confidence interval obtained via the maximum likelihood approach of the
 \code{id} parameter.
 }
 \description{

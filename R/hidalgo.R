@@ -5,7 +5,7 @@
 #' distribution with modified likelihood to induce homogeneity across
 #' neighboring observations. The model can segment the observations into
 #' multiple clusters characterized by different
-#' intrinsic dimensions, which allows to capture hidden patterns in the data.
+#' intrinsic dimensions. This permits to capture hidden patterns in the data.
 #' For more details on the algorithm, refer to
 #' \href{https://www.nature.com/articles/s41598-020-72222-0}{Allegra et al., 2020}.
 #' For an example of application to basketball data, see
@@ -157,7 +157,7 @@ Hidalgo <- function(X  = NULL,
   rm(Nq)
 
   pl  <- c(MCMCpack::rdirichlet(1, rep(alpha_Dirichlet,K)))
-  # in case alpha_Dirichlet is too low, initialize as equi-probable
+  # in case alpha_Dirichlet is too low, initialize as equiprobable
   if( any(is.na(pl)) ){
 
     warning(paste("alpha_Dirichlet is too low and caused underflows when initializing.
@@ -223,7 +223,7 @@ Consider increasing its value in the next run."),
       log_Precomp_ratios = log_corr
     )
 
-    # STEP 2, uptading Pi^*
+    # STEP 2, updating Pi^*
 
     Ci     <- factor(Ci, levels = seq_len(K))
     N_Slog <- Groups_quantities(mu_obser = mus,

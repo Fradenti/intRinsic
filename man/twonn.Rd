@@ -101,9 +101,9 @@ incremented.}
 }
 \value{
 list characterized by a class type that depends on the \code{method}
-chosen. Regardless the \code{method}, the output list always contains the
+chosen. Regardless of the \code{method}, the output list always contains the
 object \code{est}, which provides the estimated intrinsic dimension along
-with uncertainty quantification. The remaining objects varies with the
+with uncertainty quantification. The remaining objects vary with the
 estimation method. In particular, if
 \describe{
 \item{\code{method = "mle"}}{the output reports the MLE and the relative
@@ -112,7 +112,7 @@ confidence interval;}
 used for the computation;}
 \item{\code{method = "bayes"}}{the output contains the {(1 + \code{alpha}) / 2}
 and {(1 - \code{alpha}) / 2}
-quantiles, mean, mode and median of the posterior distribution of \code{d}.}
+quantiles, mean, mode, and median of the posterior distribution of \code{d}.}
 }
 }
 \description{

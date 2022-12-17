@@ -65,9 +65,10 @@ print.hidalgo_class <- function(x, ... ){
 #'
 #' The function computes the posterior similarity (coclustering) matrix (psm)
 #' and estimates a representative partition of the observations from the MCMC
-#' output. The user can provide the desired number of clusters, or estimate a
-#' partition minimizing a loss function on the space of the partitions.
-#' In the latter case, function uses the package \code{salso}
+#' output. The user can provide the desired number of clusters or estimate a
+#' optimal clustering solution by minimizing a loss function on the space
+#' of the partitions.
+#' In the latter case, the function uses the package \code{salso}
 #' (\href{https://cran.r-project.org/package=salso}{Dahl et al., 2021}),
 #' that the user needs to load.
 #'

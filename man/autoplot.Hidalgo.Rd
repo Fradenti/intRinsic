@@ -19,7 +19,7 @@
 \item{object}{object of class \code{Hidalgo}, the output of the
 \code{Hidalgo()} function.}
 
-\item{type}{character that indicates the type of plot that is requested.
+\item{type}{character that indicates the requested type of plot.
 It can be:
 \describe{
  \item{\code{"raw_chains"}}{plot the MCMC and the ergodic means NOT corrected
@@ -29,7 +29,7 @@ It can be:
  \item{\code{"class_plot"}}{plot the estimated id distributions stratified by
  the groups specified in the class vector;}
  \item{\code{"clustering"}}{plot the posterior coclustering matrix. Rows and
- columns can be stratified by and external class and/or a clustering
+ columns can be stratified by an exogenous class and/or a clustering
  solution.}
  }}
 
@@ -64,15 +64,15 @@ More precisely, if
 the posterior mean and median \code{id} for each observation, after that the
 MCMC has been postprocessed to handle label switching;}
  \item{\code{method = "class_plot"}}{The function returns a plot that can be
- used to visually assess the relation between the posterior \code{id}
+ used to visually assess the relationship between the posterior \code{id}
  estimates and an external, categorical variable. The type of plot varies
  according to the specification of \code{class_plot_type}, and it can be
- either a set of boxplots or violin plots, or a collection of overlapping
+ either a set of boxplots or violin plots or a collection of overlapping
  densities or histograms;}
  \item{\code{method = "clustering"}}{The function displays the posterior
  similarity matrix, to allow the study of the clustering structure present in
  the data estimated via the mixture model. Rows and columns can be stratified
- by and external class and/or a clustering structure.}
+ by an exogenous class and/or a clustering structure.}
  }
 }
 \description{

@@ -145,7 +145,7 @@ autoplot.twonn_bayes <-
 #' @seealso \code{\link{twonn}}
 #'
 #' @return \code{\link[ggplot2]{ggplot2}} object displaying the point estimate
-#' and confidence interval obtained via maximum likelihood approach of the
+#' and confidence interval obtained via the maximum likelihood approach of the
 #' \code{id} parameter.
 #'
 #' @family autoplot methods

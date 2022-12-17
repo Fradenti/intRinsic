@@ -16,7 +16,7 @@
 #' @param vec_n2 vector of integers, containing the larger NN orders considered
 #' in the evolution.
 #' @param upp_bound upper bound for the interval used in the numerical
-#' optimization (via \code{optimize}). Default set to 50.
+#' optimization (via \code{optimize}). Default is set to 50.
 #'
 #' @return list containing the Gride evolution, the corresponding NN distance
 #' ratios, the average n2-th NN order distances, and the NN orders considered.

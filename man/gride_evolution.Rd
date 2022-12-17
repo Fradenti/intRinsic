@@ -22,7 +22,7 @@ in the evolution.}
 in the evolution.}
 
 \item{upp_bound}{upper bound for the interval used in the numerical
-optimization (via \code{optimize}). Default set to 50.}
+optimization (via \code{optimize}). Default is set to 50.}
 
 \item{x}{an object of class \code{gride_evolution}.}
 

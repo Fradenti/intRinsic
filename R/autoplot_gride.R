@@ -1,7 +1,7 @@
-#' Plot the simulated MCMC chains
+#' Plot the simulated MCMC chains for the Bayesian \code{Gride}
 #'
 #' Use this method without the \code{.gride_bayes} suffix.
-#' It display the traceplots of the chains generated
+#' It displays the traceplots of the chains generated
 #' with Metropolis-Hasting updates to visually assess mixing and convergence.
 #' Alternatively, it is possible to plot the posterior density.
 #'
@@ -86,7 +86,7 @@ n[1] == .(object$n1) ~ "," ~ n[2] == .(object$n2) ~ "," ~ sigma == .(object$sigm
 #' Plot the simulated bootstrap sample for the MLE \code{Gride}
 #'
 #' Use this method without the \code{.gride_mle} suffix.
-#' It display the density plot of sample obtained via
+#' It displays the density plot of sample obtained via
 #' parametric bootstrap for the \code{Gride} model.
 #'
 #' @param object object of class \code{gride_mle}.
@@ -97,7 +97,7 @@ n[1] == .(object$n1) ~ "," ~ n[2] == .(object$n2) ~ "," ~ sigma == .(object$sigm
 #'
 #' @rdname autoplot.gride_mle
 #'
-#' @return  object of class \code{\link[ggplot2]{ggplot}}. It displays the
+#' @return object of class \code{\link[ggplot2]{ggplot}}. It displays the
 #' density plot of the sample generated via parametric bootstrap to help the
 #' visual assessment of the uncertainty of the \code{id} estimates.
 #'

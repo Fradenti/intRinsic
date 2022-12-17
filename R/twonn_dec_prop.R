@@ -30,7 +30,7 @@ twonn_dec_prop <- function(X,
 
   if (any(proportions  > 1) | any(proportions  < 0)) {
     stop(
-      "The vector proportions must contains values between 0 (excluded) and 1 (included)",
+      "The vector proportions must contain values between 0 (excluded) and 1 (included)",
       call. = FALSE
     )
   }
