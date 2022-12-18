@@ -32,7 +32,7 @@ of the simulated posterior distribution (\code{traceplot = FALSE}).
 }
 \description{
 Use this method without the \code{.gride_bayes} suffix.
-It displays the traceplots of the chains generated
+It displays the traceplot of the chain generated
 with Metropolis-Hasting updates to visually assess mixing and convergence.
 Alternatively, it is possible to plot the posterior density.
 }
