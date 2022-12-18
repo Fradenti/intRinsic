@@ -18,7 +18,6 @@ The functions `devtools::check_rhub()`,  produce no ERRORs, no WARNINGs, and one
 * checking HTML version of manual ... NOTE
   Skipping checking HTML validation: no command 'tidy' found
 
-
 Finally, this package, in its current state, also passes all the standard 
 checks performed via GitHub actions.
 
