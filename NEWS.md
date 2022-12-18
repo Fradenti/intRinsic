@@ -1,3 +1,7 @@
+# intRinsic 0.2.2.9000
+
+
+
 # intRinsic 0.2.2
 
 * Fixed bug in `Hidalgo()`, causing errors when setting `verbose = FALSE`
