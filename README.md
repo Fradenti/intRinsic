@@ -39,8 +39,8 @@ X <- Swissroll(2000)
 twonn(X)
 ```
 
-The vignette for this package is available on ArXiv, at [this link](https://arxiv.org/pdf/2102.11425.pdf).
+The vignette for this package is available on ArXiv at [this link](https://arxiv.org/pdf/2102.11425.pdf).
 
 Please help me improve this package by reporting suggestions, typos, and issues at [this link](https://github.com/Fradenti/intRinsic/issues).
 
-Please note that the previous versions of the package (v0.1.0, v0.2.0, and v0.2.1) are still available under the GitHub release at [this page](https://github.com/Fradenti/intRinsic/releases).
+Please note that the previous versions of the package (v0.1.0, v0.2.0, and v0.2.1) are still available as GitHub Releases at [this page](https://github.com/Fradenti/intRinsic/releases).
