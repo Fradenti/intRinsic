@@ -398,7 +398,7 @@ print.Hidalgo <- function(x, ...) {
       "\nElapsed time: ",
       round(x$recap[["elapsed"]], 4),
       " ",
-      attr(x$recap[["elapsed"]], "units")
+      attr(x$recap[["elapsed"]], "units\n")
     )
   )
   invisible(x)
@@ -546,10 +546,9 @@ summary.Hidalgo <- function(object, ... ){
 #'
 #' @export
 print.summary.Hidalgo <- function(x, ...){
-
   cat("Hidalgo - Posterior id estimates\n")
-
   print(summary(as.data.frame(x)))
+  cat("\n")
   invisible(x)
 }
 

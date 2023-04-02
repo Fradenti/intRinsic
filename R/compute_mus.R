@@ -190,14 +190,13 @@ print.mus <- function(x, ...) {
     nn <- length(x)
   }
 
-  cat("Ratio statistics mu's:\n")
+  cat("Ratio statistics mu's\n")
   cat(paste0("NN orders: n1 = ", attr(x, "n1"), ", n2 = ",
-             attr(x, "n2"), ".\n"))
-  cat(paste0("Sample size: ", nn, "."))
+             attr(x, "n2"), "\n"))
+  cat(paste0("Sample size: ", nn, "\n"))
   if (!is.null(attr(x, "upper_D"))) {
-    cat(paste0("\nNominal Dimension: ", attr(x, "upper_D"), "."))
+    cat(paste0("Nominal Dimension: ", attr(x, "upper_D"), "\n"))
   }
-
   invisible(x)
   }
 

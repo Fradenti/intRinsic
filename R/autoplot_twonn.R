@@ -110,7 +110,7 @@ autoplot.twonn_bayes <-
     y <- stats::dgamma(x,
                        shape = object$hp_posterior[1],
                        rate =  object$hp_posterior[2])
-    G1 <- ggplot2::ggplot(dplyr::as_tibble(x, y)) +
+    G1 <- ggplot2::ggplot(dplyr::tibble(x, y)) +
       ggplot2::geom_line(ggplot2::aes(x = x, y = y0), col = 4) +
       ggplot2::geom_line(ggplot2::aes(x = x, y = y)) +
       ggplot2::xlab("Intrinsic Dimension") +

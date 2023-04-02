@@ -58,6 +58,7 @@ print.hidalgo_class <- function(x, ... ){
   cat("Posterior ID by class:")
   rownames(x) <- NULL
   print(knitr::kable(x))
+  cat("\n")
   invisible(x)
 }
 
@@ -170,6 +171,7 @@ print.hidalgo_psm <- function(x, ...) {
   tab           <- t(table(Cluster = x$clust))
   colnames(tab) <- paste("Cluster", colnames(tab))
   print(knitr::kable(tab))
+  cat("\n")
   invisible(x)
 }
 

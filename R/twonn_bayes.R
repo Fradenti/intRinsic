@@ -76,7 +76,8 @@ twonn_bayes <- function(mus,
 #' @export
 print.twonn_bayes <- function(x, ...) {
   y <- c("TWONN - Bayes - Posterior Mean" = x[["est"]][2])
-  print((y))
+  cat(y)
+  cat("\n")
   invisible(x)
 }
 
@@ -133,7 +134,7 @@ print.summary.twonn_bayes <- function(x, ...) {
              x[5],
              ")\n"))
   cat(paste0(
-    "Credibile Interval quantiles: ",
+    "Credible Interval quantiles: ",
     (1 - x[6]) / 2 * 100,
     "%, ",
     (1 + x[6]) / 2 * 100,
@@ -149,6 +150,7 @@ print.summary.twonn_bayes <- function(x, ...) {
   )
   rownames(y) <- NULL
   print(knitr::kable(y))
+  cat("\n")
   invisible(x)
 }
 

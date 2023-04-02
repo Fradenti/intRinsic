@@ -43,6 +43,6 @@ LinkingTo:
 NeedsCompilation: yes
 ByteCompile: true
 Encoding: UTF-8
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Suggests: 
     covr

@@ -115,6 +115,7 @@ gride_bayes <- function(mus_n1_n2 = NULL,
 print.gride_bayes <- function(x, ...) {
   cat(paste0("Gride(",x[["n1"]],",",x[["n2"]],") - Bayes - Posterior Mean\n"))
   cat(x[["est"]][2])
+  cat("\n")
   invisible(x)
 }
 
@@ -164,9 +165,9 @@ print.summary.gride_bayes <- function(x, ...) {
              ", ",
              x[3],
              ")\n"))
-  cat(paste0("MCMC posterior sample size: ", x[["nsim"]], "\n"))
+  cat(paste0("MCMC posterior sample size: ", x[1], "\n"))
   cat(paste0(
-    "Credibile Interval quantiles: ",
+    "Credible Interval quantiles: ",
     (1 - x[4]) / 2 * 100,
     "%, ",
     (1 + x[4]) / 2 * 100,
@@ -181,7 +182,9 @@ print.summary.gride_bayes <- function(x, ...) {
     `Mode` = x[10],
     `Upper Bound` = x[11]
   )
+  rownames(y) <- NULL
   print(knitr::kable(y))
+  cat("\n")
   invisible(x)
 }
 

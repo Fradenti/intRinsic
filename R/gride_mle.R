@@ -87,8 +87,9 @@ gride_mle <- function(mus_n1_n2 = NULL,
 #'
 #' @export
 print.gride_mle <- function(x, ...) {
-  y <- c("Gride - MLE" = unname(x[["est"]][2]))
-  print((y))
+  cat(paste0("Gride(",x[["n1"]],",",x[["n2"]],") - MLE\n"))
+  cat(x[["est"]][2])
+  cat("\n")
   invisible(x)
 }
 
@@ -133,6 +134,7 @@ print.summary.gride_mle <- function(x, ...) {
     `Upper Bound` = x[7]
   )
   print(knitr::kable(y))
+  cat("\n")
   invisible(x)
   }
 

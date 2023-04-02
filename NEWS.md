@@ -1,6 +1,7 @@
 # intRinsic 0.2.2.9000
 
-
+* Fixed some spelling typos and new-line inconsistencies.
+* Removed the dependencies on the `as_tibble()` function (deprecated)
 
 # intRinsic 0.2.2
 

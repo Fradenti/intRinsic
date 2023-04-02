@@ -107,7 +107,6 @@ print.gride_evolution <- function(x, ...) {
     round(max(x[["avg_distance_n2"]]), 4),
     "\n"
   ))
-
   invisible(x)
 }
 

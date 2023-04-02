@@ -82,7 +82,8 @@ twonn_mle <-
 #' @export
 print.twonn_mle <- function(x, ...) {
   y <- c("TWONN - MLE" = x[["est"]][2])
-  print((y))
+  cat(y)
+  cat("\n")
   invisible(x)
 }
 
@@ -133,6 +134,7 @@ print.summary.twonn_mle <- function(x, ...) {
     `Upper Bound` = x[7]
   )
   print(knitr::kable(y))
+  cat("\n")
   invisible(x)
 }
 

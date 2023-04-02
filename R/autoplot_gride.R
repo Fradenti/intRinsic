@@ -55,7 +55,7 @@ n[1] == .(object$n1) ~ "," ~ n[2] == .(object$n2) ~ "," ~ sigma == .(object$sigm
 
   } else{
     sam <- object$post_sample
-    G1 <- ggplot2::ggplot(dplyr::as_tibble(c(sam))) +
+    G1 <- ggplot2::ggplot(dplyr::tibble(c(sam))) +
       ggplot2::geom_density(ggplot2::aes(x = .data$value),
                             col = "darkblue",
                             fill = "lightgray") +
@@ -108,7 +108,7 @@ n[1] == .(object$n1) ~ "," ~ n[2] == .(object$n2) ~ "," ~ sigma == .(object$sigm
 autoplot.gride_mle <- function(object,
                                title = "MLE Gride - Bootstrap sample",
                                ...) {
-  G1 <- ggplot2::ggplot(dplyr::as_tibble(object$boot_sample)) +
+  G1 <- ggplot2::ggplot(dplyr::tibble(object$boot_sample)) +
     ggplot2::geom_density(ggplot2::aes(x = .data$value),
                           col = "darkblue",
                           fill = "lightgray") +

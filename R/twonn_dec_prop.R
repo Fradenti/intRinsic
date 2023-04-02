@@ -42,10 +42,11 @@ twonn_dec_prop <- function(X,
     )
   }
 
+  proportions     <- sort(proportions,decreasing = T)
   W               <- length(proportions)
   twonns          <- matrix(NA, W, 3)
   avg_distance_n2 <- numeric(W)
-  sub_ind        <-  1:n
+  sub_ind         <-  1:n
   n_new           <- n
 
   # Classic TWO-NN
@@ -53,7 +54,7 @@ twonn_dec_prop <- function(X,
   mudots             <- K$nn.dist[, 2] / K$nn.dist[, 1]
   avg_distance_n2[1] <- mean(K$nn.dist[, 2])
   ests               <- twonn_mle(mudots)
-  twonns[1, ]         <- ests$est
+  twonns[1, ]        <- ests$est
 
   for (w in 2:(W)) {
     prop       <- proportions[(w)] / proportions[w - 1]
@@ -99,16 +100,16 @@ print.twonn_dec_prop <- function(x, ...) {
       " to ",
       round(min(x[["proportions"]]), 5)
     ),
-    ".\n")
+    "\n")
   } else{
-    cat("Decimating proportions: ", round(x[["proportions"]], 5), ".\n")
+    cat("Decimating proportions: ", round(x[["proportions"]], 5), "\n")
   }
   cat(paste0(
     "Average distance from the n2-th NN ranging from ",
     round(min(x[["avg_distance_n2"]]), 4),
     " to ",
     round(max(x[["avg_distance_n2"]]), 4),
-    ".\n"
+    "\n"
   ))
   invisible(x)
 }

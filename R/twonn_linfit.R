@@ -66,7 +66,8 @@ twonn_linfit <- function(mus,
 #' @export
 print.twonn_linfit <- function(x, ...) {
   y <- c("TWONN - Linfit" = x[["est"]][2])
-  print((y))
+  cat(y)
+  cat("\n")
   invisible(x)
 }
 
@@ -117,6 +118,7 @@ print.summary.twonn_linfit <- function(x, ...) {
     `Upper Bound` = x[7]
   )
   print(knitr::kable(y))
+  cat("\n")
   invisible(x)
 }
 
