@@ -1,18 +1,11 @@
-citHeader("To cite intRinsic in publications use:")
-
-citEntry(entry = "Manual",
-  title        = "intRinsic: an R package for model-based estimation of the intrinsic dimension of a dataset",
-  author       = personList(as.person("Francesco Denti")),
-  journal      = "Arxiv preprint",
-  year         = "2021",
-  volume       = "",
-  number       = "",
-  pages        = "",
-  url          = "https://arxiv.org/abs/2102.11425",
-
-  textVersion  =
-  paste("Francesco Denti (2022+).",
-        "intRinsic: an R package for model-based estimation of the intrinsic dimension of a dataset.",
-        "Arxiv preprint",
-        "URL https://arxiv.org/abs/2102.11425")
+bibentry(bibtype = "Article",
+  title        = "{intRinsic}: An {R} Package for Model-Based Estimation of the Intrinsic Dimension of a Dataset",
+  author       = person(given = "Francesco", family = "Denti", email = "francesco.denti@unicatt.it"),
+  journal      = "Journal of Statistical Software",
+  year         = "2023",
+  volume       = "106",
+  number       = "9",
+  pages        = "1--45",
+  doi          = "10.18637/jss.v106.i09",
+  header       = "To cite intRinsic in publications use:"
 )

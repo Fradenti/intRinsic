@@ -1,5 +1,6 @@
-# intRinsic 0.2.2.9000
+# intRinsic 1.0.0
 
+* The DOI in the CITATION is for a new JSS publication that will be registered after publication on CRAN.
 * Fixed some spelling typos and new-line inconsistencies.
 * Removed the dependencies on the `as_tibble()` function (deprecated)
 
