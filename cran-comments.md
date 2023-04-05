@@ -22,7 +22,7 @@ Please note that the DOI in the CITATION is for a new JSS publication that will 
      Message: Not Found
 
 Aside from the notes above, running `devtools::check(args = c('--as-cran','--no-manual'))` locally and the functions `devtools::check_win_devel()` and `devtools::check_win_release()` produces 
-no ERRORs, WARNINGs, nor NOTEs.  
+no ERRORs, WARNINGs, nor additional NOTEs.  
 
 The functions `devtools::check_rhub()`,  produce no ERRORs, no WARNINGs, and one NOTE. Specifically, only on `Fedora Linux, R-devel, clang, gfortran`, we obtained
 

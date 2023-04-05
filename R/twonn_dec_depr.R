@@ -44,35 +44,10 @@
 #'
 #' @seealso \code{\link{twonn}}
 #'
-#' @examples
-#' X <- replicate(4,rnorm(1000))
-#' twonn_decimation(X,,method = "proportions",
-#'                 proportions = c(1,.5,.2,.1,.01))
-#'
-twonn_decimation <- function(X,
+twonn_decimated <- function(X,
                             method = c("steps", "proportions"),
                             steps = 0,
                             proportions = 1,
                             seed = NULL) {
-  method <- match.arg(method)
-
-  if (steps == 0 & length(proportions) == 1) {
-    if (proportions == 1)
-      method <- "mle"
-  }
-
-  res <- switch(
-    method,
-    steps = twonn_dec_by(X = X,
-                         steps = steps,
-                         seed = seed),
-    proportions = twonn_dec_prop(
-      X = X,
-      proportions = proportions,
-      seed = seed
-    ),
-    mle = twonn(X = X,
-                method = "mle")
-  )
-  return(res)
+  .Deprecated("twonn_decimation")
 }

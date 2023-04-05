@@ -45,8 +45,30 @@ gride_evolution <- function(X, vec_n1, vec_n2, upp_bound = 50) {
     stop("the considered NN orders in n1 and n2 do not match", call. = FALSE)
   }
 
-  D        <- ncol(X)
-  n        <- nrow(X)
+  X     <- as.matrix(X)
+  D     <- ncol(X)
+  n     <- n0 <- nrow(X)
+  check <- 0
+  check <- duplicated(X)
+
+  if (sum(check) > 0) {
+    X <- X[-which(check),]
+    n <- nrow(X)
+    warning(
+      paste0(
+        "\n  Duplicates are present and will be removed.
+        \n  Original sample size: ",
+        n0,
+        ". New sample size: ",
+        n,
+        "."
+      ),
+      call. = FALSE
+    )
+  }
+
+
+
   W        <- length(vec_n1)
   MUdots   <- matrix(NA, n, W)
   K        <- FNN::get.knn(X, k = max(vec_n2))

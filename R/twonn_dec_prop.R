@@ -42,6 +42,29 @@ twonn_dec_prop <- function(X,
     )
   }
 
+  X     <- as.matrix(X)
+  D     <- ncol(X)
+  n     <- n0 <- nrow(X)
+  check <- 0
+  check <- duplicated(X)
+
+  if (sum(check) > 0) {
+    X <- X[-which(check),]
+    n <- nrow(X)
+    warning(
+      paste0(
+        "\n  Duplicates are present and will be removed.
+        \n  Original sample size: ",
+        n0,
+        ". New sample size: ",
+        n,
+        "."
+      ),
+      call. = FALSE
+    )
+  }
+
+
   proportions     <- sort(proportions,decreasing = T)
   W               <- length(proportions)
   twonns          <- matrix(NA, W, 3)
@@ -84,7 +107,7 @@ twonn_dec_prop <- function(X,
 
 
 
-#' @name twonn_decimated
+#' @name twonn_decimation
 #'
 #' @param x object of class \code{twonn_dec_prop}, obtained from the function
 #' \code{twonn_dec_prop()}.
@@ -116,7 +139,7 @@ print.twonn_dec_prop <- function(x, ...) {
 
 
 
-#' @name twonn_decimated
+#' @name twonn_decimation
 #'
 #' @param x object of class \code{twonn_dec_prop}, obtained from the function
 #' \code{twonn_dec_prop()}.
