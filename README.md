@@ -1,4 +1,4 @@
-# intRinsic v0.2.2 <img src="man/figures/intLogo.png" align="right" width="120" />
+# intRinsic v1.0.0 <img src="man/figures/intLogo.png" align="right" width="120" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/Fradenti/intRinsic/workflows/R-CMD-check/badge.svg)](https://github.com/Fradenti/intRinsic/actions)
@@ -39,7 +39,7 @@ X <- Swissroll(2000)
 twonn(X)
 ```
 
-The vignette for this package has been published in the Journal of Statistical Software [this link](https://doi.org/10.18637/jss.v106.i09), and is also available on ArXiv at [this link](https://arxiv.org/pdf/2102.11425.pdf).
+The vignette for this package has been published in the `Journal of Statistical Software` [this link](https://doi.org/10.18637/jss.v106.i09), and is also available on ArXiv at [this link](https://arxiv.org/pdf/2102.11425.pdf).
 
 Please help me improve this package by reporting suggestions, typos, and issues at [this link](https://github.com/Fradenti/intRinsic/issues).
 

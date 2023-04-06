@@ -50,4 +50,26 @@ twonn_decimated <- function(X,
                             proportions = 1,
                             seed = NULL) {
   .Deprecated("twonn_decimation")
+  method <- match.arg(method)
+
+  if (steps == 0 & length(proportions) == 1) {
+    if (proportions == 1)
+      method <- "mle"
+  }
+
+  res <- switch(
+    method,
+    steps = twonn_dec_by(X = X,
+                         steps = steps,
+                         seed = seed),
+    proportions = twonn_dec_prop(
+      X = X,
+      proportions = proportions,
+      seed = seed
+    ),
+    mle = twonn(X = X,
+                method = "mle")
+  )
+  return(res)
+
 }

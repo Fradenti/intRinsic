@@ -35,13 +35,6 @@ twonn_dec_prop <- function(X,
     )
   }
 
-  n               <- nrow(X)
-  if (floor(min(proportions) * n)  <= 2) {
-    stop(
-      "Proportions are too low, no observations left. Please lower the number of steps considered"
-    )
-  }
-
   X     <- as.matrix(X)
   D     <- ncol(X)
   n     <- n0 <- nrow(X)
@@ -64,12 +57,17 @@ twonn_dec_prop <- function(X,
     )
   }
 
+  if (floor(min(proportions) * n)  <= 2) {
+    stop(
+      "Proportions are too low, no observations left. Please lower the number of steps considered"
+    )
+  }
 
   proportions     <- sort(proportions,decreasing = T)
   W               <- length(proportions)
   twonns          <- matrix(NA, W, 3)
   avg_distance_n2 <- numeric(W)
-  sub_ind         <-  1:n
+  sub_ind         <- 1:n
   n_new           <- n
 
   # Classic TWO-NN
@@ -91,7 +89,7 @@ twonn_dec_prop <- function(X,
     K          <- FNN::get.knn(subX, k = 2)
     mudots     <- K$nn.dist[, 2] / K$nn.dist[, 1]
     avg_distance_n2[w] <- mean(K$nn.dist[, 2])
-    ests       <- twonn_mle(mudots)
+    ests        <- twonn_mle(mudots)
     twonns[w, ] <- ests$est
 
   }

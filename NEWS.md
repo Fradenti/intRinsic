@@ -1,10 +1,10 @@
 # intRinsic 1.0.0
 
-* The DOI in the CITATION is for a new JSS publication that will be registered after publication on CRAN.
-* Fixed some spelling typos and new-line inconsistencies.
-* Removed the dependencies on the `as_tibble()` function (deprecated).
-* The function `twonn_decimated()` changed name in `twonn_decimation()` (old name still available).
-* Now `gride_evolution()` and `twonn_decimation()` remove duplicated observations by default.
+* This update marks the acceptance of the `intRinsic` vignette in the `Journal of Statistical Software`. Note: the DOI in the CITATION is for a new JSS publication that will be registered after publication on CRAN
+* Fixed some spelling typos and new-line inconsistencies
+* Removed the dependencies on the `as_tibble()` function (deprecated)
+* The function `twonn_decimated()` is now deprecated and will be removed in future releases. The function to use is `twonn_decimation()`
+* Now `gride_evolution()` and `twonn_decimation()` remove duplicated observations by default
 
 # intRinsic 0.2.2
 

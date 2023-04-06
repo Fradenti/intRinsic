@@ -27,13 +27,6 @@ twonn_dec_by <- function(X,
   if (!is.null(seed)) {
     set.seed(seed)
   }
-  n               <- nrow(X)
-  if (floor(2 ^ (-steps) * n)  <= 2) {
-    stop(
-"Too many steps, no observations left. Please lower the number of steps considered",
-      call. = FALSE
-    )
-  }
 
   X     <- as.matrix(X)
   D     <- ncol(X)
@@ -57,6 +50,12 @@ twonn_dec_by <- function(X,
     )
   }
 
+  if (floor(2 ^ (-steps) * n)  <= 2) {
+    stop(
+      "Too many steps, no observations left. Please lower the number of steps considered",
+      call. = FALSE
+    )
+  }
 
   W               <- steps + 1
   twonns          <- matrix(NA, W, 3)
