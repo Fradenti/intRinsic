@@ -398,7 +398,7 @@ print.Hidalgo <- function(x, ...) {
       "\nElapsed time: ",
       round(x$recap[["elapsed"]], 4),
       " ",
-      attr(x$recap[["elapsed"]], "units\n")
+      attr(x$recap[["elapsed"]], "units"),"\n"
     )
   )
   invisible(x)

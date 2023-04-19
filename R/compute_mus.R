@@ -99,16 +99,16 @@ Please remove the problematic observations and try again.",
         NQ[h, K$nn.index[h,]] <- 1
       }
       mus <- list(mus = mus, NQ = NQ)
-
     }
 
     attr(mus, "upper_D") <- D
 
-  } else {
+
+    } else {
     # checks on dist_mat
 
     # if it is of class dist, then transform it into a matrix
-    if(inherits(dist_mat,"dist")){
+    if(inherits(dist_mat,"dist") | inherits(dist_mat,"dissimilarity")){
       dist_mat <- as.matrix(dist_mat)
     }
 
@@ -124,12 +124,12 @@ Please provide a valid distance matrix",
            call. = FALSE)
     }
     # NA?
-    if(any(is.na(X))){
+    if(any(is.na(dist_mat))){
       stop("There are missing values in the provided distance matrix.
 Please remove the problematic observations and try again.",
            call. = FALSE)
     }
-    n0    <- nrow(dist_mat)
+    n <- n0 <- nrow(dist_mat)
     dummy <- dist_mat
     dummy[lower.tri(dummy, diag = TRUE)] <- -1
     inds     <- unique(which(dummy == 0, arr.ind = TRUE)[, 2])
@@ -139,28 +139,24 @@ Please remove the problematic observations and try again.",
       n        <- nrow(dist_mat)
 
       warning(
-        paste0(
-          "\n  Duplicates are present and will be removed.
-             Original sample size: ",
-          n0,
-          ". New sample size: ",
-          n,
-          "."
+        paste0("\nDuplicates are present and will be removed.\n",
+               "Original sample size: ", n0,". New sample size: ",
+          n,"."
         )
       )
     }
 
-    if (!Nq) {
       sDistMat <- apply(dist_mat, 1, function(x)
         sort(x, index = TRUE))
       mus      <- unlist(lapply(sDistMat,
                                 function(z)
                                   z$x[n2 + 1] / z$x[n1 + 1]))
-
+    if (!Nq) {
+      mus <- list(mus = mus)
     } else{
       NQ       <- matrix(0, n, n)
       for (h in 1:n) {
-        NQ[h, (sDistMat[[h]]$ix)[2:q]] <- 1
+        NQ[h, (sDistMat[[h]]$ix)[2:(q+1)]] <- 1
       }
       mus <- list(mus = mus, Nq = NQ)
 

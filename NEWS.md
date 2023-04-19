@@ -1,3 +1,8 @@
+# intRinsic 1.0.0.999
+
+* Fixed a typo in `compute_mus` when computing ratios from `dist_matrix`. Now the function handles also the `dissimilarity` class
+* Adjusted some indentations in `print` methods
+
 # intRinsic 1.0.0
 
 * This update marks the acceptance of the `intRinsic` vignette in the `Journal of Statistical Software`. Note: the DOI in the CITATION is for a new JSS publication that will be registered after publication on CRAN
