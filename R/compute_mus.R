@@ -151,15 +151,12 @@ Please remove the problematic observations and try again.",
       mus      <- unlist(lapply(sDistMat,
                                 function(z)
                                   z$x[n2 + 1] / z$x[n1 + 1]))
-    if (!Nq) {
-      mus <- list(mus = mus)
-    } else{
+    if (Nq) {
       NQ       <- matrix(0, n, n)
       for (h in 1:n) {
         NQ[h, (sDistMat[[h]]$ix)[2:(q+1)]] <- 1
       }
       mus <- list(mus = mus, Nq = NQ)
-
     }
   }
 
