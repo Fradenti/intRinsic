@@ -3,12 +3,15 @@
 \name{compute_mus}
 \alias{compute_mus}
 \alias{print.mus}
+\alias{print.mus_Nq}
 \alias{plot.mus}
 \title{Compute the ratio statistics needed for the intrinsic dimension estimation}
 \usage{
 compute_mus(X = NULL, dist_mat = NULL, n1 = 1, n2 = 2, Nq = FALSE, q = 3)
 
 \method{print}{mus}(x, ...)
+
+\method{print}{mus_Nq}(x, ...)
 
 \method{plot}{mus}(x, range_d = NULL, ...)
 }

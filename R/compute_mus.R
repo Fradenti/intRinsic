@@ -103,6 +103,10 @@ Please remove the problematic observations and try again.",
 
     attr(mus, "upper_D") <- D
 
+    attr(mus, "n1") <- n1
+    attr(mus, "n2") <- n2
+    structure(mus, class = c("mus", class(mus)))
+
 
     } else {
     # checks on dist_mat
@@ -129,6 +133,7 @@ Please provide a valid distance matrix",
 Please remove the problematic observations and try again.",
            call. = FALSE)
     }
+
     n <- n0 <- nrow(dist_mat)
     dummy <- dist_mat
     dummy[lower.tri(dummy, diag = TRUE)] <- -1
@@ -151,19 +156,27 @@ Please remove the problematic observations and try again.",
       mus      <- unlist(lapply(sDistMat,
                                 function(z)
                                   z$x[n2 + 1] / z$x[n1 + 1]))
-    if (Nq) {
+    if (!Nq) {
+      attr(mus, "n1") <- n1
+      attr(mus, "n2") <- n2
+      structure(mus, class = c("mus", class(mus)))
+
+    }else{
       NQ       <- matrix(0, n, n)
       for (h in 1:n) {
         NQ[h, (sDistMat[[h]]$ix)[2:(q+1)]] <- 1
       }
-      mus <- list(mus = mus, Nq = NQ)
-    }
+      attr(mus, "n1") <- n1
+      attr(mus, "n2") <- n2
+      mus <- structure(mus, class = c("mus", class(mus)))
+      mus_nq <- list(mus = mus, Nq = NQ)
+      attr(mus_nq, "n1") <- n1
+      attr(mus_nq, "n2") <- n2
+      attr(mus_nq, "q")  <- q
+      structure(mus_nq, class = c("mus_Nq", class(mus_nq)))
+
+      }
   }
-
-  attr(mus, "n1") <- n1
-  attr(mus, "n2") <- n2
-  structure(mus, class = c("mus", class(mus)))
-
 }
 
 
@@ -194,6 +207,33 @@ print.mus <- function(x, ...) {
   }
 
 
+#' @name compute_mus
+#'
+#' @param x object of class \code{mus}, obtained from the
+#' function \code{compute_mus()}.
+#' @param ... ignored.
+#'
+#' @export
+print.mus_Nq <- function(x, ...) {
+
+  if(is.list(x)){ #check if the mus object contains Nq
+    nn <- length(x[[1]])
+  }else{
+    nn <- length(x)
+  }
+
+  cat("List containing the ratio statistics mu's and the Nq adjacency matrix\n")
+
+  cat(paste0("NN orders: n1 = ", attr(x, "n1"), ", n2 = ",
+             attr(x, "n2"), "\n"))
+  cat(paste0("Sample size: ", nn, "\n"))
+  if (!is.null(attr(x, "upper_D"))) {
+    cat(paste0("Nominal Dimension: ", attr(x, "upper_D"), "\n"))
+  }
+  cat(paste0("NNs considered: q = ", attr(x, "q"), "\n"))
+
+  invisible(x)
+}
 
 
 #' @name compute_mus
