@@ -1,4 +1,4 @@
-# intRinsic 1.0.0.999
+# intRinsic 1.0.0.9000
 
 * Fixed a typo in `compute_mus` when computing ratios from `dist_matrix`. Now the function handles also the `dissimilarity` class
 * Adjusted some indentations in `print` methods
