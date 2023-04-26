@@ -1,7 +1,7 @@
 ## Version 1.0.1
 
 * I am kindly asking for an early package update on CRAN since the 
-current version of `intRinsic (v1.0.0)` contains a bug that makes the script published in the Journal of Statistical Software (`JSS`) not fully reproducible. Therefore, I would like to address this issue as soon as possible to avoid causing any disruption to potential users. In detail:
+current CRAN version of `intRinsic (v1.0.0)` contains a bug that makes the script published in the Journal of Statistical Software (`JSS`) not fully reproducible. Therefore, I would like to address this issue as soon as possible to avoid causing any disruption to potential users. In detail, we:
 * Fixed a typo in `compute_mus` when computing ratios from `dist_matrix`. Now the function handles also the `dissimilarity` class
 * Fixed a typo in `compute_mus` involving the class of the returned object
 * Adjusted some indentations in `print` methods
