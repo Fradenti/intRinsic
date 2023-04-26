@@ -10,16 +10,10 @@ current version of `intRinsic (v1.0.0)` contains a bug that makes the script pub
 ## R CMD check results
 
 Running `devtools::check(args = c('--as-cran','--no-manual'))` locally and the functions `devtools::check_win_devel()` and `devtools::check_win_release()` produces 
-no ERRORs, WARNINGs, or additional NOTEs.  
+no ERRORs, WARNINGs, no NOTEs.
 
-I removed the recent note 
-
-* checking C++ specification ...
-  NOTE Specified C++11: please drop specification unless essential
-
-following https://www.tidyverse.org/blog/2023/03/cran-checks-compiled-code/, updating the `src/Makevars` and `msrc/Makevars.win` files. 
-
-The function `devtools::check_rhub()` produces no ERRORs, no WARNINGs, and one NOTE. Specifically, only on `Fedora Linux, R-devel, clang, gfortran`, we obtained
+The function `devtools::check_rhub()` produces no ERRORs, no WARNINGs, and one NOTE. 
+Specifically, only on `Fedora Linux, R-devel, clang, gfortran`, we obtained
 
 * checking HTML version of manual ... NOTE
   Skipping checking HTML validation: no command 'tidy' found
@@ -32,6 +26,6 @@ If I instead run `rhub::check(platform = "debian-gcc-devel-nold")`, the package 
 
 Finally, this package, in its current state, also passes all the standard checks performed via GitHub actions.
 
-## Downstread dependencies
+## Downstream dependencies
 
 There are currently no downstream dependencies for this package.
