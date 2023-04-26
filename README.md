@@ -43,4 +43,4 @@ The vignette for this package has been published in the `Journal of Statistical 
 
 Please help me improve this package by reporting suggestions, typos, and issues at [this link](https://github.com/Fradenti/intRinsic/issues).
 
-Please note that the previous versions of the package (v0.1.0, v0.2.0, and v0.2.1) are still available as GitHub Releases at [this page](https://github.com/Fradenti/intRinsic/releases).
+Please note that the previous versions of the package (from `v0.1.0` to `v1.0.0`) are still available as GitHub Releases at [this page](https://github.com/Fradenti/intRinsic/releases).

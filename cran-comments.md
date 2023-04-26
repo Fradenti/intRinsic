@@ -1,27 +1,15 @@
-## Version 1.0.0
+## Version 1.0.1
 
-* This release is accompanied by a publication in the `Journal of Statistical Software`.
-  Please note that the DOI in the CITATION is for a new JSS publication that will be registered `after` the package release on CRAN.
-* Also, we have fixed minor bugs and have updated the documentation adding the most recent references
+* I am kindly asking for an early package update on CRAN since the 
+current version of `intRinsic (v1.0.0)` contains a bug that makes the script published in the Journal of Statistical Software (`JSS`) not fully reproducible. Therefore, I would like to address this issue as soon as possible to avoid causing any disruption to potential users. In detail:
+* Fixed a typo in `compute_mus` when computing ratios from `dist_matrix`. Now the function handles also the `dissimilarity` class
+* Fixed a typo in `compute_mus` involving the class of the returned object
+* Adjusted some indentations in `print` methods
+
   
 ## R CMD check results
 
-Please note that the DOI in the CITATION is for a new JSS publication that will be registered after publication on CRAN. As a result, I currently obtain the following notes across the various platforms:
-
-* Found the following (possibly) invalid URLs:
-   URL: https://doi.org/10.18637/jss.v106.i09
-     From: README.md
-     Status: 404
-     Message: Not Found
-
-* Found the following (possibly) invalid DOIs:
-   DOI: 10.18637/jss.v106.i09
-     From: DESCRIPTION
-           inst/CITATION
-     Status: 404
-     Message: Not Found
-
-Aside from the notes above, running `devtools::check(args = c('--as-cran','--no-manual'))` locally and the functions `devtools::check_win_devel()` and `devtools::check_win_release()` produces 
+Running `devtools::check(args = c('--as-cran','--no-manual'))` locally and the functions `devtools::check_win_devel()` and `devtools::check_win_release()` produces 
 no ERRORs, WARNINGs, or additional NOTEs.  
 
 I removed the recent note 

@@ -1,7 +1,9 @@
-# intRinsic 1.0.0.9000
+# intRinsic 1.0.1
 
 * Fixed a typo in `compute_mus` when computing ratios from `dist_matrix`. Now the function handles also the `dissimilarity` class
+* Fixed a typo in `compute_mus` involving the class of the returned object
 * Adjusted some indentations in `print` methods
+* Adjusted the `autoplot` method related to `gride_mle`
 
 # intRinsic 1.0.0
 

@@ -34,8 +34,8 @@ autoplot.gride_bayes <- function(object,
     sam <- c(object$post_sample)
     cmm <- cumsum(sam) / seq_along(sam)
     G1 <-
-      ggplot2::ggplot(dplyr::tibble(sam, ind = seq_along(sam), cmm = cmm)) +
-      ggplot2::geom_line(ggplot2::aes(x = .data$ind, y = .data$sam), col =
+      ggplot2::ggplot(dplyr::tibble(value = sam, ind = seq_along(sam), cmm = cmm)) +
+      ggplot2::geom_line(ggplot2::aes(x = .data$ind, y = .data$value), col =
                            "lightgray") +
       ggplot2::geom_line(ggplot2::aes(x = .data$ind, y = .data$cmm), col =
                            "darkblue") +
@@ -55,7 +55,7 @@ n[1] == .(object$n1) ~ "," ~ n[2] == .(object$n2) ~ "," ~ sigma == .(object$sigm
 
   } else{
     sam <- object$post_sample
-    G1 <- ggplot2::ggplot(dplyr::tibble(c(sam))) +
+    G1 <- ggplot2::ggplot(dplyr::tibble(value = c(sam))) +
       ggplot2::geom_density(ggplot2::aes(x = .data$value),
                             col = "darkblue",
                             fill = "lightgray") +
@@ -108,7 +108,7 @@ n[1] == .(object$n1) ~ "," ~ n[2] == .(object$n2) ~ "," ~ sigma == .(object$sigm
 autoplot.gride_mle <- function(object,
                                title = "MLE Gride - Bootstrap sample",
                                ...) {
-  G1 <- ggplot2::ggplot(dplyr::tibble(object$boot_sample)) +
+  G1 <- ggplot2::ggplot(dplyr::tibble(value = object$boot_sample)) +
     ggplot2::geom_density(ggplot2::aes(x = .data$value),
                           col = "darkblue",
                           fill = "lightgray") +

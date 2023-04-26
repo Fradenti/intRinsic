@@ -134,7 +134,7 @@ Hidalgo <- function(X  = NULL,
         Nq = TRUE
       )
     mus       <- InputList$mus
-    Nq        <- InputList$Nq
+    Nq        <- InputList$NQ
 
   } else if (is.null(X) & is.null(dist_mat)) {
     stop("Please provide either a dataset or a distance matrix", call. = FALSE)

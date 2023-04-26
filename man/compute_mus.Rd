@@ -38,12 +38,13 @@ function \code{compute_mus()}.}
 is superimposed to the histogram of \code{mus}.}
 }
 \value{
-a vector containing the ratio statistics, an object of class
-\code{mus}. The length of the vector is equal to the number of observations
-considered, unless ties are present in the dataset. In that case, the
-duplicates are removed. Optionally, if \code{Nq} is \code{TRUE}, the function
-returns a list containing both the ratio statistics and the adjacency
-matrix \code{N^q}.
+the principal output of this function is a vector containing the
+ratio statistics, an object of class \code{mus}. The length of the vector is
+equal to the number of observations considered, unless ties are present in
+the dataset. In that case, the duplicates are removed. Optionally, if
+\code{Nq} is \code{TRUE}, the function returns an object of class
+\code{mus_Nq}, a list containing both the ratio statistics \code{mus} and the
+adjacency matrix \code{NQ}.
 }
 \description{
 The function \code{compute_mus} computes the ratios of distances between
