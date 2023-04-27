@@ -1,4 +1,4 @@
-# intRinsic v1.0.1 <img src="man/figures/intLogo.png" align="right" width="120" />
+# intRinsic v1.0.1.9000 <img src="man/figures/intLogo.png" align="right" width="120" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/Fradenti/intRinsic/workflows/R-CMD-check/badge.svg)](https://github.com/Fradenti/intRinsic/actions)
