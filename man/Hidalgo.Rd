@@ -129,6 +129,7 @@ For an example of application to basketball data, see
 }
 \examples{
 \donttest{
+set.seed(1234)
 X            <- replicate(5,rnorm(500))
 X[1:250,1:2] <- 0
 X[1:250,]    <- X[1:250,] + 4
@@ -146,7 +147,7 @@ id_by_class(h_out, oracle)
 Allegra M, Facco E, Denti F, Laio A, Mira A (2020).
 “Data segmentation based on the local intrinsic dimension.”
 Scientific Reports, 10(1), 1–27. ISSN 20452322,
-\doi{10.1038/s41598-020-72222-0, 1902.10459},
+\doi{10.1038/s41598-020-72222-0},
 
 Santos-Fernandez E, Denti F, Mengersen K, Mira A (2021).
 “The role of intrinsic dimension in high-resolution player tracking data –

@@ -1,3 +1,8 @@
+# intRinsic 1.0.2
+
+* Removed the dependency from the package `MCMCpack` 
+* Fixed and updated the documentation (minor stuff)
+
 # intRinsic 1.0.1
 
 * Fixed a typo in `compute_mus` when computing ratios from `dist_matrix`. Now the function handles also the `dissimilarity` class

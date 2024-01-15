@@ -108,11 +108,8 @@ estimation method. In particular, if
 \describe{
 \item{\code{method = "mle"}}{the output reports the MLE and the relative
 confidence interval;}
-\item{\code{method = "linfit"}}{the output includes the \code{lm()} object
-used for the computation;}
-\item{\code{method = "bayes"}}{the output contains the {(1 + \code{alpha}) / 2}
-and {(1 - \code{alpha}) / 2}
-quantiles, mean, mode, and median of the posterior distribution of \code{d}.}
+\item{\code{method = "linfit"}}{the output includes the \code{lm()} object used for the computation;}
+\item{\code{method = "bayes"}}{the output contains the (1 + \code{alpha}) / 2 and (1 - \code{alpha}) / 2 quantiles, mean, mode, and median of the posterior distribution of \code{d}.}
 }
 }
 \description{

@@ -65,7 +65,7 @@
 #' Allegra M, Facco E, Denti F, Laio A, Mira A (2020).
 #' “Data segmentation based on the local intrinsic dimension.”
 #' Scientific Reports, 10(1), 1–27. ISSN 20452322,
-#' \doi{10.1038/s41598-020-72222-0, 1902.10459},
+#' \doi{10.1038/s41598-020-72222-0},
 #'
 #' Santos-Fernandez E, Denti F, Mengersen K, Mira A (2021).
 #' “The role of intrinsic dimension in high-resolution player tracking data –
@@ -74,6 +74,7 @@
 #'
 #' @examples
 #' \donttest{
+#' set.seed(1234)
 #' X            <- replicate(5,rnorm(500))
 #' X[1:250,1:2] <- 0
 #' X[1:250,]    <- X[1:250,] + 4
@@ -156,7 +157,7 @@ Hidalgo <- function(X  = NULL,
   IRC.list <-  index_row_col(Nq, q, n)
   rm(Nq)
 
-  pl  <- c(MCMCpack::rdirichlet(1, rep(alpha_Dirichlet,K)))
+  pl  <- c(.mcmc_pack_rdirichlet(1, rep(alpha_Dirichlet,K)))
   # in case alpha_Dirichlet is too low, initialize as equiprobable
   if( any(is.na(pl)) ){
 
@@ -231,7 +232,7 @@ Consider increasing its value in the next run."),
                                 K = K)
     nl     <- N_Slog[, 1]
     sLog   <- N_Slog[, 2]
-    pl     <- MCMCpack::rdirichlet(1, alpha_Dirichlet + nl)
+    pl     <- .mcmc_pack_rdirichlet(1, alpha_Dirichlet + nl)
 
     # Step 3  --  Update d
 
