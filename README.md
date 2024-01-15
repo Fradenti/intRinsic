@@ -1,4 +1,4 @@
-# intRinsic v1.0.1.9000 <img src="man/figures/intLogo.png" align="right" width="120" />
+# intRinsic v1.0.2 <img src="man/figures/intLogo.png" align="right" width="120" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/Fradenti/intRinsic/workflows/R-CMD-check/badge.svg)](https://github.com/Fradenti/intRinsic/actions)
@@ -43,4 +43,4 @@ The vignette for this package has been published in the `Journal of Statistical 
 
 Please help me improve this package by reporting suggestions, typos, and issues at [this link](https://github.com/Fradenti/intRinsic/issues).
 
-Please note that the previous versions of the package (from `v0.1.0` to `v1.0.0`) are still available as GitHub Releases at [this page](https://github.com/Fradenti/intRinsic/releases).
+Please note that the previous versions of the package (from `v0.1.0` to `v1.0.1`) are still available as GitHub Releases at [this page](https://github.com/Fradenti/intRinsic/releases).
