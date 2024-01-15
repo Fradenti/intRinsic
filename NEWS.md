@@ -1,3 +1,7 @@
+# intRinsic 1.0.2.9000
+
+* ...
+
 # intRinsic 1.0.2
 
 * Removed the dependency from the package `MCMCpack` 
