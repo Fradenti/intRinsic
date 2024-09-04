@@ -5,6 +5,7 @@
 * Translated some `R` parts of the `Hidalgo()` code into `C++`
 * Corrected a bug affecting the `Truncated-pointmass` approach
 * Updated the README file
+* Set up the new `rhub` checks workflows
 
 # intRinsic 1.0.2
 
