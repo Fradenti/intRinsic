@@ -50,8 +50,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// log_Zeta_maker
+arma::vec log_Zeta_maker(int N, double xi, int q);
+RcppExport SEXP _intRinsic_log_Zeta_maker(SEXP NSEXP, SEXP xiSEXP, SEXP qSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type N(NSEXP);
+    Rcpp::traits::input_parameter< double >::type xi(xiSEXP);
+    Rcpp::traits::input_parameter< int >::type q(qSEXP);
+    rcpp_result_gen = Rcpp::wrap(log_Zeta_maker(N, xi, q));
+    return rcpp_result_gen;
+END_RCPP
+}
 // index_row_col
-List index_row_col(arma::mat Nq, int q, int N);
+Rcpp::List index_row_col(arma::mat Nq, int q, int N);
 RcppExport SEXP _intRinsic_index_row_col(SEXP NqSEXP, SEXP qSEXP, SEXP NSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -63,8 +76,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rdir_cpp
+arma::colvec rdir_cpp(arma::colvec alpha);
+RcppExport SEXP _intRinsic_rdir_cpp(SEXP alphaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::colvec >::type alpha(alphaSEXP);
+    rcpp_result_gen = Rcpp::wrap(rdir_cpp(alpha));
+    return rcpp_result_gen;
+END_RCPP
+}
 // Update_memberships_faster
-arma::colvec Update_memberships_faster(arma::colvec mu_obser, arma::colvec dl, arma::colvec pl, int K, int N, int q, arma::colvec possible_label, arma::colvec Ci, double QQ, arma::umat index_row, List index_col, arma::colvec log_Precomp_Z, arma::colvec log_Precomp_ratios);
+arma::colvec Update_memberships_faster(arma::colvec mu_obser, arma::colvec dl, arma::colvec pl, int K, int N, int q, arma::colvec possible_label, arma::colvec Ci, double QQ, arma::umat index_row, Rcpp::List index_col, arma::colvec log_Precomp_Z, arma::colvec log_Precomp_ratios);
 RcppExport SEXP _intRinsic_Update_memberships_faster(SEXP mu_obserSEXP, SEXP dlSEXP, SEXP plSEXP, SEXP KSEXP, SEXP NSEXP, SEXP qSEXP, SEXP possible_labelSEXP, SEXP CiSEXP, SEXP QQSEXP, SEXP index_rowSEXP, SEXP index_colSEXP, SEXP log_Precomp_ZSEXP, SEXP log_Precomp_ratiosSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -79,67 +103,43 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::colvec >::type Ci(CiSEXP);
     Rcpp::traits::input_parameter< double >::type QQ(QQSEXP);
     Rcpp::traits::input_parameter< arma::umat >::type index_row(index_rowSEXP);
-    Rcpp::traits::input_parameter< List >::type index_col(index_colSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type index_col(index_colSEXP);
     Rcpp::traits::input_parameter< arma::colvec >::type log_Precomp_Z(log_Precomp_ZSEXP);
     Rcpp::traits::input_parameter< arma::colvec >::type log_Precomp_ratios(log_Precomp_ratiosSEXP);
     rcpp_result_gen = Rcpp::wrap(Update_memberships_faster(mu_obser, dl, pl, K, N, q, possible_label, Ci, QQ, index_row, index_col, log_Precomp_Z, log_Precomp_ratios));
     return rcpp_result_gen;
 END_RCPP
 }
-// Postprocessing_Chains
-arma::mat Postprocessing_Chains(arma::mat labels, arma::mat IDs);
-RcppExport SEXP _intRinsic_Postprocessing_Chains(SEXP labelsSEXP, SEXP IDsSEXP) {
+// gam_trunc
+arma::colvec gam_trunc(int D, int K, double a0_d, double b0_d, arma::colvec n_l, arma::colvec sLog);
+RcppExport SEXP _intRinsic_gam_trunc(SEXP DSEXP, SEXP KSEXP, SEXP a0_dSEXP, SEXP b0_dSEXP, SEXP n_lSEXP, SEXP sLogSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type labels(labelsSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type IDs(IDsSEXP);
-    rcpp_result_gen = Rcpp::wrap(Postprocessing_Chains(labels, IDs));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rtgamma_once
-double rtgamma_once(double shape, double rate, double lb, double ub);
-RcppExport SEXP _intRinsic_rtgamma_once(SEXP shapeSEXP, SEXP rateSEXP, SEXP lbSEXP, SEXP ubSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type shape(shapeSEXP);
-    Rcpp::traits::input_parameter< double >::type rate(rateSEXP);
-    Rcpp::traits::input_parameter< double >::type lb(lbSEXP);
-    Rcpp::traits::input_parameter< double >::type ub(ubSEXP);
-    rcpp_result_gen = Rcpp::wrap(rtgamma_once(shape, rate, lb, ub));
-    return rcpp_result_gen;
-END_RCPP
-}
-// UPD_d_TRUNC
-arma::colvec UPD_d_TRUNC(List AIFD, double a0, double b0, int K, double D);
-RcppExport SEXP _intRinsic_UPD_d_TRUNC(SEXP AIFDSEXP, SEXP a0SEXP, SEXP b0SEXP, SEXP KSEXP, SEXP DSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type AIFD(AIFDSEXP);
-    Rcpp::traits::input_parameter< double >::type a0(a0SEXP);
-    Rcpp::traits::input_parameter< double >::type b0(b0SEXP);
+    Rcpp::traits::input_parameter< int >::type D(DSEXP);
     Rcpp::traits::input_parameter< int >::type K(KSEXP);
-    Rcpp::traits::input_parameter< double >::type D(DSEXP);
-    rcpp_result_gen = Rcpp::wrap(UPD_d_TRUNC(AIFD, a0, b0, K, D));
+    Rcpp::traits::input_parameter< double >::type a0_d(a0_dSEXP);
+    Rcpp::traits::input_parameter< double >::type b0_d(b0_dSEXP);
+    Rcpp::traits::input_parameter< arma::colvec >::type n_l(n_lSEXP);
+    Rcpp::traits::input_parameter< arma::colvec >::type sLog(sLogSEXP);
+    rcpp_result_gen = Rcpp::wrap(gam_trunc(D, K, a0_d, b0_d, n_l, sLog));
     return rcpp_result_gen;
 END_RCPP
 }
-// UPD_d_TRUNC_MASS
-arma::colvec UPD_d_TRUNC_MASS(List AIFD, double a0, double b0, int K, double D, double piMass);
-RcppExport SEXP _intRinsic_UPD_d_TRUNC_MASS(SEXP AIFDSEXP, SEXP a0SEXP, SEXP b0SEXP, SEXP KSEXP, SEXP DSEXP, SEXP piMassSEXP) {
+// gam_trunc_pmass
+arma::colvec gam_trunc_pmass(int D, int K, double a0_d, double b0_d, arma::colvec n_l, arma::colvec sLog, double pi_mass);
+RcppExport SEXP _intRinsic_gam_trunc_pmass(SEXP DSEXP, SEXP KSEXP, SEXP a0_dSEXP, SEXP b0_dSEXP, SEXP n_lSEXP, SEXP sLogSEXP, SEXP pi_massSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< List >::type AIFD(AIFDSEXP);
-    Rcpp::traits::input_parameter< double >::type a0(a0SEXP);
-    Rcpp::traits::input_parameter< double >::type b0(b0SEXP);
+    Rcpp::traits::input_parameter< int >::type D(DSEXP);
     Rcpp::traits::input_parameter< int >::type K(KSEXP);
-    Rcpp::traits::input_parameter< double >::type D(DSEXP);
-    Rcpp::traits::input_parameter< double >::type piMass(piMassSEXP);
-    rcpp_result_gen = Rcpp::wrap(UPD_d_TRUNC_MASS(AIFD, a0, b0, K, D, piMass));
+    Rcpp::traits::input_parameter< double >::type a0_d(a0_dSEXP);
+    Rcpp::traits::input_parameter< double >::type b0_d(b0_dSEXP);
+    Rcpp::traits::input_parameter< arma::colvec >::type n_l(n_lSEXP);
+    Rcpp::traits::input_parameter< arma::colvec >::type sLog(sLogSEXP);
+    Rcpp::traits::input_parameter< double >::type pi_mass(pi_massSEXP);
+    rcpp_result_gen = Rcpp::wrap(gam_trunc_pmass(D, K, a0_d, b0_d, n_l, sLog, pi_mass));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -197,12 +197,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_intRinsic_log_Likelihood_double", (DL_FUNC) &_intRinsic_log_Likelihood_double, 2},
     {"_intRinsic_Groups_quantities", (DL_FUNC) &_intRinsic_Groups_quantities, 3},
     {"_intRinsic_Norm_Constant_Z_l2", (DL_FUNC) &_intRinsic_Norm_Constant_Z_l2, 4},
+    {"_intRinsic_log_Zeta_maker", (DL_FUNC) &_intRinsic_log_Zeta_maker, 3},
     {"_intRinsic_index_row_col", (DL_FUNC) &_intRinsic_index_row_col, 3},
+    {"_intRinsic_rdir_cpp", (DL_FUNC) &_intRinsic_rdir_cpp, 1},
     {"_intRinsic_Update_memberships_faster", (DL_FUNC) &_intRinsic_Update_memberships_faster, 13},
-    {"_intRinsic_Postprocessing_Chains", (DL_FUNC) &_intRinsic_Postprocessing_Chains, 2},
-    {"_intRinsic_rtgamma_once", (DL_FUNC) &_intRinsic_rtgamma_once, 4},
-    {"_intRinsic_UPD_d_TRUNC", (DL_FUNC) &_intRinsic_UPD_d_TRUNC, 5},
-    {"_intRinsic_UPD_d_TRUNC_MASS", (DL_FUNC) &_intRinsic_UPD_d_TRUNC_MASS, 6},
+    {"_intRinsic_gam_trunc", (DL_FUNC) &_intRinsic_gam_trunc, 6},
+    {"_intRinsic_gam_trunc_pmass", (DL_FUNC) &_intRinsic_gam_trunc_pmass, 7},
     {"_intRinsic_gride_log_likelihood", (DL_FUNC) &_intRinsic_gride_log_likelihood, 4},
     {"_intRinsic_gride_log_posterior", (DL_FUNC) &_intRinsic_gride_log_posterior, 6},
     {"_intRinsic_gride_mh_sampler", (DL_FUNC) &_intRinsic_gride_mh_sampler, 9},

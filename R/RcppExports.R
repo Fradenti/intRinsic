@@ -13,28 +13,28 @@ Norm_Constant_Z_l2 <- function(Nzi_l, N, xi, q) {
     .Call(`_intRinsic_Norm_Constant_Z_l2`, Nzi_l, N, xi, q)
 }
 
+log_Zeta_maker <- function(N, xi, q) {
+    .Call(`_intRinsic_log_Zeta_maker`, N, xi, q)
+}
+
 index_row_col <- function(Nq, q, N) {
     .Call(`_intRinsic_index_row_col`, Nq, q, N)
+}
+
+rdir_cpp <- function(alpha) {
+    .Call(`_intRinsic_rdir_cpp`, alpha)
 }
 
 Update_memberships_faster <- function(mu_obser, dl, pl, K, N, q, possible_label, Ci, QQ, index_row, index_col, log_Precomp_Z, log_Precomp_ratios) {
     .Call(`_intRinsic_Update_memberships_faster`, mu_obser, dl, pl, K, N, q, possible_label, Ci, QQ, index_row, index_col, log_Precomp_Z, log_Precomp_ratios)
 }
 
-Postprocessing_Chains <- function(labels, IDs) {
-    .Call(`_intRinsic_Postprocessing_Chains`, labels, IDs)
+gam_trunc <- function(D, K, a0_d, b0_d, n_l, sLog) {
+    .Call(`_intRinsic_gam_trunc`, D, K, a0_d, b0_d, n_l, sLog)
 }
 
-rtgamma_once <- function(shape, rate, lb, ub) {
-    .Call(`_intRinsic_rtgamma_once`, shape, rate, lb, ub)
-}
-
-UPD_d_TRUNC <- function(AIFD, a0, b0, K, D) {
-    .Call(`_intRinsic_UPD_d_TRUNC`, AIFD, a0, b0, K, D)
-}
-
-UPD_d_TRUNC_MASS <- function(AIFD, a0, b0, K, D, piMass) {
-    .Call(`_intRinsic_UPD_d_TRUNC_MASS`, AIFD, a0, b0, K, D, piMass)
+gam_trunc_pmass <- function(D, K, a0_d, b0_d, n_l, sLog, pi_mass) {
+    .Call(`_intRinsic_gam_trunc_pmass`, D, K, a0_d, b0_d, n_l, sLog, pi_mass)
 }
 
 gride_log_likelihood <- function(d, n1, n2, mus_n1_n2) {

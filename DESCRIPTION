@@ -1,6 +1,6 @@
 Package: intRinsic
 Title: Likelihood-Based Intrinsic Dimension Estimators
-Version: 1.0.2
+Version: 1.0.2.9000
 Authors@R: c(
     person("Francesco", "Denti", ,"francescodenti.personal@gmail.com", 
     role = c("aut", "cre", "cph"),
@@ -42,6 +42,4 @@ LinkingTo:
 NeedsCompilation: yes
 ByteCompile: true
 Encoding: UTF-8
-RoxygenNote: 7.3.0
-Suggests: 
-    covr
+RoxygenNote: 7.3.2

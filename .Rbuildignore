@@ -6,3 +6,4 @@
 ^\.travis\.yml$
 ^CRAN-SUBMISSION$
 ^codecov\.yml$
+^README\.Rmd$

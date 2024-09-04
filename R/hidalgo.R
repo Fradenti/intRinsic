@@ -111,7 +111,7 @@ Hidalgo <- function(X  = NULL,
     cat("Computing ratios and Nq...\n")
 
   if (!is.null(X)) {
-    D         <- ncol(X)
+    if(is.null(D)) D  <- ncol(X)
     InputList <-
       compute_mus(
         X = X,
@@ -157,7 +157,7 @@ Hidalgo <- function(X  = NULL,
   IRC.list <-  index_row_col(Nq, q, n)
   rm(Nq)
 
-  pl  <- c(.mcmc_pack_rdirichlet(1, rep(alpha_Dirichlet,K)))
+  pl  <- rdir_cpp(rep(alpha_Dirichlet,K))
   # in case alpha_Dirichlet is too low, initialize as equiprobable
   if( any(is.na(pl)) ){
 
@@ -177,16 +177,12 @@ Consider increasing its value in the next run."),
 
   if (verbose)
     cat("Computing recurring quantities to save you time... \n")
-  log_Zeta <-
-    log(sapply(seq_len(n), function(zz)
-      Norm_Constant_Z_l2(
-        Nzi_l = zz,
-        N = n,
-        xi = xi,
-        q = q
-      )))
+  ###################### Ricontrolla!!!!
+  log_Zeta_extra <- log_Zeta_maker(n+1,xi,q)
+  log_Zeta <- log_Zeta_extra[-(n+1)]
+  ### problema prima: non pre-calcolavo 500esimo valore, che si basa con 501 vicini
   log_corr <-
-    (log_Zeta[seq_len(n - 1)] - log_Zeta[seq(2, n)]) *  (seq_len(n - 1) - 1)
+    (log_Zeta_extra[seq_len(n)] - log_Zeta_extra[seq(2, n+1)]) *  (seq_len(n) - 1)
   if (verbose)
     cat("Done! \n")
 
@@ -205,7 +201,7 @@ Consider increasing its value in the next run."),
   # Gibbs sampler loop
 
   for (sim in seq_len(nsim * thinning + burn_in)) {
-
+    #cat(1)
     # STEP 1 - sample  indicators
 
     Ci <- Update_memberships_faster(
@@ -225,58 +221,36 @@ Consider increasing its value in the next run."),
     )
 
     # STEP 2, updating Pi^*
+    #cat(2)
 
     Ci     <- factor(Ci, levels = seq_len(K))
     N_Slog <- Groups_quantities(mu_obser = mus,
                                 Ci = Ci,
                                 K = K)
-    nl     <- N_Slog[, 1]
+    n_l    <- N_Slog[, 1]
     sLog   <- N_Slog[, 2]
-    pl     <- .mcmc_pack_rdirichlet(1, alpha_Dirichlet + nl)
+    pl     <- rdir_cpp(alpha_Dirichlet + n_l)
 
     # Step 3  --  Update d
-
-    a.star <- nl   + a0_d
-    b.star <- sLog + b0_d
+    #cat(3)
 
 
     if (prior_type == "Conjugate") {
-      d <- stats::rgamma(K, a.star, b.star)
+      d <- stats::rgamma(K, n_l + a0_d, b0_d + sLog)
     } else if (prior_type == "Truncated") {
-      p_upper <-  stats::pgamma(D, a.star, b.star)
-      p_unif  <-  stats::runif(K, 0, p_upper)
-      d       <-  stats::qgamma(p_unif, a.star, b.star)
+      d <- gam_trunc(D,K,a0_d,b0_d,n_l,sLog)
     } else if (prior_type == "Truncated_PointMass") {
-      log1 <- log(1 - pi_mass) +
-        a0_d * log(b0_d) -
-        lgamma(a0_d) +
-        lgamma(a.star) -
-        a.star * log(b.star) +
-        stats::pgamma(D, a.star, b.star, log.p = TRUE) -
-        stats::pgamma(D, a0_d, b0_d, log.p = TRUE)
-      log0 <- log(pi_mass)   + nl * log(D) - D * sLog
-      LOGP <- cbind(log0, log1)
-      RES  <-
-        apply(LOGP, 1, function(x)
-          sample(c(0, 1), 1, TRUE, exp(x - max(x))))
-      for (ll in seq_len(K)) {
-        if (RES[ll] == 1L) {
-          p_upper <-  stats::pgamma(D, a.star[ll], b.star[ll])
-          p_unif  <-  stats::runif(1, 0, p_upper)
-          d[ll]   <-  stats::qgamma(p_unif, a.star[ll], b.star[ll])
-        } else{
-          d[ll] <- D
-        }
-      }
+      d <- gam_trunc_pmass(D,K,a0_d,b0_d,n_l,sLog,pi_mass)
     }
+
 
     # Step 4  --  Store simulation post burn-in
 
     if (sim > burn_in && ((sim - burn_in) %% thinning == 0L)) {
-      rr            <- floor((sim - burn_in) / thinning)
-      ALL_Ci[, rr]   <-  Ci
-      ALL_Pi[, rr]   <-  pl
-      ALL_D[, rr]    <-  d
+      ind_rr            <- floor((sim - burn_in) / thinning)
+      ALL_Ci[, ind_rr]   <-  Ci
+      ALL_Pi[, ind_rr]   <-  pl
+      ALL_D[, ind_rr]    <-  d
     }
     if (verbose) {
       ipbar <- ipbar + 1
@@ -311,6 +285,7 @@ Consider increasing its value in the next run."),
   intrinsic_dimension  <- t(ALL_D)
   cluster_prob         <- t(ALL_Pi)
   membership_labels    <- t(ALL_Ci)
+
 
   postpro_chains <-
     t(sapply(seq_len(nsim), function(i)
