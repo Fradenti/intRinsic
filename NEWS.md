@@ -1,4 +1,4 @@
-# intRinsic 1.0.2.9000
+# intRinsic 1.1.0
 
 * Re-organized the cpp code into multiple files
 * Solved an indexing problem with `log_Zeta` and `log_corr`, sometimes causing `na` with single-manifold data when using `Hidalgo()`

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# intRinsic v1.0.2.9000 <img src="man/figures/intLogo.png" align="right" width="120" />
+# intRinsic v1.1.0 <img src="man/figures/intLogo.png" align="right" width="120" />
 
 <!-- badges: start -->
 
@@ -13,7 +13,7 @@ Commit](https://img.shields.io/github/last-commit/fradenti/intRinsic)](https://g
 (monthly)](https://cranlogs.r-pkg.org/badges/intRinsic?color=brightgreen)](https://www.r-pkg.org/pkg/intRinsic)
 [![Downloads
 (total)](https://cranlogs.r-pkg.org/badges/grand-total/intRinsic?color=brightgreen)](https://www.r-pkg.org/pkg/intRinsic)
-[![JSS](https://img.shields.io/badge/JSS-10.18637%2Fjss.v040.i08-brightgreen)]()
+[![JSS](https://img.shields.io/badge/JSS-10.18637%2Fjss.v040.i08-brightgreen)](https://www.jstatsoft.org/article/view/v106i09)
 <!-- badges: end -->
 
 A package with functions to estimate the intrinsic dimension of a
@@ -55,5 +55,5 @@ Please help me improve this package by reporting suggestions, typos, and
 issues at [this link](https://github.com/Fradenti/intRinsic/issues).
 
 Please note that the previous versions of the package (from `v0.1.0` to
-`v1.0.1`) are still available as GitHub Releases at [this
+`v1.0.2`) are still available as GitHub Releases at [this
 page](https://github.com/Fradenti/intRinsic/releases).
