@@ -90,7 +90,7 @@ arma::colvec rdir_cpp(arma::colvec alpha){
   unsigned int K = alpha.n_elem;
   arma::colvec dirvec(K);
   double su = 0.0;
-  for(int i=0; i<K; i++){
+  for(size_t i=0; i<K; i++){
     dirvec[i] = R::rgamma(alpha[i],1.0);
     su += dirvec[i];
   }

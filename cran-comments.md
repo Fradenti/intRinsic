@@ -1,13 +1,9 @@
-## Version 1.1.0
+## Version 1.1.1
 
 With this version, we:
 
-* Re-organized the cpp code into multiple files
-* Solved an indexing problem with `log_Zeta` and `log_corr`, sometimes causing `NA` with single-manifold data when using `Hidalgo()`
-* Translated some `R` parts of the `Hidalgo()` code into `C++`
-* Corrected a bug affecting the `Truncated-pointmass` approach
-* Updated the README file
-* Set up the new `rhub` checks workflows
+- Replaced `arma::is_finite` with `std::isfinite` to ensure compatibility with the latest `RcppArmadillo` release and CRAN policies.
+- Implemented small code adjustments to address and resolve compiler warnings.
 
 ## R CMD check results
 

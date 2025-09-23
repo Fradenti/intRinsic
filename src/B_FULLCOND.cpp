@@ -45,7 +45,7 @@ arma::colvec  Update_memberships_faster(arma::colvec mu_obser,
       Rcpp::Rcout << log_Precomp_ratios[Nzi_l-1];
     }
     // closing loop on labels to compute probabilities
-    if(arma::is_finite(max(pp))){
+    if(std::isfinite(max(pp))){
       pp2 = exp( pp - max(pp));
       Ci(i) = RcppArmadillo::sample(
         possible_label, 1, TRUE, pp2)[0];

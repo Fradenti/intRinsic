@@ -1,3 +1,8 @@
+# intRinsic 1.1.1
+
+* Replaced `arma::is_finite` with `std::isfinite` to ensure compatibility with the latest `RcppArmadillo` release and CRAN policies.
+* Implemented small code adjustments to address and resolve compiler warnings.
+
 # intRinsic 1.1.0
 
 * Re-organized the cpp code into multiple files
