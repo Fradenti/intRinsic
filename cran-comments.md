@@ -6,7 +6,8 @@ With this version, we:
 
 ## R CMD check results
 
-Running `devtools::check(args = c('--as-cran','--no-manual'))` locally and the functions `devtools::check_win_devel()`, `devtools::check_win_release()`, and `devtools::check_mac_release()` does not produce any ERRORs, WARNINGs, or NOTEs.
+Running `devtools::check(args = c('--as-cran','--no-manual'))` locally and the functions `devtools::check_win_devel()`, 
+`devtools::check_win_release()`, and `devtools::check_mac_release()` does not produce any ERRORs, WARNINGs, or NOTEs.
 
 ## Downstream dependencies
 

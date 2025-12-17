@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# intRinsic v1.1.1 <img src="man/figures/intLogo.png" align="right" width="120" />
+# intRinsic v1.1.2 <img src="man/figures/intLogo.png" align="right" width="120" />
 
 <!-- badges: start -->
 
@@ -54,5 +54,5 @@ Please help me improve this package by reporting suggestions, typos, and
 issues at [this link](https://github.com/Fradenti/intRinsic/issues).
 
 Please note that the previous versions of the package (from `v0.1.0` to
-`v1.0.2`) are still available as GitHub Releases at [this
+`v1.1.1`) are still available as GitHub Releases at [this
 page](https://github.com/Fradenti/intRinsic/releases).
