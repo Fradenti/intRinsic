@@ -278,7 +278,7 @@ plot.mus <- function(x, range_d = NULL, ...) {
        breaks = 30,
        freq = F,
        col = "white",
-       main = "", xlab = latex2exp::TeX("$\\mu$"))
+       main = "", xlab = bquote(mu))
 
   if(!is.null(range_d)){
 

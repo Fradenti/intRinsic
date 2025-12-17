@@ -1,9 +1,8 @@
-## Version 1.1.1
+## Version 1.1.2
 
 With this version, we:
 
-- Replaced `arma::is_finite` with `std::isfinite` to ensure compatibility with the latest `RcppArmadillo` release and CRAN policies.
-- Implemented small code adjustments to address and resolve compiler warnings.
+- removed the strong dependency of `intRinsic` from the `latex2exp` package, which has been scheduled for archival.
 
 ## R CMD check results
 

@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# intRinsic v1.1.1 <img src="man/figures/intLogo.png" align="right" width="120" />
+# intRinsic v1.1.2 <img src="man/figures/intLogo.png" align="right" width="120" />
 
 
 <!-- badges: start -->

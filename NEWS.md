@@ -1,3 +1,7 @@
+# intRinsic 1.1.2
+
+* Removed the dependency from the package `latex2exp` 
+
 # intRinsic 1.1.1
 
 * Replaced `arma::is_finite` with `std::isfinite` to ensure compatibility with the latest `RcppArmadillo` release and CRAN policies.
